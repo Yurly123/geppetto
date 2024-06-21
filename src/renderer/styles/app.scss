@@ -131,6 +131,14 @@ button {
   }
 }
 
+.hidden {
+  display: none !important;
+}
+
+.center {
+  text-align: center;
+}
+
 .hello {
   display: flex;
   justify-content: center;
@@ -138,6 +146,17 @@ button {
   height: 100%;
   font-size: 2rem;
   color: var(--app-accent-color);
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0 0 10px 0 var(--app-shadow-color);
+  }
 }
 
 /**
