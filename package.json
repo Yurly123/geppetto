@@ -1,8 +1,8 @@
 {
-  "name": "erwt",
-  "productName": "ERWT",
-  "version": "8.0.0",
-  "description": "Robust project for developing Desktop Application with Electron, React, Webpack & TypeScript.",
+  "name": "geppetto",
+  "productName": "Geppetto",
+  "version": "0.0.0",
+  "description": "GPT stuffs",
   "main": ".webpack/main",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron-forge start",
@@ -11,30 +11,23 @@
     "publish": "electron-forge publish",
     "lint": "eslint src/ --ext .ts,.js,.tsx,.jsx"
   },
-  "keywords": [
-    "electron boilerplate",
-    "minimal",
-    "electron-webpack",
-    "electron-react",
-    "electron-typescript",
-    "hmr",
-    "boilerplate",
-    "2024",
-    "ERWT"
-  ],
   "author": {
-    "name": "codesbiome",
-    "url": "https://github.com/codesbiome"
+    "name": "Yurly",
+    "url": "https://github.com/Yurly123"
   },
   "contributors": [
     {
       "name": "guasam",
       "url": "https://github.com/guasam"
+    },
+    {
+      "name": "codesbiome",
+      "url": "https://github.com/codesbiome"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/codesbiome/electron-react-webpack-typescript-2024"
+    "url": "https://github.com/Yurly123/geppetto"
   },
   "license": "MIT",
   "config": {
@@ -55,7 +48,7 @@
     "@types/webpack-env": "^1.18.4",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
-    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "@vercel/webpack-asset-relocator-loader": "1.7.3",
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.9.0",
