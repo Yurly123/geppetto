@@ -9,7 +9,7 @@ const Chat: React.FC = () => {
         <ChatBar 
             message={message}
             onMessageChange={(message) => setMessage(message)}
-            onMessageSubmit={() => {
+            onMessageSubmit={(message) => {
                 console.log('Submit:', message);
                 setMessage('');
             }}
