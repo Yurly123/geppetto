@@ -5,7 +5,6 @@ import Chat from './Chat';
 const Application: React.FC = () => {
   return (
     <div className='app'>
-      <div className='box'>Hello, World!</div>
       <div className='box'>안녕, 세상아!</div>
       <Chat />
     </div>
