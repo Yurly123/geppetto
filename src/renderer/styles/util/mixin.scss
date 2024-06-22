@@ -1,0 +1,6 @@
+@mixin box-border {
+    border-color: var(--box-border-color);
+    border-width: 0.5rem;
+    border-style: outset;
+    border-radius: 1rem;
+}

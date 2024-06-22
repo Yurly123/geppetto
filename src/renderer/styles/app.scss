@@ -7,8 +7,7 @@
  * @package : Application Sass Stylesheet
 */
 
-@import './dark_theme.scss';
-@import './light_theme.scss';
+@import './util';
 
 /**
  *==========================================================================
@@ -139,23 +138,37 @@ button {
   text-align: center;
 }
 
-.hello {
+.app {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
+  font-family: 'one-pop';
   font-size: 2rem;
   color: var(--app-accent-color);
 
-  &-box {
+  input {
+    font-family: inherit;
+  }
+
+  .box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    border-radius: 6px;
+    @include box-border;
     background: white;
     box-shadow: 0 0 10px 0 var(--app-shadow-color);
+  }
+
+  input.chat {
+    width: 90%;
+    padding: 0.5rem;
+    @include box-border;
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
   }
 }
 

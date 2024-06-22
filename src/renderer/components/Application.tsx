@@ -3,10 +3,10 @@ import '@styles/app.scss';
 
 const Application: React.FC = () => {
   return (
-    <div className='hello'>
-      <div className='hello-box'>
-        Hello
-      </div>
+    <div className='app'>
+      <div className='box'>Hello, World!</div>
+      <div className='box'>안녕, 세상아!</div>
+      <input type='text' className='chat' placeholder='Type message' />
     </div>
   );
 };

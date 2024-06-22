@@ -1,11 +1,3 @@
-/*
- *=========================================================================
- * ERWT Dark Theme
- *=========================================================================
- *
- * Here we define the Dark Theme (stylesheet) for application.
- */
-
 :root {
   // Application
   --app-accent-color: #27954f;
@@ -54,4 +46,7 @@
 
   // ERWT
   --erwt-heading-color: #ddddddec;
+
+  --box-border: 5px ridge var(--box-border-color);
+  --box-border-color: #111111;
 }
