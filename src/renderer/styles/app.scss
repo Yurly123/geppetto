@@ -162,14 +162,6 @@ button {
     background: white;
     box-shadow: 0 0 10px 0 var(--app-shadow-color);
   }
-
-  input.chat {
-    width: 90%;
-    padding: 0.5rem;
-    @include box-border;
-    font-size: 1.5rem;
-    margin: 0.5rem 0;
-  }
 }
 
 /**
