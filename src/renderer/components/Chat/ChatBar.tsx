@@ -16,7 +16,7 @@ const ChatBar: React.FC<Props> = (props) => {
 
   return (
     <form 
-      className='chat'
+      className='chat-bar'
       onSubmit={handleSumbit}
       >
       <input 
