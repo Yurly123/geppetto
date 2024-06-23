@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect } from 'react';
+import React, { CSSProperties, useState, useEffect } from 'react';
 import '@styles/chat.scss';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Subtitle: React.FC<Props> = (props) => {
-  const [style, setStyle] = React.useState<CSSProperties>({});
+  const [style, setStyle] = useState<CSSProperties>({});
   const disappear: CSSProperties = {
     animation: `${props.disappearDelay || 3}s disappear`,
     opacity: 0,

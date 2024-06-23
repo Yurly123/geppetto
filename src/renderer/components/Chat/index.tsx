@@ -1,14 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import '@styles/chat.scss';
 import ChatBar from './ChatBar';
 import Subtitle from './Subtitle';
 
+function subtitleReducer(
+  state: string, 
+  action: { type: 'clear' | 'data', data?: string}
+) {
+  if (action.type === 'clear') {
+    return action.data || '';
+  }
+  else if (action.type === 'data') {
+    return state + (action?.data || '');
+  }
+}
+
 const Chat: React.FC = () => {
-  const [input, setInput] = React.useState<string>('');
-  const [messages, setMessages] = React.useState<string[]>([]); 
-  const [subtitleVisible, setSubtitleVisible] = React.useState<boolean>(false);
-  const [subtitle, setSubtitle] = React.useState<string>('');
-  const [delta, setDelta] = React.useState<string>('');
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<string[]>([]); 
+  const [subtitleVisible, setSubtitleVisible] = useState(false);
+  const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
 
   function messageCompletion(message: string) {
     window.openai.requestCompletion(message)
@@ -16,22 +27,10 @@ const Chat: React.FC = () => {
 
   useEffect(() => {
     window.openai.onCompletionChunk((chunk) => {
-      setDelta(chunk);
+      console.log(chunk)
+      dispatchSubtitle({ type: 'data', data: chunk })
     });
   }, []);
-  useEffect(() => {
-    if (!delta) return;
-    setSubtitle(subtitle + delta);
-  }, [delta]);
-  
-  //useEffect(() => {
-    //if (!subtitleVisible) return;
-    //const length = subtitle.length || 0;
-    //const timer = setTimeout(() => {
-      //setSubtitleVisible(false);
-    //}, 2000 + length * 100);
-    //return () => clearTimeout(timer);
-  //}, [subtitleVisible]);
 
   return (
     <div className='chat'>
@@ -49,7 +48,7 @@ const Chat: React.FC = () => {
           setInput('');
           setSubtitleVisible(true);
           messageCompletion(message);
-          setSubtitle('');
+          dispatchSubtitle({ type:'clear' });
         }}
       />
     </div>
