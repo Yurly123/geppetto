@@ -1,12 +1,15 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import OpenAI from 'openai';
 import { registerTitlebarIpc } from '@main/window/titlebarIpc';
+import { registerOpenaiIpc } from './openai/openaiIpc';
 
 // Electron Forge automatically creates these entry points
 declare const APP_WINDOW_WEBPACK_ENTRY: string;
 declare const APP_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 let appWindow: BrowserWindow;
+const openai = new OpenAI()
 
 /**
  * Create Application Window
@@ -60,4 +63,5 @@ function registerMainIPC() {
    * to Communicate asynchronously from the main process to renderer processes.
    */
   registerTitlebarIpc(appWindow);
+  registerOpenaiIpc(openai);
 }

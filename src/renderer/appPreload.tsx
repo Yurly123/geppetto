@@ -1,4 +1,5 @@
 import '@main/window/windowPreload';
+import '@main/openai/preload'
 
 // Say something
 console.log('[ERWT] : Preload execution started');
