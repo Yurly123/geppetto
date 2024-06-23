@@ -10,11 +10,11 @@ declare global {
 
 const preload = {
     requestCompletion(messages: Message[]) {
-        ipcRenderer.invoke(mainChannel.completion, messages)
+        ipcRenderer.invoke(mainChannel.COMPLETION, messages)
     },
 
     onCompletionChunk(callback: (chunk: string) => void) {
-        const channel = rendererChannel.completionChunk
+        const channel = rendererChannel.COMPLETION_CHUNK
         ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, chunk: string) => {
             callback(chunk)
@@ -22,7 +22,7 @@ const preload = {
     },
 
     onCompletionEnd(callback: (content: string) => void) {
-        const channel = rendererChannel.completionEnd
+        const channel = rendererChannel.COMPLETION_END
         ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, content: string) => {
             callback(content)

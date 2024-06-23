@@ -5,17 +5,17 @@ import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/types";
 
 export function registerOpenaiIpc(openai: OpenAI) {
-  ipcMain.handle(mainChannel.completion, async ({ sender }, messages: Message[]) => {
+  ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, messages: Message[]) => {
     const stream = await completion(openai, messages);
 
     let content = ''
     for await (const chunk of stream) {
       const data = chunk.choices[0].delta.content || '';
       content += data;
-      sender.send(rendererChannel.completionChunk, data);
+      sender.send(rendererChannel.COMPLETION_CHUNK, data);
 
       if (chunk.choices[0].finish_reason === 'stop') {
-        sender.send(rendererChannel.completionEnd, content);
+        sender.send(rendererChannel.COMPLETION_END, content);
       }
     }
   });

@@ -1,8 +1,8 @@
 export const mainChannel = {
-    completion: 'completion',
+    COMPLETION: 'completion',
 }
 
 export const rendererChannel = {
-    completionChunk: 'completion-chunk',
-    completionEnd: 'completion-end',
+    COMPLETION_CHUNK: 'completion-chunk',
+    COMPLETION_END: 'completion-end',
 }
