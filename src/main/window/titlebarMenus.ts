@@ -34,97 +34,6 @@ const titlebarMenus: TitlebarMenu[] = [
     ],
   },
   {
-    name: 'Edit',
-    items: [
-      {
-        name: 'Undo',
-        action: 'undo',
-        shortcut: 'Ctrl+Z',
-      },
-      {
-        name: 'Redo',
-        action: 'redo',
-        shortcut: 'Ctrl+Y',
-      },
-      {
-        name: '__',
-      },
-      {
-        name: 'Cut',
-        action: 'cut',
-        shortcut: 'Ctrl+X',
-      },
-      {
-        name: 'Copy',
-        action: 'copy',
-        shortcut: 'Ctrl+C',
-      },
-      {
-        name: 'Paste',
-        action: 'paste',
-        shortcut: 'Ctrl+V',
-      },
-      {
-        name: 'Delete',
-        action: 'delete',
-      },
-      {
-        name: '__',
-      },
-      {
-        name: 'Select All',
-        action: 'select_all',
-        shortcut: 'Ctrl+A',
-      },
-    ],
-  },
-  {
-    name: 'View',
-    items: [
-      {
-        name: 'Reload',
-        action: 'reload',
-        shortcut: 'Ctrl+R',
-      },
-      {
-        name: 'Force Reload',
-        action: 'force_reload',
-        shortcut: 'Ctrl+Shift+R',
-      },
-      {
-        name: 'Toogle Developer Tools',
-        action: 'toggle_devtools',
-        shortcut: 'Ctrl+Shift+I',
-      },
-      {
-        name: '__',
-      },
-      {
-        name: 'Actual Size',
-        action: 'actual_size',
-        shortcut: 'Ctrl+0',
-      },
-      {
-        name: 'Zoom In',
-        action: 'zoom_in',
-        shortcut: 'Ctrl++',
-      },
-      {
-        name: 'Zoom Out',
-        action: 'zoom_out',
-        shortcut: 'Ctrl+-',
-      },
-      {
-        name: '__',
-      },
-      {
-        name: 'Toggle Fullscreen',
-        action: 'toggle_fullscreen',
-        shortcut: 'F11',
-      },
-    ],
-  },
-  {
     name: 'Window',
     items: [
       {
@@ -151,7 +60,19 @@ const titlebarMenus: TitlebarMenu[] = [
         name: 'Guasam',
         action: 'open_url',
         value: 'https://github.com/guasam',
-        shortcut: '@guasam',
+        shortcut: 'electron window',
+      },
+      {
+        name: 'Codesbiome',
+        action: 'open_url',
+        value: 'https://github.com/codesbiome',
+        shortcut: 'electron template',
+      },
+      {
+        name: 'ONEstore',
+        action: 'open_url',
+        value: 'https://www.onestorecorp.com/sv/fordev_font',
+        shortcut: 'main font',
       },
     ],
   },

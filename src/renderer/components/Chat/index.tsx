@@ -5,19 +5,6 @@ import Subtitle from './Subtitle';
 import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
 import { createMessage } from '@common/openai';
 
-function subtitleReducer(
-  state: string, 
-  action: { type: 'clear' | 'data', data?: string }
-) {
-  action.data = action.data || '';
-  if (action.type === 'clear') {
-    return action.data
-  }
-  else if (action.type === 'data') {
-    return state + action.data
-  }
-}
-
 const Chat: React.FC = () => {
   const [input, setInput] = useState('');
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
@@ -55,3 +42,16 @@ const Chat: React.FC = () => {
 };
 
 export default Chat;
+
+function subtitleReducer(
+  state: string, 
+  action: { type: 'clear' | 'data', data?: string }
+) {
+  action.data = action.data || '';
+  if (action.type === 'clear') {
+    return action.data
+  }
+  else if (action.type === 'data') {
+    return state + action.data
+  }
+}

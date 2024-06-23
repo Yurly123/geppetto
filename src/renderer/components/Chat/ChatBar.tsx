@@ -21,7 +21,7 @@ const ChatBar: React.FC<Props> = (props) => {
       >
       <input 
         type='text' 
-        placeholder='Type message' 
+        placeholder='메세지 입력' 
         value={props.message}
         onChange={(e) => props.onMessageChange(e.target.value)}
       />
