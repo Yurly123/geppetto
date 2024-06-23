@@ -1,26 +1,25 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { completion } from "./completion";
-import { ChatCompletionChunk } from "openai/resources";
+import { mainChannel, rendererChannel } from "./channels";
 
 declare global {
     interface Window {
-        openai: {
-            requestCompletion: (
-                message: string,
-            ) => any,
-            onCompletionChunk: (
-                callback: (chunk: string) => any,
-            ) => any,
-        }
+        openai: typeof preload
     }
 }
 
-contextBridge.exposeInMainWorld('openai', {
-    requestCompletion: (message: string) => {
-        ipcRenderer.invoke('completion', message)
+const preload = {
+    requestCompletion(message: string) {
+        ipcRenderer.invoke(mainChannel.completion, message)
     },
-    onCompletionChunk: (callback: (chunk: ChatCompletionChunk) => any) => {
-        ipcRenderer.removeAllListeners('completion-chunk')
-        ipcRenderer.on('completion-chunk', (_, chunk: ChatCompletionChunk) => callback(chunk))
+
+    onCompletionChunk(callback: (chunk: string) => void) {
+        const channel = rendererChannel.completionChunk
+        ipcRenderer.removeAllListeners(channel)
+        ipcRenderer.on(channel, (_, chunk: string) => {
+            callback(chunk)
+        });
     }
-})
+
+}
+
+contextBridge.exposeInMainWorld('openai', preload)

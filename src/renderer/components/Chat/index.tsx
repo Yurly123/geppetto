@@ -5,13 +5,14 @@ import Subtitle from './Subtitle';
 
 function subtitleReducer(
   state: string, 
-  action: { type: 'clear' | 'data', data?: string}
+  action: { type: 'clear' | 'data', data?: string }
 ) {
+  action.data = action.data || '';
   if (action.type === 'clear') {
-    return action.data || '';
+    return action.data
   }
   else if (action.type === 'data') {
-    return state + (action?.data || '');
+    return state + action.data
   }
 }
 
@@ -21,13 +22,8 @@ const Chat: React.FC = () => {
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
 
-  function messageCompletion(message: string) {
-    window.openai.requestCompletion(message)
-  }
-
   useEffect(() => {
     window.openai.onCompletionChunk((chunk) => {
-      console.log(chunk)
       dispatchSubtitle({ type: 'data', data: chunk })
     });
   }, []);
@@ -43,11 +39,10 @@ const Chat: React.FC = () => {
         message={input}
         onMessageChange={setInput}
         onMessageSubmit={(message) => {
-          console.log('Submit:', message);
           setMessages([...messages, message]);
           setInput('');
           setSubtitleVisible(true);
-          messageCompletion(message);
+          window.openai.requestCompletion(message);
           dispatchSubtitle({ type:'clear' });
         }}
       />
