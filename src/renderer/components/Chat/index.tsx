@@ -21,6 +21,15 @@ const Chat: React.FC = () => {
     });
   }, []);
 
+  function handleSubmit(message: string) {
+    setInput('');
+    dispatchSubtitle({ type: 'clear' });
+
+    const newMessage = createMessage('user', message);
+    dispatchMessages({ type: 'add', message: newMessage });
+    window.openai.requestCompletion(messages.concat(newMessage));
+  }
+
   return (
     <div className='chat'>
       <Subtitle message={subtitle} />
@@ -28,14 +37,7 @@ const Chat: React.FC = () => {
       <ChatBar 
         message={input}
         onMessageChange={setInput}
-        onMessageSubmit={(message) => {
-          setInput('');
-          dispatchSubtitle({ type:'clear' });
-
-          const newMessage = createMessage('user', message);
-          dispatchMessages({ type: 'add', message: newMessage});
-          window.openai.requestCompletion(messages.concat(newMessage));
-        }}
+        onMessageSubmit={handleSubmit}
       />
     </div>
   );
@@ -48,10 +50,10 @@ function subtitleReducer(
   action: { type: 'clear' | 'data', data?: string }
 ) {
   action.data = action.data || '';
-  if (action.type === 'clear') {
-    return action.data
-  }
-  else if (action.type === 'data') {
-    return state + action.data
+  switch (action.type) {
+    case 'clear':
+      return action.data;
+    case 'data':
+      return state + action.data;
   }
 }
