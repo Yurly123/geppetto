@@ -8,11 +8,11 @@ module.exports = {
     // Create asar archive for main, renderer process files
     asar: true,
     // Set executable name
-    executableName: 'ERWT',
+    executableName: 'Geppetto',
     // Set application copyright
-    appCopyright: '© 2021-2024 Codesbiome, Guasam',
+    appCopyright: '',
     // Set application icon
-    icon: path.resolve('assets/images/appIcon.ico'),
+    icon: path.resolve('assets/icons/appicon.ico'),
   },
   // Forge Makers
   makers: [
