@@ -3,34 +3,43 @@ import '@styles/chat.scss';
 
 type Props = {
   message?: string;
-  isVisible?: boolean;
+  disappearDuration?: number;
+  appearDuration?: number;
   disappearDelay?: number;
-  appearDelay?: number;
 }
 
-const DEFAULT_DISAPPEAR_DELAY = 3;
-const DEFAULT_APPEAR_DELAY = 0.25;
+const DEFAULT_DISAPPEAR_DURATION = 3;
+const DEFAULT_APPEAR_DURATION = 0.25;
+const DEFAULT_DISAPPEAR_DELAY = 10;
 
 const Subtitle: React.FC<Props> = (props) => {
+  const appearDuration = props.appearDuration || DEFAULT_APPEAR_DURATION;
+  const disappearDuration = props.disappearDuration || DEFAULT_DISAPPEAR_DURATION;
+  const disappearDelay = props.disappearDelay || DEFAULT_DISAPPEAR_DELAY;
+
   const [style, setStyle] = useState<CSSProperties>({});
 
-  const disappear: CSSProperties = {
-    animation: `${
-      props.disappearDelay || DEFAULT_DISAPPEAR_DELAY
-    }s disappear`,
-    opacity: 0,
-  }
   const appear: CSSProperties = {
-    animation: `${
-      props.appearDelay || DEFAULT_APPEAR_DELAY
-    }s appear`,
+    animationName: 'appear',
+    animationDuration: `${appearDuration}s`,
     opacity: 1,
+  }
+  const disappear: CSSProperties = {
+    animationName: 'disappear',
+    animationDuration: `${disappearDuration}s`,
+    opacity: 0,
   }
 
   useEffect(() => {
-    if (props.isVisible) setStyle(appear);
-    else setStyle(disappear);
-  }, [props.isVisible]);
+    if (!props.message) return;
+    setStyle(appear);
+
+    const timer = setTimeout(
+      () => setStyle(disappear), 
+      disappearDelay * 1000
+    );
+    return () => clearTimeout(timer);
+  }, [props.message]);
 
   return props.message ? (
     <div className='chat-subtitle' style={style}>
