@@ -18,8 +18,13 @@ const preload = {
         ipcRenderer.on(channel, (_, chunk: string) => {
             callback(chunk)
         });
-    }
+    },
 
+    onCompletionEnd(callback: () => void) {
+        const channel = rendererChannel.completionEnd
+        ipcRenderer.removeAllListeners(channel)
+        ipcRenderer.on(channel, callback);
+    },
 }
 
 contextBridge.exposeInMainWorld('openai', preload)

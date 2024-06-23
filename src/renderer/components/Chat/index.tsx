@@ -18,13 +18,16 @@ function subtitleReducer(
 
 const Chat: React.FC = () => {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<string[]>([]); 
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
 
   useEffect(() => {
     window.openai.onCompletionChunk((chunk) => {
       dispatchSubtitle({ type: 'data', data: chunk })
+    });
+
+    window.openai.onCompletionEnd(() => {
+      setSubtitleVisible(false);
     });
   }, []);
 
@@ -39,7 +42,6 @@ const Chat: React.FC = () => {
         message={input}
         onMessageChange={setInput}
         onMessageSubmit={(message) => {
-          setMessages([...messages, message]);
           setInput('');
           setSubtitleVisible(true);
           window.openai.requestCompletion(message);
