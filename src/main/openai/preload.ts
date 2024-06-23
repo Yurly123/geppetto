@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { mainChannel, rendererChannel } from "./channels";
+import { Message } from "@common/types";
 
 declare global {
     interface Window {
@@ -8,8 +9,8 @@ declare global {
 }
 
 const preload = {
-    requestCompletion(message: string) {
-        ipcRenderer.invoke(mainChannel.completion, message)
+    requestCompletion(messages: Message[]) {
+        ipcRenderer.invoke(mainChannel.completion, messages)
     },
 
     onCompletionChunk(callback: (chunk: string) => void) {
@@ -20,10 +21,12 @@ const preload = {
         });
     },
 
-    onCompletionEnd(callback: () => void) {
+    onCompletionEnd(callback: (content: string) => void) {
         const channel = rendererChannel.completionEnd
         ipcRenderer.removeAllListeners(channel)
-        ipcRenderer.on(channel, callback);
+        ipcRenderer.on(channel, (_, content: string) => {
+            callback(content)
+        });
     },
 }
 

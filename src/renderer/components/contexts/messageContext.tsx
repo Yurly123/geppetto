@@ -1,8 +1,9 @@
+import { systemMessage } from "@common/openai";
 import { Message } from "@common/types";
 import React, { Dispatch, ReactNode, createContext, useReducer } from "react";
 
-export const MessagesContext = createContext<Message[]>([]);
-export const DispatchMessagesContext = createContext<Dispatch<action>>(() => {});
+export const MessagesContext = createContext<Message[]>(null);
+export const DispatchMessagesContext = createContext<Dispatch<action>>(null);
 
 type action = Parameters<typeof messagesReducer>[1]
 function messagesReducer(
@@ -21,7 +22,7 @@ type Props = { children: ReactNode; }
 export const MessagesProvider: React.FC<Props> = ({
     children
 }) => {
-    const [messages, dispatchMessages] = useReducer(messagesReducer, [])
+    const [messages, dispatchMessages] = useReducer(messagesReducer, [systemMessage()])
 
     return (
         <MessagesContext.Provider value={messages}>

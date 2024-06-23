@@ -6,3 +6,7 @@ export function createMessage(
 ): Message {
     return { role, content };
 }
+
+export function systemMessage() {
+    return createMessage('system', 'You are a helpful assistant.');
+}

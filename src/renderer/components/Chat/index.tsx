@@ -3,7 +3,7 @@ import '@styles/chat.scss';
 import ChatBar from './ChatBar';
 import Subtitle from './Subtitle';
 import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
-import { createMessage } from '@common/message';
+import { createMessage } from '@common/openai';
 
 function subtitleReducer(
   state: string, 
@@ -28,6 +28,10 @@ const Chat: React.FC = () => {
     window.openai.onCompletionChunk((chunk) => {
       dispatchSubtitle({ type: 'data', data: chunk })
     });
+
+    window.openai.onCompletionEnd((content) => {
+      dispatchMessages({ type: 'add', message: createMessage('assistant', content) });
+    });
   }, []);
 
   return (
@@ -39,9 +43,11 @@ const Chat: React.FC = () => {
         onMessageChange={setInput}
         onMessageSubmit={(message) => {
           setInput('');
-          window.openai.requestCompletion(message);
           dispatchSubtitle({ type:'clear' });
-          dispatchMessages({ type: 'add', message: createMessage('user', message) });
+
+          const newMessage = createMessage('user', message);
+          dispatchMessages({ type: 'add', message: newMessage});
+          window.openai.requestCompletion(messages.concat(newMessage));
         }}
       />
     </div>
