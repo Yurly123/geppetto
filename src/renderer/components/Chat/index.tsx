@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 import '@styles/chat.scss';
 import ChatBar from './ChatBar';
 import Subtitle from './Subtitle';
+import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
+import { createMessage } from '@common/message';
 
 function subtitleReducer(
   state: string, 
@@ -19,6 +21,8 @@ function subtitleReducer(
 const Chat: React.FC = () => {
   const [input, setInput] = useState('');
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
+  const dispatchMessages = useContext(DispatchMessagesContext);
+  const messages = useContext(MessagesContext);
 
   useEffect(() => {
     window.openai.onCompletionChunk((chunk) => {
@@ -37,6 +41,7 @@ const Chat: React.FC = () => {
           setInput('');
           window.openai.requestCompletion(message);
           dispatchSubtitle({ type:'clear' });
+          dispatchMessages({ type: 'add', message: createMessage('user', message) });
         }}
       />
     </div>

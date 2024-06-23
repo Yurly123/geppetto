@@ -1,8 +1,8 @@
+import { Message } from '@common/types';
 import OpenAI from 'openai';
-import { ChatCompletionMessageParam } from 'openai/resources';
 
 export async function completion(openai: OpenAI, prompt: string) {
-    const messages: ChatCompletionMessageParam[] = [
+    const messages: Message[] = [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: prompt },
     ]
