@@ -10,10 +10,11 @@ type Props = {
 
 function addDefaultProps(props: Props) {
   return {
-    message: props.message,
-    appearDuration: props.appearDuration ?? 0.25,
-    disappearDuration: props.disappearDuration ?? 3,
-    disappearDelay: props.disappearDelay ?? 10,
+    message: '',
+    appearDuration: 0.25,
+    disappearDuration: 3,
+    disappearDelay: 10,
+    ...props,
   }
 }
 

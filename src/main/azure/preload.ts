@@ -1,4 +1,4 @@
-import { Viseme } from "@common/types";
+import { SSMLOption, Viseme } from "@common/types";
 import { contextBridge, ipcRenderer } from "electron";
 import { mainChannel, rendererChannel } from "./channels";
 
@@ -9,8 +9,8 @@ declare global {
 }
 
 const preload = {
-    requestSynthesis(content: string) {
-        ipcRenderer.invoke(mainChannel.SYNTHESIS, content)
+    requestSynthesis(content: string, option?: SSMLOption) {
+        ipcRenderer.invoke(mainChannel.SYNTHESIS, content, option)
     },
 
     onSynthesisViseme(callback: (viseme: Viseme) => void) {

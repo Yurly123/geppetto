@@ -1,17 +1,31 @@
 import { ipcMain } from "electron";
 import { SpeechSynthesizer } from "microsoft-cognitiveservices-speech-sdk";
 import { mainChannel, rendererChannel } from "./channels";
-import { Viseme } from "@common/types";
+import { SSMLOption, Viseme } from "@common/types";
 
-function attachSsml(synthesizer: SpeechSynthesizer, content: string) {
+function attachSsml(
+    synthesizer: SpeechSynthesizer, 
+    content: string,
+    option: SSMLOption,
+) {
+    option = { pitch: 0, rate: 0, ...option }
     const baseSsml = synthesizer.buildSsml('*').split('*')
-    const ssml = `<prosody pitch="+5%" rate="+20%">${content}</prosody>`
+    const ssml = `<prosody 
+            pitch="+${option.pitch}%"
+            rate="+${option.rate}%"
+        > 
+            ${content}
+        </prosody>`
     return baseSsml[0] + ssml + baseSsml[1]
 }
 
 export function registerAzureIpc(synthesizer: SpeechSynthesizer) {
-    ipcMain.handle(mainChannel.SYNTHESIS, (_, content: string) => {
-        const input = attachSsml(synthesizer, content)
+    ipcMain.handle(mainChannel.SYNTHESIS, (
+        _,
+        content: string,
+        option?: SSMLOption,
+    ) => {
+        const input = attachSsml(synthesizer, content, option)
         synthesizer.speakSsmlAsync(input, null, console.error)
     });
 

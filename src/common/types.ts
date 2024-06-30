@@ -7,3 +7,8 @@ export interface Viseme {
     visemeId: number;
     offset: number;
 }
+
+export type SSMLOption = {
+    pitch?: number,
+    rate?: number,
+}

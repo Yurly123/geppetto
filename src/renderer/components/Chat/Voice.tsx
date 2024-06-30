@@ -1,7 +1,11 @@
+import { SSMLOption } from '@common/types';
 import { MessagesContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
-const Voice: React.FC = () => {
+type Props = {
+  ssmlOption?: SSMLOption
+}
+const Voice: React.FC<Props> = (props) => {
   const messages = useContext(MessagesContext)
   useEffect(() => {
     if (messages.length === 0) return;
@@ -17,7 +21,12 @@ const Voice: React.FC = () => {
       source.start(0);
     })
 
-    window.azure.requestSynthesis(message.content);
+    const option = {
+      pitch: 10,
+      rate: 30,
+      ...props.ssmlOption
+    }
+    window.azure.requestSynthesis(message.content, option);
   }, [messages.length]);
   return null;
 };
