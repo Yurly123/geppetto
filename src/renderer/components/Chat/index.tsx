@@ -42,7 +42,10 @@ const Chat: React.FC = () => {
         onMessageChange={setInput}
         onMessageSubmit={handleSubmit}
       />
-      <Voice />
+      <Voice ssmlOption={{
+        pitch: 10,
+        rate: 30,
+      }} />
     </div>
   );
 };

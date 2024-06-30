@@ -7,6 +7,7 @@ type Props = {
 }
 const Voice: React.FC<Props> = (props) => {
   const messages = useContext(MessagesContext)
+
   useEffect(() => {
     if (messages.length === 0) return;
     const message = messages[messages.length - 1];
@@ -21,14 +22,10 @@ const Voice: React.FC<Props> = (props) => {
       source.start(0);
     })
 
-    const option = {
-      pitch: 10,
-      rate: 30,
-      ...props.ssmlOption
-    }
-    window.azure.requestSynthesis(message.content, option);
+    window.azure.requestSynthesis(message.content, props.ssmlOption);
   }, [messages.length]);
-  return null;
+
+  return null
 };
 
 export default Voice;
