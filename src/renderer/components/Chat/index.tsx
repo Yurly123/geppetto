@@ -20,6 +20,11 @@ const Chat: React.FC = () => {
     window.openai.onCompletionEnd((content) => {
       dispatchMessages({ type: 'add', message: createMessage('assistant', content) });
     });
+
+    return () => {
+      window.openai.removeCompletionChunkListeners();
+      window.openai.removeCompletionEndListeners();
+    }
   }, []);
 
   function handleSubmit(message: string) {

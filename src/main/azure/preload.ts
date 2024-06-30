@@ -16,7 +16,6 @@ const preload = {
     onSynthesisViseme(callback: (viseme: Viseme) => void) {
         ipcRenderer.invoke(mainChannel.SYNTHESIS_VISEME)
         const channel = rendererChannel.SYNTHESIS_VISEME
-        ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, viseme: Viseme) => {
             callback(viseme)
         })
@@ -25,11 +24,17 @@ const preload = {
     onSynthesisEnd(callback: (audio: ArrayBuffer) => void) {
         ipcRenderer.invoke(mainChannel.SYNTHESIS_END)
         const channel = rendererChannel.SYNTHESIS_END
-        ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, audio: ArrayBuffer) => {
             callback(audio)
         })
     },
+
+    removeSynthesisVisemeListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.SYNTHESIS_VISEME)
+    },
+    removeSynthesisEndListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.SYNTHESIS_END)
+    }
 }
 
 contextBridge.exposeInMainWorld('azure', preload)

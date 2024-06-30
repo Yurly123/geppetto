@@ -2,12 +2,21 @@ import { Viseme } from "@common/types";
 import { useEffect, useReducer } from "react";
 
 const Viseme: React.FC = () => {
-    const [viesmes, dispatchVisemes] = useReducer(visemeReducer, []);
+    const [visemes, dispatchVisemes] = useReducer(visemeReducer, []);
 
     useEffect(() => {
         window.azure.onSynthesisViseme((viseme) => {
             dispatchVisemes({ type: 'add', viseme });
         })
+
+        window.azure.onSynthesisEnd(() => {
+            console.log(visemes)
+        })
+
+        return () => {
+            window.azure.removeSynthesisVisemeListeners();
+            window.azure.removeSynthesisEndListeners();
+        }
     }, [])
 
     return ''

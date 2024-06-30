@@ -15,7 +15,6 @@ const preload = {
 
     onCompletionChunk(callback: (chunk: string) => void) {
         const channel = rendererChannel.COMPLETION_CHUNK
-        ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, chunk: string) => {
             callback(chunk)
         });
@@ -23,10 +22,16 @@ const preload = {
 
     onCompletionEnd(callback: (content: string) => void) {
         const channel = rendererChannel.COMPLETION_END
-        ipcRenderer.removeAllListeners(channel)
         ipcRenderer.on(channel, (_, content: string) => {
             callback(content)
         });
+    },
+
+    removeCompletionChunkListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_CHUNK)
+    },
+    removeCompletionEndListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_END)
     },
 }
 
