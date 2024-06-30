@@ -8,25 +8,21 @@ type Props = {
   disappearDelay?: number;
 }
 
-const DEFAULT_DISAPPEAR_DURATION = 3;
-const DEFAULT_APPEAR_DURATION = 0.25;
-const DEFAULT_DISAPPEAR_DELAY = 10;
-
 const Subtitle: React.FC<Props> = (props) => {
-  const appearDuration = props.appearDuration || DEFAULT_APPEAR_DURATION;
-  const disappearDuration = props.disappearDuration || DEFAULT_DISAPPEAR_DURATION;
-  const disappearDelay = props.disappearDelay || DEFAULT_DISAPPEAR_DELAY;
+  props.appearDuration ??= 3;
+  props.disappearDuration ??= 0.25;
+  props.disappearDelay ??= 10;
 
   const [style, setStyle] = useState<CSSProperties>({});
 
   const appear: CSSProperties = {
     animationName: 'appear',
-    animationDuration: `${appearDuration}s`,
+    animationDuration: `${props.appearDuration}s`,
     opacity: 1,
   }
   const disappear: CSSProperties = {
     animationName: 'disappear',
-    animationDuration: `${disappearDuration}s`,
+    animationDuration: `${props.appearDuration}s`,
     opacity: 0,
   }
 
@@ -36,7 +32,7 @@ const Subtitle: React.FC<Props> = (props) => {
 
     const timer = setTimeout(
       () => setStyle(disappear), 
-      disappearDelay * 1000
+      props.disappearDelay * 1000
     );
     return () => clearTimeout(timer);
   }, [props.message]);
