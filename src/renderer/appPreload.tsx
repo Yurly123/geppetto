@@ -1,5 +1,6 @@
 import '@main/window/windowPreload';
-import '@main/openai/preload'
+import '@main/openai/preload';
+import '@main/azure/preload';
 
 // Say something
 console.log('[ERWT] : Preload execution started');

@@ -3,13 +3,23 @@ import path from 'path';
 import OpenAI from 'openai';
 import { registerTitlebarIpc } from '@main/window/titlebarIpc';
 import { registerOpenaiIpc } from './openai/openaiIpc';
+import { SpeechConfig, SpeechSynthesizer } from 'microsoft-cognitiveservices-speech-sdk';
+import { registerAzureIpc } from './azure/azureIpc';
 
 // Electron Forge automatically creates these entry points
 declare const APP_WINDOW_WEBPACK_ENTRY: string;
 declare const APP_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 let appWindow: BrowserWindow;
+
 const openai = new OpenAI()
+const speechConfig = SpeechConfig.fromSubscription(
+  process.env.AZURE_SUBSCRIPTION_KEY,
+  process.env.AZURE_SERVICE_REGION
+)
+speechConfig.speechSynthesisLanguage = 'ko-KR'
+speechConfig.speechSynthesisVoiceName = 'ko-KR-SoonBokNeural'
+const synthesizer = new SpeechSynthesizer(speechConfig)
 
 /**
  * Create Application Window
@@ -64,4 +74,5 @@ function registerMainIPC() {
    */
   registerTitlebarIpc(appWindow);
   registerOpenaiIpc(openai);
+  registerAzureIpc(synthesizer);
 }
