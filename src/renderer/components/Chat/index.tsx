@@ -31,9 +31,11 @@ const Chat: React.FC = () => {
     window.openai.requestCompletion(messages.concat(newMessage));
   }
 
+  const disappearDelay = 10 + subtitle.length / 10;
+
   return (
     <div className='chat'>
-      <Subtitle message={subtitle} />
+      <Subtitle message={subtitle} disappearDelay={disappearDelay} />
       <div style={{ height: '100%' }}></div>
       <ChatBar 
         message={input}

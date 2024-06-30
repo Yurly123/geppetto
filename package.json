@@ -52,7 +52,7 @@
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.9.0",
-    "electron": "^28.1.2",
+    "electron": "^31.1.0",
     "eslint": "^8.56.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.29.1",
