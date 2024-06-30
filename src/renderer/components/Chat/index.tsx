@@ -4,6 +4,7 @@ import ChatBar from './ChatBar';
 import Subtitle from './Subtitle';
 import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
 import { createMessage } from '@common/openai';
+import Voice from './Voice';
 
 const Chat: React.FC = () => {
   const [input, setInput] = useState('');
@@ -39,6 +40,7 @@ const Chat: React.FC = () => {
         onMessageChange={setInput}
         onMessageSubmit={handleSubmit}
       />
+      <Voice />
     </div>
   );
 };
