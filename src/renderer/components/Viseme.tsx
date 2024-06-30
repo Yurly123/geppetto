@@ -1,40 +1,32 @@
 import { getVisemeSymbol } from "@common/azure";
 import { Viseme } from "@common/types";
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
+import { DispatchVoicePlayingContext, VoicePlayingContext } from "@components/contexts";
 
 const Viseme: React.FC = () => {
     const [visemes, dispatchVisemes] = useReducer(visemeReducer, []);
     const [viseme, setViseme] = useState<Viseme | null>(null);
+    const voicePlaying = useContext(VoicePlayingContext);
+    const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
 
     useEffect(() => {
         window.azure.onSynthesisViseme((viseme) => {
             dispatchVisemes({ type: 'add', viseme });
         })
 
-        window.azure.onSynthesisEnd(() => {
-            setViseme({
-                visemeId: 0,
-                offset: -1,
-            })
-        })
-
-        return () => {
-            window.azure.removeSynthesisVisemeListeners();
-            window.azure.removeSynthesisEndListeners();
-        }
+        return () => window.azure.removeSynthesisVisemeListeners();
     }, [])
 
     useEffect(() => {
-        if (!viseme) return;
-        if (viseme.offset === -1) {
-            visemes.forEach((v) => 
-                setTimeout(() => {
-                    setViseme(v)
-                }, v.offset)
-            )
-            dispatchVisemes({ type: 'clear' });
-        }
-    }, [viseme])
+        if (!voicePlaying) return;
+        visemes.forEach((v) => 
+            setTimeout(() => {
+                setViseme(v)
+            }, v.offset + 300)
+        )
+        dispatchVisemes({ type: 'clear' });
+        dispatchVoicePlaying(false);
+    }, [voicePlaying])
 
     return viseme ? 
         getVisemeSymbol(viseme.visemeId) 

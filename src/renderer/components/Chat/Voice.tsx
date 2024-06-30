@@ -1,5 +1,5 @@
 import { SSMLOption } from '@common/types';
-import { MessagesContext } from '@components/contexts';
+import { DispatchVoicePlayingContext, MessagesContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
 type Props = {
@@ -7,6 +7,7 @@ type Props = {
 }
 const Voice: React.FC<Props> = (props) => {
   const messages = useContext(MessagesContext)
+  const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
 
   useEffect(() => {
     window.azure.onSynthesisEnd(async (audio) => {
@@ -15,7 +16,10 @@ const Voice: React.FC<Props> = (props) => {
       const buffer = await context.decodeAudioData(audio)
       source.buffer = buffer;
       source.connect(context.destination);
-      source.start(0);
+      setTimeout(() => {
+        source.start();
+        dispatchVoicePlaying(true);
+      }, 0)
     })
 
     return () => window.azure.removeSynthesisEndListeners();
