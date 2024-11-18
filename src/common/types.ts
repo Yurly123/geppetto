@@ -8,6 +8,13 @@ export interface Viseme {
     offset: number;
 }
 
+export interface SettingElement {
+    name: string;
+    type: 'number' | 'boolean';
+    value: number | boolean;
+    default: number | boolean;
+}
+
 export type SSMLOption = {
     pitch?: number,
     rate?: number,

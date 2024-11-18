@@ -10,7 +10,7 @@ function messagesReducer(
     state: Message[], 
     action: { 
         type: 'add', 
-        message?: Message 
+        message: Message 
     },
 ): Message[] {
     if (action.type === 'add' && action.message) 

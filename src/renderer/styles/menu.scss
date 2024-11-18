@@ -27,4 +27,14 @@ $bar-height: titlebar.$titlebar-height;
     top: $bar-height; right: 0;
     height: 100%; width: 100%;
     background-color: var(--menu-background-color);
+
+    .setting {
+        position: absolute;
+        top: 8rem;
+        left: 1rem;
+        padding: 1rem;
+        display: flex;
+        background-color: white;
+        @include util.box-border;
+    }
 }
