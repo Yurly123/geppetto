@@ -6,8 +6,8 @@ type Props = {
 }
 const MenuButton: React.FC<Props> = (Props) => {
     return (
-        <div className='menu-button'>
-            <h3 onClick={Props.onClick}>메뉴</h3>
+        <div className='menu-button' onClick={Props.onClick}>
+            <h3>메뉴</h3>
         </div>
     )
 }

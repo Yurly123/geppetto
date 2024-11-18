@@ -5,7 +5,8 @@ import MenuButton from './MenuButton';
 type Props = {
 }
 const Menu: React.FC<Props> = (Props) => {
-    return '메뉴화면'
+    return <div className='menu'>
+    </div>
 }
 
 export default Menu;

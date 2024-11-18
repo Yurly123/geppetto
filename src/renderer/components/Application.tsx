@@ -10,9 +10,10 @@ const Application: React.FC = () => {
   return (
     <ContextsProvider>
       <div className='app'>
-        <MenuButton onClick={() => setMenuEnable(!menuEnable)} />
+        <h1>asdfasdf</h1>
         <Chat enable={!menuEnable} />
         {menuEnable && <Menu />}
+        <MenuButton onClick={() => setMenuEnable(!menuEnable)} />
       </div>
     </ContextsProvider>
   );

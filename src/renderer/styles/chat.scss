@@ -19,6 +19,10 @@
             @include util.box-border;
             font-size: 1.5rem;
             margin: 0.5rem 0;
+
+            &:disabled {
+                background-color: gray;
+            }
         }
     }
 
