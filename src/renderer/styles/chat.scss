@@ -27,8 +27,8 @@
     }
 
     &-subtitle {
-        position: absolute;
-        top: 75%;
+        position: fixed;
+        bottom: 25%;
         height: 0;
         display: flex;
         justify-content: center;
