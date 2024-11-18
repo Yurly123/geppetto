@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '@styles/app.scss';
 import { ContextsProvider } from './contexts';
 import Chat from './Chat';
-import MenuButton from './Menu/MenuButton';
+import Menu, { MenuButton } from './Menu';
 
 const Application: React.FC = () => {
+  const [menuEnable, setMenuEnable] = useState(false)
+
   return (
     <ContextsProvider>
       <div className='app'>
-        <MenuButton />
-        <Chat />
+        <MenuButton onClick={() => setMenuEnable(!menuEnable)} />
+        <Chat enable={!menuEnable} />
+        {menuEnable && <Menu />}
       </div>
     </ContextsProvider>
   );

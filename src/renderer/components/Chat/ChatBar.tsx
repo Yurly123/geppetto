@@ -5,6 +5,7 @@ type Props = {
   message?: string;
   onMessageChange?: (message: string) => void;
   onMessageSubmit?: (message: string) => void;
+  enable?: boolean;
 }
 
 const ChatBar: React.FC<Props> = (props) => {
@@ -20,6 +21,7 @@ const ChatBar: React.FC<Props> = (props) => {
       onSubmit={handleSumbit}
       >
       <input 
+        disabled={!props.enable}
         type='text' 
         placeholder='메세지 입력' 
         value={props.message}

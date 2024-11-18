@@ -6,7 +6,10 @@ import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
 import { createMessage } from '@common/openai';
 import Voice from './Voice';
 
-const Chat: React.FC = () => {
+type Props = {
+  enable?: boolean;
+}
+const Chat: React.FC<Props> = ({ enable = true }) => {
   const [input, setInput] = useState('');
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
   const dispatchMessages = useContext(DispatchMessagesContext);
@@ -43,6 +46,7 @@ const Chat: React.FC = () => {
       <Subtitle message={subtitle} disappearDelay={disappearDelay} />
       <div style={{ height: '100%' }}></div>
       <ChatBar 
+        enable={enable}
         message={input}
         onMessageChange={setInput}
         onMessageSubmit={handleSubmit}
