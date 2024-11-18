@@ -7,7 +7,7 @@
  * @package : Application Sass Stylesheet
 */
 
-@import './util';
+@use './util';
 
 /**
  *==========================================================================
@@ -150,7 +150,7 @@ button {
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    @include box-border;
+    @include util.box-border;
     background: white;
     box-shadow: 0 0 10px 0 var(--app-shadow-color);
   }

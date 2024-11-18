@@ -1,4 +1,4 @@
-@import './font.scss';
-@import './mixin.scss';
-@import './variable.scss';
-@import './class.scss';
+@forward './font';
+@forward './mixin';
+@forward './variable';
+@forward './class';

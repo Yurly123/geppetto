@@ -1,4 +1,4 @@
-@import './util';
+@use './util';
 
 .chat {
     position: absolute;
@@ -16,7 +16,7 @@
         input {
             width: 90%;
             padding: 0.5rem;
-            @include box-border;
+            @include util.box-border;
             font-size: 1.5rem;
             margin: 0.5rem 0;
         }
