@@ -1,0 +1,17 @@
+@use './util';
+
+.menu-button {
+    position: fixed;
+    height: 5rem; width: 5rem;
+    top: 3rem; right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--button-color);
+    @include util.box-border;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--button-hover-bgcolor);
+    }
+}

@@ -131,10 +131,6 @@ button {
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   height: 100%;
   font-family: 'one-pop';
   font-size: 2rem;
@@ -142,17 +138,6 @@ button {
 
   input {
     font-family: inherit;
-  }
-
-  .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    @include util.box-border;
-    background: white;
-    box-shadow: 0 0 10px 0 var(--app-shadow-color);
   }
 }
 
