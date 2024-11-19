@@ -19,9 +19,12 @@ const Setting: React.FC = () => {
                     value={element.value}
                     min={element.min}
                     max={element.max}
-                    onChange={(e) => dispatchSetting(
-                        { type: 'change', name, value: parseInt(e.target.value) }
-                    )}
+                    onChange={(e) => {
+                        let value: number;
+                        if (e.target.value === '') value = 0
+                        else value = parseInt(e.target.value)
+                        dispatchSetting({ type: 'change', name, value })
+                    }}
                 />
             } break;
             case 'boolean': {

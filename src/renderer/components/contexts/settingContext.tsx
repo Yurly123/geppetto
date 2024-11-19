@@ -1,10 +1,11 @@
-import { initialSetting, ReadableSetting, Setting, settingValue } from "@common/setting";
+import { initialSetting, NumberSettingElement, ReadableSetting, Setting, settingValue } from "@common/setting";
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
 
 export const SettingContext = createContext<ReadableSetting>(null);
 export const DispatchSettingContext = createContext<Dispatch<action>>(null);
 
 type action = Parameters<typeof settingReducer>[1]
+
 function settingReducer(
     state: Setting, 
     action: { 
@@ -16,8 +17,9 @@ function settingReducer(
     switch (action.type) {
         case 'change': if (!action.name) return state; {
             const element = state[action.name]
-            if (!element || typeof element.value !== typeof action.value)
+            if (!element || typeof element.default !== typeof action.value)
                 return state;
+            action = preprocessAction(state, action);
             return {
                 ...state,
                 [action.name]: {
@@ -57,3 +59,14 @@ export const SettingProvider: React.FC<Props> = ({
         </SettingContext.Provider>
     )
 };
+
+function preprocessAction(state: Setting, action: action): action {
+    if (typeof action.value === 'number') {
+        const element = state[action.name] as NumberSettingElement
+        if (element.min && action.value < element.min) 
+            action.value = element.min;
+        if (element.max && action.value > element.max) 
+            action.value = element.max;
+    }
+    return action;
+}
