@@ -1,17 +1,21 @@
-export type settingValue = number | boolean;
-export type settingType = 'number' | 'boolean';
-export interface SettingElement {
-    type: settingType;
-    value: settingValue;
-    default: settingValue;
+export interface SettingElement<T> {
+    value: T;
+    default: T;
 }
 
+// When you add a new setting type,
+// you should update both 'settingValue' and 'Setting'
+
+export type settingValue = number | boolean;
+
 export interface Setting {
-    [name: string]: SettingElement;
+    [name: string]:
+    SettingElement<number> |
+    SettingElement<boolean>;
 }
 
 const _initialSetting = {
-    'TTS음량': { type: 'number', value: 100, default: 100 },
+    'TTS음량': { value: 100, default: 100 }, 
 }
 
 export const initialSetting = _initialSetting as Setting
