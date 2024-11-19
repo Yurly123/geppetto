@@ -1,5 +1,4 @@
-import { Setting } from "@common/class";
-import { SettingElement } from "@common/types";
+import { Setting, settingValue } from "@common/types";
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
 
 export const SettingContext = createContext<Setting>(null);
@@ -11,22 +10,21 @@ function settingReducer(
     action: { 
         type: 'change' | 'reset',
         name?: string,
-        value?: SettingElement['value'],
+        value?: settingValue,
     },
 ): Setting {
-    if (action.type === 'change' && action.name) {
-        const setting = state.get(action.name);
-        if (typeof setting.value !== typeof action.value) return state;
-        setting.value = action.value;
-    }
-    if (action.type === 'reset') {
-        if (action.name) {
-            const setting = state.get(action.name);
-            setting.value = setting.default;
-        }
-        else {
-            state.settings.forEach(setting => setting.value = setting.default);
-        }
+    switch (action.type) {
+        case 'change': if (!action.name) return state; {
+            const element = state[action.name]
+            if (!element || typeof element.value !== typeof action.value)
+                return state;
+            element.value = action.value
+        } break;
+        case 'reset': if (!action.name) return state; {
+            const element = state[action.name]
+            if (!element) return state;
+            element.value = element.default
+        } break;
     }
     return state
 }
@@ -35,10 +33,10 @@ type Props = { children: ReactNode; }
 export const SettingProvider: React.FC<Props> = ({
     children
 }) => {
-    const settings: SettingElement[] = [
-        { name: 'TTS음량', type: 'number', default: 50, value: 50 },
-    ]
-    const [setting, dispatchSetting] = useReducer(settingReducer, new Setting(settings));
+    const initialSetting: Setting = {
+        'TTS음량': { type: 'number', value: 100, default: 100 },
+    }
+    const [setting, dispatchSetting] = useReducer(settingReducer, initialSetting);
 
     return (
         <SettingContext.Provider value={setting}>

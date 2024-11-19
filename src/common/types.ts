@@ -8,11 +8,16 @@ export interface Viseme {
     offset: number;
 }
 
+export type settingValue = number | boolean;
+export type settingType = 'number' | 'boolean';
 export interface SettingElement {
-    name: string;
-    type: 'number' | 'boolean';
-    value: number | boolean;
-    default: number | boolean;
+    type: settingType;
+    value: settingValue;
+    default: settingValue;
+}
+
+export interface Setting {
+    [name: string]: SettingElement;
 }
 
 export type SSMLOption = {
