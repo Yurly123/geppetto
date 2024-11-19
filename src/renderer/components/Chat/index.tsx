@@ -55,7 +55,7 @@ const Chat: React.FC<Props> = ({ enable = true }) => {
       <Voice ssmlOption={{
         pitch: 10,
         rate: 30,
-        volume: 50,
+        volume: setting['TTS음량'].value,
       }} />
     </div>
   );
