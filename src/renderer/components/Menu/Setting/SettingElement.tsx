@@ -1,7 +1,7 @@
 import React from 'react';
 import '@styles/menu.scss';
 import { Setting, settingValue } from '@common/setting';
-import SettingInput from './SettingInput/SettingInput';
+import SettingInput from './SettingInput';
 
 type Props = {
     name: string,

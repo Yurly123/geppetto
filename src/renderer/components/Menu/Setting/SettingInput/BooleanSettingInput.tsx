@@ -5,9 +5,7 @@ type Props = {
     element: BooleanSettingElement
     onChange: (value: boolean) => void
 }
-const BooleanSettingInput: React.FC<Props> = ({
-    element, onChange
-}) => {
+const BooleanSettingInput: React.FC<Props> = ({ element, onChange }) => {
     return <input
         type='checkbox'
         checked={element.value}
