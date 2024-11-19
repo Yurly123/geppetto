@@ -36,5 +36,33 @@ $bar-height: titlebar.$titlebar-height;
         display: flex;
         background-color: white;
         @include util.box-border;
+        flex-direction: column;
+
+        &-element {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            margin: 0;
+            font-size: 1.5rem;
+            height: 4rem;
+
+            > * {
+                font-size: inherit;
+                display: flex;
+                align-items: center;
+                margin-right: 1rem;
+                height: 2rem;
+            }
+
+            > input[type="checkbox"] {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            > input[type="number"] {
+                height: 2rem;
+                width: 4rem;
+            }
+        }
     }
 }

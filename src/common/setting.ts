@@ -16,6 +16,7 @@ export interface Setting {
 
 const _initialSetting = {
     'TTS음량': { value: 100, default: 100 }, 
+    'TTS토글asdfasdf': { value: true, default: true },
 }
 
 export const initialSetting = _initialSetting as Setting
