@@ -8,14 +8,23 @@ export interface SettingElement<T> {
 
 export type settingValue = number | boolean;
 
+export interface BooleanSettingElement
+    extends SettingElement<boolean> { };
+
+export interface NumberSettingElement
+    extends SettingElement<number> {
+    min?: number;
+    max?: number;
+};
+
 export interface Setting {
     [name: string]:
-    SettingElement<number> |
-    SettingElement<boolean>;
+    NumberSettingElement |
+    BooleanSettingElement;
 }
 
 const _initialSetting = {
-    'TTS음량': { value: 100, default: 100 }, 
+    'TTS음량': { value: 100, default: 100, min: 0, max: 100 }, 
     'TTS토글asdfasdf': { value: true, default: true },
 }
 

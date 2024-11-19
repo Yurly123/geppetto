@@ -12,9 +12,11 @@ function messagesReducer(
         message: Message 
     },
 ): Message[] {
-    if (action.type === 'add' && action.message) 
-        state.push(action.message)
-    return state
+    switch (action.type) {
+        case 'add':
+            return [...state, action.message]
+        default: return state
+    }
 }
 
 type Props = { children: ReactNode; }

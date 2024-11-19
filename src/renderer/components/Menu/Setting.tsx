@@ -1,22 +1,38 @@
 import React, { useContext } from 'react';
 import '@styles/menu.scss';
-import { SettingContext } from '@components/contexts';
-import { Setting as ISetting} from '@common/setting';
+import { DispatchSettingContext, SettingContext } from '@components/contexts';
+import { Setting as ISetting, NumberSettingElement} from '@common/setting';
 
 const Setting: React.FC = () => {
     const setting = useContext(SettingContext)
+    const dispatchSetting = useContext(DispatchSettingContext)
 
     function settingElement(name: string) {
-        const element = (setting as ISetting)[name];
+        let element = (setting as ISetting)[name];
 
         let input;
         switch (typeof element.value) {
-            case 'number':
-                input = <input type='number' value={element.value} />
-                break;
-            case 'boolean':
-                input = <input type='checkbox' checked={element.value} />
-                break;
+            case 'number': {
+                element = element as NumberSettingElement
+                input = <input
+                    type='number'
+                    value={element.value}
+                    min={element.min}
+                    max={element.max}
+                    onChange={(e) => dispatchSetting(
+                        { type: 'change', name, value: parseInt(e.target.value) }
+                    )}
+                />
+            } break;
+            case 'boolean': {
+                input = <input
+                    type='checkbox'
+                    checked={element.value}
+                    onChange={(e) => dispatchSetting(
+                        { type: 'change', name, value: e.target.checked }
+                    )}
+                />
+            } break;
         }
 
         return (

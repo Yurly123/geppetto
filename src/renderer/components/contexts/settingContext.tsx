@@ -18,16 +18,29 @@ function settingReducer(
             const element = state[action.name]
             if (!element || typeof element.value !== typeof action.value)
                 return state;
-            element.value = action.value
-        } break;
+            return {
+                ...state,
+                [action.name]: {
+                    ...element,
+                    value: action.value
+                } as typeof element
+            }
+        }
 
         case 'reset': if (!action.name) return state; {
             const element = state[action.name]
             if (!element) return state;
-            element.value = element.default
-        } break;
+            return {
+                ...state,
+                [action.name]: {
+                    ...element,
+                    value: element.default
+                } as typeof element
+            }
+        } 
+
+        default: return state
     }
-    return state
 }
 
 type Props = { children: ReactNode; }
