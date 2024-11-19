@@ -8,11 +8,12 @@ function attachSsml(
     content: string,
     option: SSMLOption,
 ) {
-    option = { pitch: 0, rate: 0, ...option }
+    option = { pitch: 0, rate: 0, volume: 100, ...option }
     const baseSsml = synthesizer.buildSsml('*').split('*')
     const ssml = `<prosody 
             pitch="+${option.pitch}%"
             rate="+${option.rate}%"
+            volume="${option.volume}"
         > 
             ${content}
         </prosody>`

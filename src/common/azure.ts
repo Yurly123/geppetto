@@ -4,8 +4,9 @@ export interface Viseme {
 }
 
 export type SSMLOption = {
-    pitch?: number,
-    rate?: number,
+    pitch?: number, // -100% ~ 100%
+    rate?: number, // -100% ~ 100%
+    volume?: number, // 0 ~ 100
 }
 
 export enum VisemeSymbol {

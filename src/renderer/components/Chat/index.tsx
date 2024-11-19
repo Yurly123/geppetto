@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer, useContext } from 'react';
 import '@styles/chat.scss';
 import ChatBar from './ChatBar';
 import Subtitle from './Subtitle';
-import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
+import { DispatchMessagesContext, MessagesContext, SettingContext } from '@components/contexts';
 import { createMessage } from '@common/openai';
 import Voice from './Voice';
 
@@ -14,6 +14,7 @@ const Chat: React.FC<Props> = ({ enable = true }) => {
   const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
   const dispatchMessages = useContext(DispatchMessagesContext);
   const messages = useContext(MessagesContext);
+  const setting = useContext(SettingContext);
 
   useEffect(() => {
     window.openai.onCompletionChunk((chunk) => {
@@ -54,6 +55,7 @@ const Chat: React.FC<Props> = ({ enable = true }) => {
       <Voice ssmlOption={{
         pitch: 10,
         rate: 30,
+        volume: 50,
       }} />
     </div>
   );
