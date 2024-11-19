@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { mainChannel, rendererChannel } from "./channels";
-import { Message } from "@common/types";
+import { Message } from "@common/openai";
 
 declare global {
     interface Window {

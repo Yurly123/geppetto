@@ -1,4 +1,4 @@
-import { SSMLOption, Viseme } from "@common/types";
+import { SSMLOption, Viseme } from "@common/azure";
 import { contextBridge, ipcRenderer } from "electron";
 import { mainChannel, rendererChannel } from "./channels";
 

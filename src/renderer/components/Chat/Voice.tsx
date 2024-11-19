@@ -1,4 +1,4 @@
-import { SSMLOption } from '@common/types';
+import { SSMLOption } from '@common/azure';
 import { DispatchVoicePlayingContext, MessagesContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 

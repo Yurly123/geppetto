@@ -1,5 +1,4 @@
-import { getVisemeSymbol } from "@common/azure";
-import { Viseme } from "@common/types";
+import { getVisemeSymbol, Viseme } from "@common/azure";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { DispatchVoicePlayingContext, VoicePlayingContext } from "@components/contexts";
 

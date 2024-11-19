@@ -1,4 +1,4 @@
-import { Message } from '@common/types';
+import { Message } from '@common/openai';
 import OpenAI from 'openai';
 
 export async function completion(openai: OpenAI, messages: Message[]) {

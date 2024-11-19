@@ -1,4 +1,4 @@
-import { Setting, settingValue } from "@common/types";
+import { Setting, settingValue } from "@common/setting";
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
 
 export const SettingContext = createContext<Setting>(null);

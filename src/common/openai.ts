@@ -1,4 +1,7 @@
-import { Message } from "./types";
+export interface Message {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+}
 
 export function createMessage(
     role: Message['role'], 

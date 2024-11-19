@@ -1,5 +1,4 @@
-import { systemMessage } from "@common/openai";
-import { Message } from "@common/types";
+import { systemMessage, Message } from "@common/openai";
 import React, { Dispatch, ReactNode, createContext, useReducer } from "react";
 
 export const MessagesContext = createContext<Message[]>(null);

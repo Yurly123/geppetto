@@ -1,7 +1,7 @@
 import { ipcMain } from "electron";
 import { SpeechSynthesizer } from "microsoft-cognitiveservices-speech-sdk";
 import { mainChannel, rendererChannel } from "./channels";
-import { SSMLOption, Viseme } from "@common/types";
+import { SSMLOption, Viseme } from "@common/azure";
 
 function attachSsml(
     synthesizer: SpeechSynthesizer, 
