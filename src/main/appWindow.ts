@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, MenuItem } from 'electron';
 import path from 'path';
 import OpenAI from 'openai';
 import { registerTitlebarIpc } from '@main/window/titlebarIpc';
@@ -61,6 +61,8 @@ export function createAppWindow(): BrowserWindow {
     app.quit();
   });
 
+  registerShortcuts()
+
   return appWindow;
 }
 
@@ -75,4 +77,27 @@ function registerMainIPC() {
   registerTitlebarIpc(appWindow);
   registerOpenaiIpc(openai);
   registerAzureIpc(synthesizer);
+}
+
+function registerShortcuts() {
+  const menu = Menu.getApplicationMenu()
+  const register = (accel: string, isIn: Boolean) =>
+    menu.append(new MenuItem({
+      accelerator: accel,
+      click: isIn ? zoomIn : zoomOut
+    }))
+  register('CmdOrCtrl+Plus', true)
+  register('CmdOrCtrl+-', false)
+  register('CmdOrCtrl+=', true)
+  register('CmdOrCtrl+_', false)
+  register('CmdOrCtrl+numadd', true)
+  register('CmdOrCtrl+numsub', false)
+  Menu.setApplicationMenu(menu)
+
+  function zoomIn() {
+    appWindow.webContents.zoomLevel += 0.5
+  }
+  function zoomOut() {
+    appWindow.webContents.zoomLevel -= 0.5
+  }
 }
