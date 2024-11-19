@@ -12,9 +12,9 @@ const NumberSettingInput: React.FC<Props> = ({ element, onChange }) => {
         const value = parseInt(e.target.value)
         if (isNaN(value)) return
         if (value < element.min) return
-        if (value > element.max) return
+        if (value > element.max) { onChange(element.max); return }
 
-        onChange(parseInt(e.target.value))
+        onChange(value)
     }
 
     return <input
