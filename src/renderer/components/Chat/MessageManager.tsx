@@ -2,9 +2,7 @@ import { createMessage } from '@common/openai';
 import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
-type Props = {
-}
-const MessageManager: React.FC<Props> = (props) => {
+const MessageManager: React.FC = () => {
     const messages = useContext(MessagesContext)
     const dispatchMessages = useContext(DispatchMessagesContext);
 
@@ -17,10 +15,10 @@ const MessageManager: React.FC<Props> = (props) => {
 
     useEffect(() => {
         if (messages.length === 0) return;
-        const message = messages[messages.length - 1];
-        if (message.role !== 'user') return;
 
-        window.openai.requestCompletion(messages);
+        const message = messages[messages.length - 1];
+        if (message.role === 'user')
+            window.openai.requestCompletion(messages);
     }, [messages.length]);
 
     return null
