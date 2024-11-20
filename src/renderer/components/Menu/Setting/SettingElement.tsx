@@ -1,5 +1,4 @@
 import React from 'react';
-import '@styles/menu.scss';
 import { Setting, SettingElement, settingValue } from '@common/setting';
 import SettingInput from './SettingInput';
 

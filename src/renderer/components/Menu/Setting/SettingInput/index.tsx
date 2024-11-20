@@ -1,5 +1,4 @@
 import React from 'react';
-import '@styles/menu.scss';
 import { NumberSettingElement, settingValue, BooleanSettingElement, SettingElement } from '@common/setting';
 import NumberSettingInput from './NumberSettingInput';
 import BooleanSettingInput from './BooleanSettingInput';

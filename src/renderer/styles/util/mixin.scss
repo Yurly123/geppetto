@@ -1,8 +1,8 @@
-@mixin box-border($width: 0.5rem) {
+@mixin box-border($width: 0.5rem, $radius: 1rem) {
     border-color: var(--box-border-color);
     border-width: $width;
     border-style: outset;
-    border-radius: 1rem;
+    border-radius: $radius;
 }
 
 @mixin button-background {

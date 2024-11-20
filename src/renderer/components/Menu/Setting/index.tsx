@@ -1,16 +1,14 @@
 import React, { useContext } from 'react';
-import '@styles/menu.scss';
 import { DispatchSettingContext, SettingContext } from '@components/contexts';
 import SettingElement from './SettingElement';
-import SettingSaveLoad from './SettingSaveLoad';
+import SettingWrapper from './SettingWrapper';
 
 const Setting: React.FC = () => {
     const setting = useContext(SettingContext)
     const dispatchSetting = useContext(DispatchSettingContext)
 
     return (
-        <div className='setting'>
-            <div>설정</div>
+        <SettingWrapper>
             {Object.keys(setting).map((name: keyof typeof setting) =>
                 <SettingElement
                     name={name}
@@ -21,8 +19,7 @@ const Setting: React.FC = () => {
                     )}
                 />
             )}
-            <SettingSaveLoad />
-        </div>
+        </SettingWrapper>
     )
 }
 

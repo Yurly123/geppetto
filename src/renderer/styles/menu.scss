@@ -29,6 +29,12 @@ $bar-height: titlebar.$titlebar-height;
         @include util.box-border;
         flex-direction: column;
 
+        &-title {
+            font-size: 2rem;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
         &-element {
             display: flex;
             align-items: center;
@@ -53,6 +59,7 @@ $bar-height: titlebar.$titlebar-height;
             > input[type="number"] {
                 height: 2rem;
                 width: 4rem;
+                @include util.box-border(0.2rem, 0.5rem);
             }
         }
 
