@@ -9,39 +9,36 @@ type action = Parameters<typeof settingReducer>[1]
 function settingReducer(
     state: Setting, 
     action: { 
-        type: 'change' | 'reset',
+        type: 'change' | 'reset' | 'changeAll',
         name?: keyof Setting,
         value?: settingValue,
+        setting?: Setting,
     },
 ): Setting {
     switch (action.type) {
-        case 'change': if (!action.name) return state; {
-            const element = state[action.name]
-            if (!element || typeof element.default !== typeof action.value)
-                return state;
-            action = preprocessAction(state, action);
-            return {
-                ...state,
-                [action.name]: {
-                    ...element,
-                    value: action.value
-                } as SettingElement
-            }
-        }
-
-        case 'reset': if (!action.name) return state; {
-            const element = state[action.name]
-            if (!element) return state;
-            return {
-                ...state,
-                [action.name]: {
-                    ...element,
-                    value: element.default
-                } as SettingElement
-            }
-        } 
-
+        case 'change': return change(action.name, action.value)
+        case 'reset': return reset(action.name)
+        case 'changeAll': return action.setting || state
         default: return state
+    }
+    function change(name: keyof Setting, value: settingValue): Setting {
+        if (!name) return state;
+        const element = state[name]
+        if (!element || typeof element.default !== typeof value)
+            return state;
+        return {
+            ...state,
+            [name]: { ...element, value } as SettingElement
+        }
+    }
+    function reset(name: keyof Setting): Setting {
+        if (!name) return state;
+        const element = state[name]
+        if (!element) return state;
+        return {
+            ...state,
+            [name]: { ...element, value: element.default } as SettingElement
+        }
     }
 }
 

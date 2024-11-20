@@ -11,7 +11,15 @@ declare global {
 const preload = {
     saveSetting(setting: Setting) {
         ipcRenderer.invoke(mainChannel.SAVE_SETTING, setting)
-    }
+    },
+
+    loadSetting() {
+        return new Promise<Setting>((resolve, reject) => {
+            ipcRenderer.invoke(mainChannel.LOAD_SETTING)
+                .then((setting) => resolve(setting))
+                .catch((error) => reject(error))
+        })
+    },
 }
 
 contextBridge.exposeInMainWorld('store', preload)
