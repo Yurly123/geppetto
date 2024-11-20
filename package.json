@@ -45,6 +45,7 @@
     "@types/node": "^20.10.8",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
+    "@types/to-json-schema": "^0.2.4",
     "@types/webpack-env": "^1.18.4",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
@@ -64,12 +65,12 @@
     "sass": "^1.69.7",
     "sass-loader": "^13.3.3",
     "style-loader": "^3.3.4",
+    "to-json-schema": "^0.2.5",
     "ts-loader": "9.5.1",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0"
   },
   "dependencies": {
-    "@types/conf": "^2.1.0",
     "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^10.0.0",
