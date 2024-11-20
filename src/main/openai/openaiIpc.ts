@@ -4,7 +4,9 @@ import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/openai";
 
-export function registerOpenaiIpc(openai: OpenAI) {
+export function registerOpenaiIpc() {
+  const openai = new OpenAI()
+
   ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, messages: Message[]) => {
     const stream = await completion(openai, messages);
 

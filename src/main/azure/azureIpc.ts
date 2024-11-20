@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { SpeechSynthesizer } from "microsoft-cognitiveservices-speech-sdk";
+import { SpeechConfig, SpeechSynthesizer } from "microsoft-cognitiveservices-speech-sdk";
 import { mainChannel, rendererChannel } from "./channels";
 import { SSMLOption, Viseme } from "@common/azure";
 
@@ -20,7 +20,15 @@ function attachSsml(
     return baseSsml[0] + ssml + baseSsml[1]
 }
 
-export function registerAzureIpc(synthesizer: SpeechSynthesizer) {
+export function registerAzureIpc() {
+    const speechConfig = SpeechConfig.fromSubscription(
+        process.env.AZURE_SUBSCRIPTION_KEY,
+        process.env.AZURE_SERVICE_REGION
+    )
+    speechConfig.speechSynthesisLanguage = 'ko-KR'
+    speechConfig.speechSynthesisVoiceName = 'ko-KR-SoonBokNeural'
+    const synthesizer = new SpeechSynthesizer(speechConfig)
+
     ipcMain.handle(mainChannel.SYNTHESIS, (
         _,
         content: string,
