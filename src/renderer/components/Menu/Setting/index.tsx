@@ -19,6 +19,7 @@ const Setting: React.FC = () => {
                     )}
                 />
             )}
+            <div onClick={() => window.store.saveSetting(setting)}>asdfasdf</div>
         </div>
     )
 }

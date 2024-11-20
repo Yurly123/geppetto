@@ -12,5 +12,7 @@ export function registerStoreIpc() {
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
         console.log(setting)
+        settingStore.set(setting)
+        console.log(settingStore.store)
     })
 }
