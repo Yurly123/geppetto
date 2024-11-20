@@ -21,6 +21,9 @@ const VoicePlayer: React.FC<Props> = (props) => {
                 source.start();
                 dispatchVoicePlaying(true);
             }, 0)
+            setTimeout(() => {
+                dispatchVoicePlaying(false);
+            }, buffer.duration * 1000)
         })
 
         return () => window.azure.removeSynthesisEndListeners();

@@ -1,12 +1,11 @@
 import { getVisemeSymbol, Viseme } from "@common/azure";
 import { useContext, useEffect, useReducer, useState } from "react";
-import { DispatchVoicePlayingContext, VoicePlayingContext } from "@components/contexts";
+import { VoicePlayingContext } from "@components/contexts";
 
 const Viseme: React.FC = () => {
     const [visemes, dispatchVisemes] = useReducer(visemeReducer, []);
     const [viseme, setViseme] = useState<Viseme | null>(null);
     const voicePlaying = useContext(VoicePlayingContext);
-    const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
 
     useEffect(() => {
         window.azure.onSynthesisViseme((viseme) => {
@@ -24,7 +23,6 @@ const Viseme: React.FC = () => {
             }, v.offset + 300)
         )
         dispatchVisemes({ type: 'clear' });
-        dispatchVoicePlaying(false);
     }, [voicePlaying])
 
     return viseme ? 
