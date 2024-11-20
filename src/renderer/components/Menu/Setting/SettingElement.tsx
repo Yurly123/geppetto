@@ -1,11 +1,11 @@
 import React from 'react';
 import '@styles/menu.scss';
-import { Setting, settingValue } from '@common/setting';
+import { Setting, SettingElement, settingValue } from '@common/setting';
 import SettingInput from './SettingInput';
 
 type Props = {
-    name: string,
-    element: Setting[keyof Setting]
+    name: keyof Setting,
+    element: SettingElement
     onChange: (value: settingValue) => void
 }
 const SettingElement: React.FC<Props> = ({ name, element, onChange }) => {

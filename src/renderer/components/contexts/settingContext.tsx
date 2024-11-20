@@ -1,7 +1,7 @@
-import { initialSetting, NumberSettingElement, ReadableSetting, Setting, settingValue } from "@common/setting";
+import { initialSetting, NumberSettingElement, Setting, SettingElement, settingValue } from "@common/setting";
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
 
-export const SettingContext = createContext<ReadableSetting>(null);
+export const SettingContext = createContext<Setting>(null);
 export const DispatchSettingContext = createContext<Dispatch<action>>(null);
 
 type action = Parameters<typeof settingReducer>[1]
@@ -10,7 +10,7 @@ function settingReducer(
     state: Setting, 
     action: { 
         type: 'change' | 'reset',
-        name?: string,
+        name?: keyof Setting,
         value?: settingValue,
     },
 ): Setting {
@@ -25,7 +25,7 @@ function settingReducer(
                 [action.name]: {
                     ...element,
                     value: action.value
-                } as typeof element
+                } as SettingElement
             }
         }
 
@@ -37,7 +37,7 @@ function settingReducer(
                 [action.name]: {
                     ...element,
                     value: element.default
-                } as typeof element
+                } as SettingElement
             }
         } 
 
@@ -52,7 +52,7 @@ export const SettingProvider: React.FC<Props> = ({
     const [setting, dispatchSetting] = useReducer(settingReducer, initialSetting);
 
     return (
-        <SettingContext.Provider value={setting as ReadableSetting}>
+        <SettingContext.Provider value={setting}>
             <DispatchSettingContext.Provider value={dispatchSetting}>
                 {children}
             </DispatchSettingContext.Provider>
