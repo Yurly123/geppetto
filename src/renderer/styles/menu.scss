@@ -9,17 +9,8 @@ $bar-height: titlebar.$titlebar-height;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--button-color);
     @include util.box-border;
-
-    &:hover {
-        cursor: pointer;
-        background-color: var(--button-hover-bgcolor);
-    }
-
-    &:active {
-        background-color: var(--button-active-bgcolor);
-    }
+    @include util.button-background;
 }
 
 .menu {
@@ -62,6 +53,24 @@ $bar-height: titlebar.$titlebar-height;
             > input[type="number"] {
                 height: 2rem;
                 width: 4rem;
+            }
+        }
+
+        &-saveload {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 1rem;
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 3rem;
+                width: 6rem;
+                font-size: 1.5rem;
+                @include util.box-border(0.4rem);
+                @include util.button-background;
             }
         }
     }
