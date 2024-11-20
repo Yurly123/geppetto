@@ -1,6 +1,6 @@
 import { SSMLOption } from '@common/azure';
 import { DispatchVoicePlayingContext, MessagesContext } from '@components/contexts';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 type Props = {
     ssmlOption?: SSMLOption
@@ -8,6 +8,7 @@ type Props = {
 const VoicePlayer: React.FC<Props> = (props) => {
     const messages = useContext(MessagesContext)
     const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
+    const [prevLength, setPrevLength] = useState(0);
 
     useEffect(() => {
         window.azure.onSynthesisEnd(async (audio) => {
@@ -27,6 +28,12 @@ const VoicePlayer: React.FC<Props> = (props) => {
 
     useEffect(() => {
         if (messages.length === 0) return;
+
+        // This is to prevent requesting when loading messages
+        const deltaLength = messages.length - prevLength;
+        setPrevLength(messages.length);
+        if (deltaLength > 1) return 
+
         const message = messages[messages.length - 1];
         if (message.role !== 'assistant') return;
 

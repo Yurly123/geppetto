@@ -8,13 +8,15 @@ type action = Parameters<typeof messagesReducer>[1]
 function messagesReducer(
     state: Message[], 
     action: { 
-        type: 'add', 
-        message: Message 
+        type: 'add' | 'changeAll', 
+        message?: Message,
+        messages?: Message[],
     },
 ): Message[] {
     switch (action.type) {
-        case 'add':
+        case 'add': if (!action.message) return state;
             return [...state, action.message]
+        case 'changeAll': return action.messages || state
         default: return state
     }
 }
