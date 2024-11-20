@@ -27,11 +27,19 @@ const preload = {
         });
     },
 
+    onCompletionStart(callback: () => void) {
+        const channel = rendererChannel.COMPLETION_START
+        ipcRenderer.on(channel, callback)
+    },
+
     removeCompletionChunkListeners() {
         ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_CHUNK)
     },
     removeCompletionEndListeners() {
         ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_END)
+    },
+    removeCompletionStartListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_START)
     },
 }
 

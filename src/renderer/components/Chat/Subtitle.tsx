@@ -1,59 +1,45 @@
-import React, { CSSProperties, useState, useEffect } from 'react';
-import '@styles/chat.scss';
+import React, { useEffect, useReducer } from 'react';
+import SubtitleBox from './SubtitleBox';
 
-type Props = {
-  message?: string;
-  disappearDuration?: number;
-  appearDuration?: number;
-  disappearDelay?: number;
-}
+const Subtitle: React.FC = () => {
+    const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
+    let disappearDelay = 10 + subtitle.length / 10;
 
-function addDefaultProps(props: Props) {
-  return {
-    message: '',
-    appearDuration: 0.25,
-    disappearDuration: 3,
-    disappearDelay: 10,
-    ...props,
-  }
-}
+    useEffect(() => {
+        window.openai.onCompletionStart(() => {
+            dispatchSubtitle({ type: 'clear' });
+        });
+        window.openai.onCompletionChunk((chunk) => {
+            dispatchSubtitle({ type: 'data', data: chunk })
+        });
+        return () => {
+            window.openai.removeCompletionStartListeners();
+            window.openai.removeCompletionChunkListeners();
+        }
+    }, []);
 
-const Subtitle: React.FC<Props> = (props) => {
-  props = addDefaultProps(props);
+    useEffect(() => {
+        disappearDelay = 10 + subtitle.length / 10;
+    }, [subtitle]);
 
-  const [style, setStyle] = useState<CSSProperties>({});
-
-  const appear: CSSProperties = {
-    animationName: 'appear',
-    animationDuration: `${props.appearDuration}s`,
-    opacity: 1,
-  }
-  const disappear: CSSProperties = {
-    animationName: 'disappear',
-    animationDuration: `${props.disappearDuration}s`,
-    opacity: 0,
-  }
-
-  useEffect(() => {
-    if (!props.message) return;
-    setStyle(appear);
-
-    const timer = setTimeout(
-      () => setStyle(disappear), 
-      props.disappearDelay * 1000
-    );
-    return () => clearTimeout(timer);
-  }, [props.message]);
-
-  return props.message ? (
-    <div className='chat-subtitle' style={style}>
-      <div className='chat-subtitle-box'>
-        <span>
-          {props.message}
-        </span>
-      </div>
-    </div>
-  ) : null;
+    return (
+        <div className='chat-subtitle'>
+            <SubtitleBox message={subtitle} disappearDelay={disappearDelay} />
+        </div>
+    )
 };
 
 export default Subtitle;
+
+function subtitleReducer(
+    state: string,
+    action: { type: 'clear' | 'data', data?: string }
+) {
+    action.data = action.data || '';
+    switch (action.type) {
+        case 'clear':
+            return action.data;
+        case 'data':
+            return state + action.data;
+    }
+}
