@@ -1,0 +1,29 @@
+import { createMessage } from '@common/openai';
+import { DispatchMessagesContext, MessagesContext } from '@components/contexts';
+import { useContext, useEffect } from 'react';
+
+type Props = {
+}
+const MessageManager: React.FC<Props> = (props) => {
+    const messages = useContext(MessagesContext)
+    const dispatchMessages = useContext(DispatchMessagesContext);
+
+    useEffect(() => {
+        window.openai.onCompletionEnd((content) => {
+            dispatchMessages({ type: 'add', message: createMessage('assistant', content) });
+        });
+        return () => window.openai.removeCompletionEndListeners();
+    }, []);
+
+    useEffect(() => {
+        if (messages.length === 0) return;
+        const message = messages[messages.length - 1];
+        if (message.role !== 'user') return;
+
+        window.openai.requestCompletion(messages);
+    }, [messages.length]);
+
+    return null
+};
+
+export default MessageManager;

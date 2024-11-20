@@ -45,7 +45,7 @@ const SubtitleBox: React.FC<Props> = (props) => {
     }, [props.message]);
 
     return props.message ? (
-        <div className='chat-subtitle-box' style={style}>
+        <div className='subtitle-box' style={style}>
             <span>
                 {props.message}
             </span>

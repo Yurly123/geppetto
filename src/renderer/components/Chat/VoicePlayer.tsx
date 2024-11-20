@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 type Props = {
     ssmlOption?: SSMLOption
 }
-const Voice: React.FC<Props> = (props) => {
+const VoicePlayer: React.FC<Props> = (props) => {
     const messages = useContext(MessagesContext)
     const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
 
@@ -36,4 +36,4 @@ const Voice: React.FC<Props> = (props) => {
     return null
 };
 
-export default Voice;
+export default VoicePlayer;

@@ -23,7 +23,7 @@ const Subtitle: React.FC = () => {
     }, [subtitle]);
 
     return (
-        <div className='chat-subtitle'>
+        <div className='subtitle'>
             <SubtitleBox message={subtitle} disappearDelay={disappearDelay} />
         </div>
     )
