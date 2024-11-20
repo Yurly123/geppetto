@@ -5,6 +5,7 @@ import { registerTitlebarIpc } from '@main/window/titlebarIpc';
 import { registerOpenaiIpc } from './openai/openaiIpc';
 import { SpeechConfig, SpeechSynthesizer } from 'microsoft-cognitiveservices-speech-sdk';
 import { registerAzureIpc } from './azure/azureIpc';
+import { registerStoreIpc } from './store/storeIpc';
 
 // Electron Forge automatically creates these entry points
 declare const APP_WINDOW_WEBPACK_ENTRY: string;
@@ -77,6 +78,7 @@ function registerMainIPC() {
   registerTitlebarIpc(appWindow);
   registerOpenaiIpc(openai);
   registerAzureIpc(synthesizer);
+  registerStoreIpc();
 }
 
 function registerShortcuts() {
