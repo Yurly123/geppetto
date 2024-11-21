@@ -17,7 +17,6 @@ const Menu: React.FC<Props> = (props) => {
                 <Setting />
             </div>}
         <MenuButton
-            enable={!logEnable}
             onClick={props.onMenuButtonClick}
         />
         {enable &&

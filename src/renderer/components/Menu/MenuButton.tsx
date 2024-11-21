@@ -1,20 +1,13 @@
 import React from 'react';
 
 type Props = {
-    enable?: boolean; 
     onClick?: () => void;
 }
-const MenuButton: React.FC<Props> = (Props) => {
-    const enable = Props.enable === undefined ? true : Props.enable;
+const MenuButton: React.FC<Props> = ({ onClick }) => {
     return (
         <div
-            className={`
-                menu-button
-                 ${!enable ? 'disabled' : ''}
-            `}
-            onClick={() =>
-                enable && Props.onClick && Props.onClick()
-            }
+            className='menu-button'
+            onClick={onClick}
         >
             <h3>메뉴</h3>
         </div>
