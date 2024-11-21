@@ -107,4 +107,19 @@ $bar-height: titlebar.$titlebar-height;
     height: 100%;
     width: 100%;
     background-color: var(--menu-background-color);
+
+    &-box {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        padding: 1rem;
+        width: calc(100% - 12rem);
+        display: flex;
+        background-color: white;
+        @include util.box-border;
+        flex-direction: column;
+        overflow-y: scroll;
+        max-height: calc(100% - 7rem);
+        scroll-behavior: smooth;
+    }
 }

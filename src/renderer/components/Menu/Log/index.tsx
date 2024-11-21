@@ -1,5 +1,6 @@
 import React from 'react';
 import LogButton from './LogButton';
+import LogBox from './LogBox';
 
 type Props = {
     enable?: boolean;
@@ -10,7 +11,7 @@ const Log: React.FC<Props> = (props) => {
     return <>
         {enable &&
             <div className='log'>
-                asdf
+                <LogBox />
             </div>}
         <LogButton onClick={props.onLogButtonClick} />
     </>
