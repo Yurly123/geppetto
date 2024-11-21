@@ -20,10 +20,13 @@ const Menu: React.FC<Props> = (props) => {
             onClick={props.onMenuButtonClick}
         />
         {enable &&
-            <Log
-                enable={logEnable}
-                onLogButtonClick={() => setLogEnable(!logEnable)}
-            />}
+
+        <Log
+            logButtonEnable={enable}
+            enable={logEnable}
+            onLogButtonClick={() => setLogEnable(!logEnable)}
+        />
+        }
     </>
 }
 

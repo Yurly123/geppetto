@@ -120,6 +120,5 @@ $bar-height: titlebar.$titlebar-height;
         flex-direction: column;
         overflow-y: scroll;
         max-height: calc(100% - 7rem);
-        scroll-behavior: smooth;
     }
 }

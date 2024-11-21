@@ -1,16 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { forwardRef } from 'react';
 
-const LogBox: React.FC = () => {
-    const logBoxRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (logBoxRef.current) {
-            logBoxRef.current.scrollTop = logBoxRef.current.scrollHeight;
-        }
-    }, []);
-
+const LogBox = forwardRef<HTMLDivElement>((_, scrollRef) => {
     return (
-        <div className='log-box' ref={logBoxRef}>
+        <div className='log-box' ref={scrollRef}>
             {[...Array(1000)].map((_, i) => (
                 <div key={i}>
                     로그 {i}
@@ -18,6 +10,6 @@ const LogBox: React.FC = () => {
             ))}
         </div>
     )
-}
+})
 
 export default LogBox;
