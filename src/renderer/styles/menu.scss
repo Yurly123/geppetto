@@ -4,8 +4,10 @@ $bar-height: titlebar.$titlebar-height;
 
 .menu-button {
     position: fixed;
-    height: 5rem; width: 5rem;
-    top: calc($bar-height + 1rem); right: 1rem;
+    height: 5rem;
+    width: 5rem;
+    top: calc($bar-height + 1rem);
+    right: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,13 +21,15 @@ $bar-height: titlebar.$titlebar-height;
 
 .menu {
     position: fixed;
-    top: $bar-height; right: 0;
-    height: 100%; width: 100%;
+    top: $bar-height;
+    right: 0;
+    height: 100%;
+    width: 100%;
     background-color: var(--menu-background-color);
 
     .setting {
         position: absolute;
-        top: 8rem;
+        top: 1rem + 6rem + 1rem;
         left: 1rem;
         padding: 1rem;
         display: flex;
@@ -47,7 +51,7 @@ $bar-height: titlebar.$titlebar-height;
             font-size: 1.5rem;
             height: 4rem;
 
-            > * {
+            >* {
                 font-size: inherit;
                 display: flex;
                 align-items: center;
@@ -55,12 +59,12 @@ $bar-height: titlebar.$titlebar-height;
                 height: 2rem;
             }
 
-            > input[type="checkbox"] {
+            >input[type="checkbox"] {
                 height: 1.5rem;
                 width: 1.5rem;
             }
 
-            > input[type="number"] {
+            >input[type="number"] {
                 height: 2rem;
                 width: 4rem;
                 @include util.box-border(0.2rem, 0.5rem);
@@ -85,4 +89,26 @@ $bar-height: titlebar.$titlebar-height;
             }
         }
     }
+}
+
+.log-button {
+    position: absolute;
+    height: 5rem;
+    width: 5rem;
+    top: 1rem + 6rem + 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include util.box-border;
+    @include util.button-background;
+}
+
+.log {
+    position: fixed;
+    top: $bar-height;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--menu-background-color);
 }

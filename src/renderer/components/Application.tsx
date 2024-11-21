@@ -12,7 +12,7 @@ const Application: React.FC = () => {
             <div className='app'>
                 <Chat enable={!menuEnable} />
                 <Menu
-                    menuEnable={menuEnable}
+                    enable={menuEnable}
                     onMenuButtonClick={() => setMenuEnable(!menuEnable)}
                 />
             </div>

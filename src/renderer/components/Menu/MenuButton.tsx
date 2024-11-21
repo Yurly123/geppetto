@@ -1,13 +1,11 @@
 import React from 'react';
-import '@styles/menu.scss';
 
 type Props = {
     enable?: boolean; 
     onClick?: () => void;
 }
 const MenuButton: React.FC<Props> = (Props) => {
-    const enable = Props.enable === undefined ?
-        true : Props.enable;
+    const enable = Props.enable === undefined ? true : Props.enable;
     return (
         <div
             className={`
