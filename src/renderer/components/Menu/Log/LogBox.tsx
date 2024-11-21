@@ -1,13 +1,19 @@
-import React, { forwardRef } from 'react';
+import { MessagesContext } from '@components/contexts';
+import React, { forwardRef, useContext } from 'react';
+import LogElement from './LogElement';
 
 const LogBox = forwardRef<HTMLDivElement>((_, scrollRef) => {
+    const messages = useContext(MessagesContext)
+
     return (
         <div className='log-box' ref={scrollRef}>
-            {[...Array(1000)].map((_, i) => (
-                <div key={i}>
-                    로그 {i}
-                </div>
-            ))}
+            {messages.map((message, index) =>
+                <LogElement
+                    key={index}
+                    message={message}
+                    index={index}
+                />
+            )}
         </div>
     )
 })

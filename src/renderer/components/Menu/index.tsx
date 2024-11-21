@@ -9,24 +9,21 @@ type Props = {
     onMenuButtonClick?: () => void;
 }
 const Menu: React.FC<Props> = (props) => {
-    const enable = props.enable === undefined ? true : props.enable;
+    const menuEnable = props.enable === undefined ? true : props.enable;
     const [logEnable, setLogEnable] = React.useState(false);
     return <>
-        {enable &&
+        {menuEnable &&
             <div className='menu'>
                 <Setting />
             </div>}
         <MenuButton
             onClick={props.onMenuButtonClick}
         />
-        {enable &&
-
         <Log
-            logButtonEnable={enable}
+            logButtonEnable={menuEnable}
             enable={logEnable}
             onLogButtonClick={() => setLogEnable(!logEnable)}
         />
-        }
     </>
 }
 

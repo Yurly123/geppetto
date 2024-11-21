@@ -13,7 +13,7 @@ const Log: React.FC<Props> = (props) => {
     const scrollHeight = useRef(-1);
 
     useEffect(() => {
-        if (!scrollHeight.current || !enable) return
+        if (!enable || !scrollRef.current) return
         if (scrollHeight.current === -1)
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight
         else
@@ -21,9 +21,8 @@ const Log: React.FC<Props> = (props) => {
     }, [enable])
 
     function handleLogButtonClick() {
-        if (enable) {
+        if (enable) 
             scrollHeight.current = scrollRef.current.scrollTop
-        }
         props.onLogButtonClick && props.onLogButtonClick();
     }
     return <>

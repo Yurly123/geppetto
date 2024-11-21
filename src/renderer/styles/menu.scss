@@ -120,5 +120,42 @@ $bar-height: titlebar.$titlebar-height;
         flex-direction: column;
         overflow-y: scroll;
         max-height: calc(100% - 7rem);
+
+        .log-element {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.5rem;
+            @include util.box-border(0.3rem, 0.75rem);
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+
+            header {
+                width: calc(100% - 2rem);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                span {}
+            }
+
+            p {
+                width: 100%;
+                box-sizing: border-box;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
+                margin: 0;
+                @include util.box-border(0.25rem, 0);
+                border-left: 0;
+                border-right: 0;
+            }
+        }
     }
 }
