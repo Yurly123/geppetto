@@ -7,6 +7,7 @@
 
 @mixin button-background {
     background-color: var(--button-color);
+    cursor: pointer;
     &:hover {
         background-color: var(--button-hover-bgcolor);
     }

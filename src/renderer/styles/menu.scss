@@ -11,6 +11,10 @@ $bar-height: titlebar.$titlebar-height;
     align-items: center;
     @include util.box-border;
     @include util.button-background;
+
+    &.disabled {
+        background-color: grey;
+    }
 }
 
 .menu {
