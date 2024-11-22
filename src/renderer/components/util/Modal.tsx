@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactModal from 'react-modal';
 
 type Props = {
     children?: React.ReactNode;
-    enable: boolean;
-    setEnable: (enable: boolean) => void;
     onClose?: (result: boolean) => void;
 }
-const Modal: React.FC<Props> = (props) => {
+export type ModalRef = {
+    open: () => void;
+}
+const Modal = forwardRef<ModalRef, Props>((props, ref) => {
+    const [enable, setEnable] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        open: () => setEnable(true),
+    }));
+
     return <ReactModal
-        isOpen={props.enable}
+        isOpen={enable}
         overlayClassName='modal'
         className='modal-box'
         portalClassName='app'
@@ -19,7 +26,7 @@ const Modal: React.FC<Props> = (props) => {
             <div
                 className='modal-button'
                 onClick={() => {
-                    props.setEnable(false);
+                    setEnable(false);
                     props.onClose?.(true);
                 }}
             >
@@ -28,7 +35,7 @@ const Modal: React.FC<Props> = (props) => {
             <div
                 className='modal-button'
                 onClick={() => {
-                    props.setEnable(false);
+                    setEnable(false);
                     props.onClose?.(false);
                 }}
             >
@@ -36,6 +43,6 @@ const Modal: React.FC<Props> = (props) => {
             </div>
         </div>
     </ReactModal>;
-};
+});
 
 export default Modal;

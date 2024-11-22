@@ -1,10 +1,11 @@
 import { systemMessage } from '@common/openai';
 import { DispatchMessagesContext } from '@components/contexts';
 import { Modal } from '@components/util';
-import React, { useContext, useState } from 'react';
+import { ModalRef } from '@components/util/Modal';
+import React, { useContext, useRef } from 'react';
 
 const InitializeButton: React.FC = () => {
-    const [modalEnable, setModalEnable] = useState(false);
+    const modalRef = useRef<ModalRef>(null);
     const dispatchMessages = useContext(DispatchMessagesContext);
 
     function initializeLog() {
@@ -17,13 +18,12 @@ const InitializeButton: React.FC = () => {
     return <>
         <h3
             className='initialize-button'
-            onClick={() => setModalEnable(true)}
+            onClick={() => modalRef.current?.open()}
         >
             초기화
         </h3>
         <Modal
-            enable={modalEnable}
-            setEnable={setModalEnable}
+            ref={modalRef}
             onClose={(result) => {
                 result && initializeLog();
             }}
