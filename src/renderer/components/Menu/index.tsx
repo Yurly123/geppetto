@@ -1,5 +1,5 @@
 import React from 'react';
-import '@styles/menu.scss';
+import '@styles/menu/index.scss';
 import MenuButton from './MenuButton';
 import Setting from './Setting';
 import Log from './Log';

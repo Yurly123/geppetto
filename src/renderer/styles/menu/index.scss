@@ -2,8 +2,7 @@
 @forward './setting.scss';
 
 @use '../util';
-@use '../../window/titlebar.scss';
-$bar-height: titlebar.$titlebar-height;
+$bar-height: util.$titlebar-height;
 
 .menu-button {
     position: fixed;
@@ -24,7 +23,7 @@ $bar-height: titlebar.$titlebar-height;
     right: 0;
     height: calc(100% - $bar-height);
     width: 100%;
-    background-color: var(--menu-background-color);
+    background-color: var(--semi-transparent-black);
 
     .storage-folder-button {
         position: absolute;

@@ -1,3 +1,5 @@
+$titlebar-height: 28px;
+
 :root {
   // Application
   --app-accent-color: #27954f;
@@ -50,5 +52,5 @@
   --box-border: 5px ridge var(--box-border-color);
   --box-border-color: #111111;
 
-  --menu-background-color: rgba(32, 32, 32, 0.5);
+  --semi-transparent-black: rgba(32, 32, 32, 0.5);
 }
