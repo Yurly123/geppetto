@@ -1,26 +1,13 @@
 @use '../util';
+@use './menu-util.scss';
 $bar-height: util.$titlebar-height;
 
 .log-button {
-    position: absolute;
-    height: 5rem;
-    width: 5rem;
-    top: 1rem + 6rem + 1rem;
-    right: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include util.box-border;
-    @include util.button-background;
+    @include menu-util.menu-button(1);
 }
 
 .log {
-    position: fixed;
-    top: $bar-height;
-    right: 0;
-    height: calc(100% - $bar-height);
-    width: 100%;
-    background-color: var(--semi-transparent-black);
+    @include util.background(var(--semi-transparent-black));
 
     &-box {
         position: absolute;

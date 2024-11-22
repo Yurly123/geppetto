@@ -1,0 +1,15 @@
+@use '../util';
+$bar-height: util.$titlebar-height;
+
+@mixin menu-button($order: 1) {
+    position: fixed;
+    height: 5rem;
+    width: 5rem;
+    top: calc($bar-height + 1rem + (7rem * $order));
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include util.box-border;
+    @include util.button-background;
+}

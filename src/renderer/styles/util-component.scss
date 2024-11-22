@@ -1,12 +1,7 @@
 @use './util';
 
 .modal {
-    position: fixed;
-    top: util.$titlebar-height;
-    left: 0;
-    height: calc(100% - util.$titlebar-height);
-    width: 100%;
-    background-color: var(--semi-transparent-black);
+    @include util.background(var(--semi-transparent-black));
     user-select: none;
 
     &-box {

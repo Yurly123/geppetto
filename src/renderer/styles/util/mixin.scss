@@ -1,3 +1,6 @@
+@use './variable.scss';
+$bar-height: variable.$titlebar-height;
+
 @mixin box-border($width: 0.5rem, $radius: 1rem) {
     border-color: var(--box-border-color);
     border-width: $width;
@@ -14,4 +17,13 @@
     &:active {
         background-color: var(--button-active-bgcolor);
     }
+}
+
+@mixin background($color) {
+    background-color: $color;
+    position: fixed;
+    top: $bar-height;
+    right: 0;
+    height: calc(100% - $bar-height);
+    width: 100%;
 }
