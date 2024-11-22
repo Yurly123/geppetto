@@ -31,6 +31,10 @@ const preload = {
                 .catch((error) => reject(error))
         })
     },
+
+    openStorageFolder() {
+        ipcRenderer.invoke(mainChannel.OPEN_STORAGE_FOLDER)
+    },
 }
 
 contextBridge.exposeInMainWorld('store', preload)

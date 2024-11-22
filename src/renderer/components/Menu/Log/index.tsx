@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import LogButton from './LogButton';
 import LogBox from './LogBox';
+import InitializeButton from './InitializeButton';
 
 type Props = {
     enable?: boolean;
@@ -29,6 +30,7 @@ const Log: React.FC<Props> = (props) => {
         {enable &&
             <div className='log'>
                 <LogBox ref={scrollRef}/>
+                <InitializeButton />
             </div>}
         {props.logButtonEnable &&
             <LogButton onClick={handleLogButtonClick} />

@@ -1,4 +1,4 @@
-import { ipcMain } from "electron"
+import { app, ipcMain, shell } from "electron"
 import { mainChannel } from "./channels"
 import { Setting } from "@common/setting"
 import { messageSchema, settingSchema } from './schema';
@@ -27,5 +27,10 @@ export function registerStoreIpc() {
     })
     ipcMain.handle(mainChannel.LOAD_MESSAGES, (_) => {
         return messageStore.store.messages
+    })
+
+    ipcMain.handle(mainChannel.OPEN_STORAGE_FOLDER, () => {
+        console.log(app.getPath('userData'))
+        shell.openPath(app.getPath('userData'))
     })
 }

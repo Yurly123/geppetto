@@ -3,6 +3,7 @@ export const mainChannel = {
     LOAD_SETTING: 'load-setting',
     SAVE_MESSAGES: 'save-messages',
     LOAD_MESSAGES: 'load-messages',
+    OPEN_STORAGE_FOLDER: 'open-storage-folder',
 }
 
 export const rendererChannel = {

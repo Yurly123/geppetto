@@ -19,7 +19,7 @@ $bar-height: titlebar.$titlebar-height;
     position: fixed;
     top: $bar-height;
     right: 0;
-    height: 100%;
+    height: calc(100% - $bar-height);
     width: 100%;
     background-color: var(--menu-background-color);
 
@@ -85,6 +85,19 @@ $bar-height: titlebar.$titlebar-height;
             }
         }
     }
+
+    .storage-folder-button {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        padding: 1rem;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include util.box-border;
+        @include util.button-background;
+    }
 }
 
 .log-button {
@@ -104,7 +117,7 @@ $bar-height: titlebar.$titlebar-height;
     position: fixed;
     top: $bar-height;
     right: 0;
-    height: 100%;
+    height: calc(100% - $bar-height);
     width: 100%;
     background-color: var(--menu-background-color);
 
@@ -119,7 +132,7 @@ $bar-height: titlebar.$titlebar-height;
         @include util.box-border;
         flex-direction: column;
         overflow-y: scroll;
-        max-height: calc(100% - 7rem);
+        max-height: calc(100% - $bar-height - 5rem);
 
         .log-element {
             display: flex;
@@ -157,5 +170,19 @@ $bar-height: titlebar.$titlebar-height;
                 border-right: 0;
             }
         }
+    }
+
+    .initialize-button {
+        position: absolute;
+        bottom: 3rem;
+        right: 1rem;
+        font-size: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include util.box-border;
+        @include util.button-background;
     }
 }

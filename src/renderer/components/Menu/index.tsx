@@ -3,6 +3,7 @@ import '@styles/menu.scss';
 import MenuButton from './MenuButton';
 import Setting from './Setting';
 import Log from './Log';
+import StorageFolderButton from './StorageFolderButton';
 
 type Props = {
     enable?: boolean;
@@ -15,6 +16,7 @@ const Menu: React.FC<Props> = (props) => {
         {menuEnable &&
             <div className='menu'>
                 <Setting />
+                <StorageFolderButton />
             </div>}
         <MenuButton
             onClick={props.onMenuButtonClick}
