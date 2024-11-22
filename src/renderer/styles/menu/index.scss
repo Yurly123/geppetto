@@ -1,0 +1,41 @@
+@forward './log.scss';
+@forward './setting.scss';
+
+@use '../util';
+@use '../../window/titlebar.scss';
+$bar-height: titlebar.$titlebar-height;
+
+.menu-button {
+    position: fixed;
+    height: 5rem;
+    width: 5rem;
+    top: calc($bar-height + 1rem);
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include util.box-border;
+    @include util.button-background;
+}
+
+.menu {
+    position: fixed;
+    top: $bar-height;
+    right: 0;
+    height: calc(100% - $bar-height);
+    width: 100%;
+    background-color: var(--menu-background-color);
+
+    .storage-folder-button {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        padding: 1rem;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include util.box-border;
+        @include util.button-background;
+    }
+}
