@@ -1,14 +1,40 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 
-const Modal: React.FC = () => {
+type Props = {
+    children?: React.ReactNode;
+    enable: boolean;
+    setEnable: (enable: boolean) => void;
+    onClose?: (result: boolean) => void;
+}
+const Modal: React.FC<Props> = (props) => {
     return <ReactModal
-        isOpen={true}
+        isOpen={props.enable}
         overlayClassName='modal'
         className='modal-box'
         portalClassName='app'
     >
-        모달
+        <div className='modal-content'>{props.children}</div>
+        <div className='modal-footer'>
+            <div
+                className='modal-button'
+                onClick={() => {
+                    props.setEnable(false);
+                    props.onClose?.(true);
+                }}
+            >
+                확인
+            </div>
+            <div
+                className='modal-button'
+                onClick={() => {
+                    props.setEnable(false);
+                    props.onClose?.(false);
+                }}
+            >
+                취소
+            </div>
+        </div>
     </ReactModal>;
 };
 

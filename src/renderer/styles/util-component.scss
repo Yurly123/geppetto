@@ -7,13 +7,32 @@
     height: calc(100% - util.$titlebar-height);
     width: 100%;
     background-color: var(--semi-transparent-black);
+    user-select: none;
 
     &-box {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
         @include util.box-border;
         background-color: white;
+        padding: 0.5rem;
+
+        .modal-content {
+            padding: 0.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-around;
+
+            .modal-button {
+                @include util.box-border(0.4rem, 0.8rem);
+                @include util.button-background;
+                padding: 0.2rem;
+            }
+        }
     }
 }

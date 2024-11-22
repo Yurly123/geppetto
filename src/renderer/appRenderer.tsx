@@ -15,5 +15,6 @@ const app = (
 );
 
 // Render application in DOM
-createRoot(document.getElementById('app')).render(app);
-setAppElement('#app');
+const appElement = document.getElementById('app');
+createRoot(appElement).render(app);
+setAppElement(appElement);
