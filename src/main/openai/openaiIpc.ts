@@ -4,6 +4,8 @@ import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/openai";
 
+// TODO: change response handle to able to handle prompt design
+
 export function registerOpenaiIpc() {
     const openai = new OpenAI()
 
@@ -16,10 +18,12 @@ export function registerOpenaiIpc() {
         for await (const chunk of stream) {
             const data = chunk.choices[0].delta.content || '';
             content += data;
-            sender.send(rendererChannel.COMPLETION_CHUNK, data);
+            //sender.send(rendererChannel.COMPLETION_CHUNK, data);
+            console.log(data);
 
             if (chunk.choices[0].finish_reason === 'stop') {
-                sender.send(rendererChannel.COMPLETION_END, content);
+                //sender.send(rendererChannel.COMPLETION_END, content);
+                console.log(content);
             }
         }
     });

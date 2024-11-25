@@ -1,4 +1,3 @@
-import { systemMessage } from '@common/openai';
 import { DispatchMessagesContext } from '@components/contexts';
 import { Modal } from '@components/util';
 import { ModalRef } from '@components/util/Modal';
@@ -9,7 +8,7 @@ const InitializeButton: React.FC = () => {
     const dispatchMessages = useContext(DispatchMessagesContext);
 
     function initializeLog() {
-        window.store.saveMessages([systemMessage()]);
+        window.store.saveMessages([]);
         window.store.loadMessages().then((messages) => {
             dispatchMessages({ type: 'changeAll', messages });
         });
