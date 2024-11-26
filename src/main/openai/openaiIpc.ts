@@ -4,8 +4,6 @@ import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/openai";
 
-// TODO: change response handle to able to handle prompt design
-
 export function registerOpenaiIpc() {
     const openai = new OpenAI()
 
