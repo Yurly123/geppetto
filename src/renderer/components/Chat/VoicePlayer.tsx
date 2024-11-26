@@ -1,6 +1,6 @@
 import { SSMLOption } from '@common/azure';
 import { extractResponse } from '@common/openai';
-import { DispatchVoicePlayingContext, MessagesContext } from '@components/contexts';
+import { DispatchVoicePlayingContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect, useRef } from 'react';
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
 const VoicePlayer: React.FC<Props> = (props) => {
     const messages = useContext(MessagesContext)
     const dispatchVoicePlaying = useContext(DispatchVoicePlayingContext);
+    const setting = useContext(SettingContext)
     const prevLength = useRef(0);
 
     useEffect(() => {
@@ -31,19 +32,20 @@ const VoicePlayer: React.FC<Props> = (props) => {
     }, []);
 
     useEffect(() => {
+        if (!setting['TTS토글'].value) return;
         if (messages.length === 0) return;
 
-        // This is to prevent requesting when loading messages
+        // This is to prevent requesting when length change is not intended to generate voice
         const deltaLength = messages.length - prevLength.current;
         prevLength.current = messages.length;
-        if (deltaLength > 1) return 
+        if (deltaLength !== 1) return 
 
         const message = messages[messages.length - 1];
         if (message.role !== 'assistant') return;
 
         const content = extractResponse(message.content);
         window.azure.requestSynthesis(content, props.ssmlOption);
-    }, [messages.length]);
+    }, [messages.length, setting['TTS토글']]);
 
     return null
 };

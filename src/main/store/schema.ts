@@ -25,7 +25,7 @@ const booleanSettingSchema: JSONSchema = {
 
 const settingSchema: Schema<Setting> = {
     'TTS음량': numberSettingSchema,
-    'TTS토글asdfasdf': booleanSettingSchema,
+    'TTS토글': booleanSettingSchema,
 }
 
 export { settingSchema }

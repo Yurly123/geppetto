@@ -22,10 +22,10 @@ export interface ISetting {
 
 export interface Setting extends ISetting {
     'TTS음량': NumberSettingElement;
-    'TTS토글asdfasdf': BooleanSettingElement;
+    'TTS토글': BooleanSettingElement;
 }
 
 export const initialSetting: Setting = {
     'TTS음량': { value: 100, default: 100, min: 0, max: 100 }, 
-    'TTS토글asdfasdf': { value: true, default: true },
+    'TTS토글': { value: true, default: true },
 }
