@@ -4,6 +4,7 @@ import { Setting } from "@common/setting"
 import { messageSchema, settingSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
+import { existsSync } from 'fs';
 
 export function registerStoreIpc() {
     const settingStore = new Store<Setting>({
@@ -26,11 +27,17 @@ export function registerStoreIpc() {
         messageStore.set({ messages })
     })
     ipcMain.handle(mainChannel.LOAD_MESSAGES, (_) => {
-        return messageStore.store.messages
+        return messageStore.store.messages 
     })
 
     ipcMain.handle(mainChannel.OPEN_STORAGE_FOLDER, () => {
-        console.log(app.getPath('userData'))
         shell.openPath(app.getPath('userData'))
+    })
+
+    ipcMain.handle(mainChannel.CHECK_SETTING_FILE, () => {
+        return existsSync(settingStore.path)
+    })
+    ipcMain.handle(mainChannel.CHECK_MESSAGES_FILE, () => {
+        return existsSync(messageStore.path)
     })
 }

@@ -14,27 +14,26 @@ const preload = {
         ipcRenderer.invoke(mainChannel.SAVE_SETTING, setting)
     },
     loadSetting() {
-        return new Promise<Setting>((resolve, reject) => {
-            ipcRenderer.invoke(mainChannel.LOAD_SETTING)
-                .then((setting) => resolve(setting))
-                .catch((error) => reject(error))
-        })
+        return ipcRenderer.invoke(mainChannel.LOAD_SETTING)
     },
 
     saveMessages(messages: Message[]) {
         ipcRenderer.invoke(mainChannel.SAVE_MESSAGES, messages)
     },
     loadMessages() {
-        return new Promise<Message[]>((resolve, reject) => {
-            ipcRenderer.invoke(mainChannel.LOAD_MESSAGES)
-                .then((messages) => resolve(messages))
-                .catch((error) => reject(error))
-        })
+        return ipcRenderer.invoke(mainChannel.LOAD_MESSAGES)
     },
 
     openStorageFolder() {
         ipcRenderer.invoke(mainChannel.OPEN_STORAGE_FOLDER)
     },
+
+    checkSettingFile() {
+        return ipcRenderer.invoke(mainChannel.CHECK_SETTING_FILE)
+    },
+    checkMessagesFile() {
+        return ipcRenderer.invoke(mainChannel.CHECK_MESSAGES_FILE)
+    }
 }
 
 contextBridge.exposeInMainWorld('store', preload)

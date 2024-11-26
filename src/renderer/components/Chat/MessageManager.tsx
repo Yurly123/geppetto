@@ -10,8 +10,12 @@ const MessageManager: React.FC = () => {
         window.openai.onCompletionEnd((content) => {
             dispatchMessages({ type: 'add', message: createMessage('assistant', content) });
         });
-        window.store.loadMessages().then((messages) => {
-            dispatchMessages({ type: 'changeAll', messages });
+
+        window.store.checkMessagesFile().then((exists) => {
+            if (!exists) return;
+            window.store.loadMessages().then((messages) => {
+                dispatchMessages({ type: 'changeAll', messages });
+            })
         })
         return () => window.openai.removeCompletionEndListeners();
     }, []);

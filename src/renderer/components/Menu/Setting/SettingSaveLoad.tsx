@@ -15,7 +15,11 @@ const SettingSaveLoad: React.FC = () => {
             ))
     }
 
-    useEffect(loadSetting, [])
+    useEffect(() => {(async () => {
+        const settingFileExist = await window.store.checkSettingFile()
+        if (settingFileExist)
+            loadSetting()
+    })()}, [])
 
     return (
         <div className='setting-saveload'>
