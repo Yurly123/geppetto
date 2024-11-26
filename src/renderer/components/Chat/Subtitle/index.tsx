@@ -1,9 +1,19 @@
 import React, { useEffect, useReducer } from 'react';
 import SubtitleBox from './SubtitleBox';
+import { RESPONSE_START } from '@common/openai';
+
+interface SubtitleState {
+    buffer: string;
+    content: string;
+    responseStarted: boolean;
+}
+const initialState: SubtitleState = { 
+    buffer: '', content: '', responseStarted: false,
+}
 
 const Subtitle: React.FC = () => {
-    const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, '');
-    let disappearDelay = 10 + subtitle.length / 10;
+    const [subtitle, dispatchSubtitle] = useReducer(subtitleReducer, initialState);
+    let disappearDelay = 10 + subtitle.content.length / 10;
 
     useEffect(() => {
         window.openai.onCompletionStart(() => {
@@ -19,12 +29,15 @@ const Subtitle: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        disappearDelay = 10 + subtitle.length / 10;
-    }, [subtitle]);
+        disappearDelay = 10 + subtitle.content.length / 10;
+    }, [subtitle.content]);
 
     return (
         <div className='subtitle'>
-            <SubtitleBox message={subtitle} disappearDelay={disappearDelay} />
+            <SubtitleBox
+                message={subtitle.content}
+                disappearDelay={disappearDelay}
+            />
         </div>
     )
 };
@@ -32,14 +45,26 @@ const Subtitle: React.FC = () => {
 export default Subtitle;
 
 function subtitleReducer(
-    state: string,
+    state: SubtitleState,
     action: { type: 'clear' | 'data', data?: string }
-) {
+): SubtitleState {
     action.data = action.data || '';
     switch (action.type) {
         case 'clear':
-            return action.data;
-        case 'data':
-            return state + action.data;
+            return initialState;
+        case 'data': {
+            const newState = { ...state }
+            console.log(newState);
+
+            if (state.buffer.includes(RESPONSE_START))
+                newState.responseStarted = true;
+            else newState.responseStarted = false;
+
+            if (state.responseStarted)
+                newState.content += action.data;
+            else newState.buffer += action.data;
+
+            return newState;
+        } 
     }
 }

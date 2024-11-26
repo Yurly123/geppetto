@@ -10,6 +10,7 @@ export async function completion(openai: OpenAI, messages: Message[]) {
         model: 'gpt-4o-mini',
         messages: requestMessages,
         stream: true,
+        max_completion_tokens: 500,
     })
     return stream
 }

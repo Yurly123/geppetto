@@ -18,7 +18,7 @@ export function registerOpenaiIpc() {
         for await (const chunk of stream) {
             const data = chunk.choices[0].delta.content || '';
             content += data;
-            //sender.send(rendererChannel.COMPLETION_CHUNK, data);
+            sender.send(rendererChannel.COMPLETION_CHUNK, data);
 
             if (chunk.choices[0].finish_reason === 'stop') {
                 sender.send(rendererChannel.COMPLETION_END, content);

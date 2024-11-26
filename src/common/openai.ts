@@ -16,6 +16,8 @@ export function createMessage(
     return { role, content };
 }
 
+export const RESPONSE_START = '### Response';
+
 export function extractResponse(content: string) {
-    return content.split('### Response')[1]?.trim();
+    return content.split(RESPONSE_START).at(-1)?.trim();
 }
