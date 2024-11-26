@@ -1,4 +1,5 @@
 import { SSMLOption } from '@common/azure';
+import { extractResponse } from '@common/openai';
 import { DispatchVoicePlayingContext, MessagesContext } from '@components/contexts';
 import { useContext, useEffect, useRef } from 'react';
 
@@ -40,7 +41,8 @@ const VoicePlayer: React.FC<Props> = (props) => {
         const message = messages[messages.length - 1];
         if (message.role !== 'assistant') return;
 
-        window.azure.requestSynthesis(message.content, props.ssmlOption);
+        const content = extractResponse(message.content);
+        window.azure.requestSynthesis(content, props.ssmlOption);
     }, [messages.length]);
 
     return null

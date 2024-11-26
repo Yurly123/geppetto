@@ -16,6 +16,6 @@ export function createMessage(
     return { role, content };
 }
 
-export function systemMessage() {
-    return createMessage('system', 'You are a helpful assistant.');
+export function extractResponse(content: string) {
+    return content.split('### Response')[1]?.trim();
 }

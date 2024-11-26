@@ -19,10 +19,9 @@ export function registerOpenaiIpc() {
             const data = chunk.choices[0].delta.content || '';
             content += data;
             //sender.send(rendererChannel.COMPLETION_CHUNK, data);
-            console.log(data);
 
             if (chunk.choices[0].finish_reason === 'stop') {
-                //sender.send(rendererChannel.COMPLETION_END, content);
+                sender.send(rendererChannel.COMPLETION_END, content);
                 console.log(content);
             }
         }
