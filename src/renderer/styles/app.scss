@@ -140,6 +140,18 @@ button {
   }
 }
 
+.help-message-box {
+  position: fixed;
+  opacity: 75%;
+  background: var(--app-bgcolor);
+  color: white;
+  @include util.box-border(0.4rem);
+  padding: 0.5rem;
+  width: calc(50% - 3rem);
+  overflow: auto;
+  word-wrap: break-word;
+}
+
 /**
  *==========================================================================
  * Titlebar Overrides for different themes

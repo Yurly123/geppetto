@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ChatInput: React.FC<Props> = (props) => {
-    return <HelpTrigger message='메세지'>
+    return <HelpTrigger message='메세지asdfasdfjasdklfjasdasdfjkasldfjasldfkajdflasdfklfasjfdkl'>
         <input
         disabled={!props.enable}
         type='text'

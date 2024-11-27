@@ -19,6 +19,7 @@ const HelpTrigger: React.FC<Props> = ({ children, message }) => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.repeat) return;
             if (e.key === 'Control') ctrlKey.current = true;
             if (e.key === 'h') hKey.current = true;
 
@@ -55,6 +56,7 @@ const HelpTrigger: React.FC<Props> = ({ children, message }) => {
                 hover.current = true;
                 updateShowHelp()
             }}
+            className='help-trigger'
         >
             {children}
         </div>
