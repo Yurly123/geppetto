@@ -1,13 +1,13 @@
 import { app, ipcMain, shell } from "electron"
 import { mainChannel } from "./channels"
-import { Setting } from "@common/setting"
+import { initialSetting, Setting, SettingStoreData } from "@common/setting"
 import { messageSchema, settingSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
 import { existsSync } from 'fs';
 
 export function registerStoreIpc() {
-    const settingStore = new Store<Setting>({
+    const settingStore = new Store<SettingStoreData>({
         name: 'setting',
         schema: settingSchema,
     })
@@ -17,10 +17,16 @@ export function registerStoreIpc() {
     })
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
-        settingStore.set(setting)
+        Object.entries(setting).forEach(([name, element]) => {
+            settingStore.set(name, element.value)
+        })
     })
     ipcMain.handle(mainChannel.LOAD_SETTING, (_) => {
-        return settingStore.store
+        const setting: Setting = { ...initialSetting }
+        Object.entries(setting).forEach(([name, element]) => {
+            element.value = settingStore.get(name) ?? element.default
+        })
+        return setting
     })
 
     ipcMain.handle(mainChannel.SAVE_MESSAGES, (_, messages: Message[]) => {
