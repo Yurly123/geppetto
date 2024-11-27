@@ -14,7 +14,6 @@ function helpReducer(
     state: Help,
     action: Help
 ): Help {
-    console.log(action)
     return action;
 }
 

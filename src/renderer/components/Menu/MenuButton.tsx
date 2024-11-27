@@ -6,7 +6,7 @@ type Props = {
 }
 const MenuButton: React.FC<Props> = ({ onClick }) => {
 
-    return <HelpTrigger message='메뉴를 엽니다'>
+    return <HelpTrigger message='메뉴를 열거나 닫습니다.'>
         <div
             className='menu-button'
             onClick={onClick}

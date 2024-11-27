@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ChatInput: React.FC<Props> = (props) => {
-    return <HelpTrigger message='메세지asdfasdfjasdklfjasdasdfjkasldfjasldfkajdflasdfklfasjfdkl'>
+    return <HelpTrigger message='메세지를 입력하고 Enter를 누르면 전송됩니다. 전송하고 수 초 기다리면 응답이 옵니다.'>
         <input
         disabled={!props.enable}
         type='text'
