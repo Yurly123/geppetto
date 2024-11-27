@@ -32,7 +32,7 @@ const VoicePlayer: React.FC<Props> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (!setting['TTS토글'].value) return;
+        if (!setting['TTS토글']?.value) return;
         if (messages.length === 0) return;
 
         // This is to prevent requesting when length change is not intended to generate voice

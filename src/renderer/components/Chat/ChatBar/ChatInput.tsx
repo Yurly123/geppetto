@@ -1,3 +1,4 @@
+import Help from '@components/util/Help';
 import React from 'react';
 
 type Props = {
@@ -7,13 +8,15 @@ type Props = {
 }
 
 const ChatInput: React.FC<Props> = (props) => {
-    return <input
+    return <Help message='메세지'>
+        <input
         disabled={!props.enable}
         type='text'
         placeholder='메세지 입력'
         value={props.message}
         onChange={(e) => props.onChange(e.target.value)}
     />
+    </Help>
 };
 
 export default ChatInput;
