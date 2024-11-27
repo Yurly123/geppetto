@@ -1,6 +1,5 @@
 import { DispatchMessagesContext } from '@components/contexts';
-import { Modal } from '@components/util';
-import { ModalRef } from '@components/util/Modal';
+import { Modal, ModalRef } from '@components/util';
 import React, { useContext, useRef } from 'react';
 
 const InitializeButton: React.FC = () => {

@@ -1,4 +1,4 @@
-import Help from '@components/util/Help';
+import { HelpTrigger } from '@components/util';
 import React from 'react';
 
 type Props = {
@@ -6,14 +6,14 @@ type Props = {
 }
 const MenuButton: React.FC<Props> = ({ onClick }) => {
 
-    return <Help message='메뉴를 엽니다'>
+    return <HelpTrigger message='메뉴를 엽니다'>
         <div
             className='menu-button'
             onClick={onClick}
         >
             <h3>메뉴</h3>
         </div>
-    </Help>
+    </HelpTrigger>
 }
 
 export default MenuButton;

@@ -1,4 +1,4 @@
-import Help from '@components/util/Help';
+import { HelpTrigger } from '@components/util';
 import React from 'react';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ChatInput: React.FC<Props> = (props) => {
-    return <Help message='메세지'>
+    return <HelpTrigger message='메세지'>
         <input
         disabled={!props.enable}
         type='text'
@@ -16,7 +16,7 @@ const ChatInput: React.FC<Props> = (props) => {
         value={props.message}
         onChange={(e) => props.onChange(e.target.value)}
     />
-    </Help>
+    </HelpTrigger>
 };
 
 export default ChatInput;

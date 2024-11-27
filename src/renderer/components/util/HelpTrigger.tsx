@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import { DispatchHelpContext } from '@components/contexts';
+import React, { useContext, useEffect, useRef } from 'react';
 
 type Props = {
     children: React.ReactNode;
     message: string;
 }
-const Help: React.FC<Props> = ({ children, message }) => {
+const HelpTrigger: React.FC<Props> = ({ children, message }) => {
+    const dispatchHelp = useContext(DispatchHelpContext);
     const hover = useRef(false);
     const ctrlKey = useRef(false)
     const hKey = useRef(false)
@@ -12,7 +14,7 @@ const Help: React.FC<Props> = ({ children, message }) => {
 
     function updateShowHelp() {
         const open = hover.current && ctrlKey.current && hKey.current;
-        console.log(message, open);
+        dispatchHelp({ message, open, x: x.current, y: y.current });
     }
 
     useEffect(() => {
@@ -59,4 +61,4 @@ const Help: React.FC<Props> = ({ children, message }) => {
     )
 }
 
-export default Help;
+export default HelpTrigger;
