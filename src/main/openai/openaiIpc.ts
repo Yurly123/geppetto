@@ -3,6 +3,7 @@ import OpenAI from 'openai';
 import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/openai";
+import { ChatCompletionChunk } from "openai/resources";
 
 export function registerOpenaiIpc() {
     const openai = new OpenAI()
@@ -14,14 +15,26 @@ export function registerOpenaiIpc() {
 
         let content = ''
         for await (const chunk of stream) {
+            if (chunk.usage) 
+                handleUsage(chunk);
+            else if (chunk.choices[0].finish_reason === 'stop')
+                handleStop(chunk);
+            else
+                handleChunk(chunk);
+        }
+
+        function handleChunk(chunk: ChatCompletionChunk) {
             const data = chunk.choices[0].delta.content || '';
             content += data;
             sender.send(rendererChannel.COMPLETION_CHUNK, data);
-
-            if (chunk.choices[0].finish_reason === 'stop') {
-                sender.send(rendererChannel.COMPLETION_END, content);
-                console.log(content);
-            }
+        }
+        function handleStop(chuck: ChatCompletionChunk) {
+            console.log(chuck)
+            sender.send(rendererChannel.COMPLETION_END, content);
+            console.log(content);
+        }
+        function handleUsage(chunk: ChatCompletionChunk) {
+            console.log(chunk);
         }
     });
 }

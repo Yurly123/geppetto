@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '@styles/app.scss';
 import { ContextsProvider } from './contexts';
 import Chat from './Chat';
@@ -9,11 +9,11 @@ import InitialLoader from './InitialLoader';
 const Application: React.FC = () => {
     return (
         <ContextsProvider>
+            <InitialLoader />
             <div className='app'>
                 <Chat />
                 <Menu />
                 <HelpMessageBox />
-                <InitialLoader />
             </div>
         </ContextsProvider>
     );

@@ -11,6 +11,9 @@ export async function completion(openai: OpenAI, messages: Message[]) {
         messages: requestMessages,
         stream: true,
         max_completion_tokens: 500,
+        stream_options: {
+            include_usage: true
+        }
     })
     return stream
 }

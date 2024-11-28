@@ -4,6 +4,7 @@ import MenuButton from './MenuButton';
 import Setting from './Setting';
 import Log from './Log';
 import StorageFolderButton from './StorageFolderButton';
+import TokenCounter from './TokenCounter';
 
 const Menu: React.FC = () => {
     const [menuEnable, setMenuEnable] = useState(false);
@@ -17,6 +18,7 @@ const Menu: React.FC = () => {
         <MenuButton
             onClick={() => setMenuEnable(!menuEnable)}
         />
+        <TokenCounter />
         <Log
             logButtonEnable={menuEnable}
             enable={logEnable}

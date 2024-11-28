@@ -1,0 +1,15 @@
+@use '../util';
+
+.token-counter {
+    position: fixed;
+    top: calc(util.$titlebar-height + 1rem);
+    left: 1rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: white;
+    @include util.box-border;
+}
