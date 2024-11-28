@@ -4,16 +4,16 @@ import { ContextsProvider } from './contexts';
 import Chat from './Chat';
 import Menu from './Menu';
 import HelpMessageBox from './HelpMessageBox';
+import InitialLoader from './InitialLoader';
 
 const Application: React.FC = () => {
-    const [menuEnable, setMenuEnable] = useState(false)
-
     return (
         <ContextsProvider>
             <div className='app'>
                 <Chat />
                 <Menu />
                 <HelpMessageBox />
+                <InitialLoader />
             </div>
         </ContextsProvider>
     );

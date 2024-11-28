@@ -54,7 +54,6 @@ function subtitleReducer(
             return initialState;
         case 'data': {
             const newState = { ...state }
-            console.log(newState);
 
             if (state.buffer.includes(RESPONSE_START))
                 newState.responseStarted = true;

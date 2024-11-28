@@ -1,6 +1,6 @@
 import { DispatchSettingContext, SettingContext } from '@components/contexts';
 import { HelpTrigger } from '@components/util';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 const SettingSaveLoad: React.FC = () => {
     const setting = useContext(SettingContext)
@@ -9,18 +9,10 @@ const SettingSaveLoad: React.FC = () => {
     function saveSetting() {
         window.store.saveSetting(setting)
     }
-    function loadSetting() {
-        window.store.loadSetting()
-            .then((data) => dispatchSetting(
-                { type: 'changeAll', setting: data }
-            ))
+    async function loadSetting() {
+        const data = await window.store.loadSetting()
+        dispatchSetting({ type: 'changeAll', setting: data })
     }
-
-    useEffect(() => {(async () => {
-        const settingFileExist = await window.store.checkSettingFile()
-        if (settingFileExist)
-            loadSetting()
-    })()}, [])
 
     return <HelpTrigger message='설정을 저장폴더에 저장하거나 불러올 수 있습니다. 설정은 자동저장되지 않습니다.'>
         <div className='setting-saveload'>
