@@ -17,6 +17,7 @@ const messageSchema: Schema<Messages> = {
             properties: {
                 role: { type: 'string' },
                 content: { type: 'string' },
+                token: { type: 'number' },
             },
             required: ['role', 'content'],
         },

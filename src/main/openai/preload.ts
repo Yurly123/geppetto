@@ -20,10 +20,10 @@ const preload = {
         });
     },
 
-    onCompletionEnd(callback: (content: string) => void) {
+    onCompletionEnd(callback: (content: string, token: number) => void) {
         const channel = rendererChannel.COMPLETION_END
-        ipcRenderer.on(channel, (_, content: string) => {
-            callback(content)
+        ipcRenderer.on(channel, (_, content: string, token: number) => {
+            callback(content, token)
         });
     },
 

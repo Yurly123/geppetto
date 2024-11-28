@@ -1,4 +1,4 @@
-import { Message } from "@common/openai";
+import { assertAssistantHasToken, Message } from "@common/openai";
 import React, { Dispatch, ReactNode, createContext, useReducer } from "react";
 
 export const MessagesContext = createContext<Message[]>(null);
@@ -15,8 +15,11 @@ function messagesReducer(
 ): Message[] {
     switch (action.type) {
         case 'add': if (!action.message) return state;
+            assertAssistantHasToken(action.message);
             return [...state, action.message]
-        case 'changeAll': return action.messages || state
+        case 'changeAll': if (!action.messages) return state;
+            action.messages.forEach(assertAssistantHasToken);
+            return action.messages
         default: return state
     }
 }

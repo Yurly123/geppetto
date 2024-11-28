@@ -7,8 +7,11 @@ const MessageManager: React.FC = () => {
     const dispatchMessages = useContext(DispatchMessagesContext);
 
     useEffect(() => {
-        window.openai.onCompletionEnd((content) => {
-            dispatchMessages({ type: 'add', message: createMessage('assistant', content) });
+        window.openai.onCompletionEnd((content, token) => {
+            dispatchMessages({
+                type: 'add',
+                message: createMessage('assistant', content, token)
+            });
         });
         return () => window.openai.removeCompletionEndListeners();
     }, []);

@@ -17,9 +17,7 @@ export function registerOpenaiIpc() {
         for await (const chunk of stream) {
             if (chunk.usage) 
                 handleUsage(chunk);
-            else if (chunk.choices[0].finish_reason === 'stop')
-                handleStop(chunk);
-            else
+            else if (!chunk.choices[0].finish_reason)
                 handleChunk(chunk);
         }
 
@@ -28,13 +26,10 @@ export function registerOpenaiIpc() {
             content += data;
             sender.send(rendererChannel.COMPLETION_CHUNK, data);
         }
-        function handleStop(chuck: ChatCompletionChunk) {
-            console.log(chuck)
-            sender.send(rendererChannel.COMPLETION_END, content);
-            console.log(content);
-        }
         function handleUsage(chunk: ChatCompletionChunk) {
-            console.log(chunk);
+            sender.send(rendererChannel.COMPLETION_END, 
+                content, chunk.usage.completion_tokens
+            );
         }
     });
 }
