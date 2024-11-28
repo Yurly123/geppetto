@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '@styles/menu/index.scss';
 import MenuButton from './MenuButton';
 import Setting from './Setting';
 import Log from './Log';
 import StorageFolderButton from './StorageFolderButton';
 
-type Props = {
-    enable?: boolean;
-    onMenuButtonClick?: () => void;
-}
-const Menu: React.FC<Props> = (props) => {
-    const menuEnable = props.enable === undefined ? true : props.enable;
-    const [logEnable, setLogEnable] = React.useState(false);
+const Menu: React.FC = () => {
+    const [menuEnable, setMenuEnable] = useState(false);
+    const [logEnable, setLogEnable] = useState(false);
     return <>
         {menuEnable &&
             <div className='menu'>
@@ -19,7 +15,7 @@ const Menu: React.FC<Props> = (props) => {
                 <StorageFolderButton />
             </div>}
         <MenuButton
-            onClick={props.onMenuButtonClick}
+            onClick={() => setMenuEnable(!menuEnable)}
         />
         <Log
             logButtonEnable={menuEnable}

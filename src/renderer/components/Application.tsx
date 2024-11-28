@@ -12,10 +12,7 @@ const Application: React.FC = () => {
         <ContextsProvider>
             <div className='app'>
                 <Chat />
-                <Menu
-                    enable={menuEnable}
-                    onMenuButtonClick={() => setMenuEnable(!menuEnable)}
-                />
+                <Menu />
                 <HelpMessageBox />
             </div>
         </ContextsProvider>
