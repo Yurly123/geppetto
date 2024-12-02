@@ -51,6 +51,13 @@
             }
         }
     }
+
+    .portrait {
+
+        img {
+            width: 50%;
+        }
+    }
 }
 
 @keyframes disappear {
