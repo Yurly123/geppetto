@@ -7,7 +7,7 @@ type Props = {
 const UserInput: React.FC<Props> = ({ userInput }) => {
     return <div className='response-element'>
         <p>
-            {userInput.content}
+            {userInput?.content}
         </p>
     </div>;
 }

@@ -1,11 +1,16 @@
 import React from 'react';
 import ChatBar from './ChatBar';
 import ResponseContent from './ResponseContent';
+import { Response, UserMessage } from '@common/openai';
 
-const ResponseBox: React.FC = () => {
+type Props = {
+    userInput: UserMessage;
+    response: Response;
+}
+const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
     return (
         <div className='response-box'>
-            <ResponseContent />
+            <ResponseContent userInput={userInput} response={response} />
             <ChatBar enable={true} />
         </div>
     );
