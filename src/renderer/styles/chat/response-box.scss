@@ -47,16 +47,24 @@
         height: 100%;
         width: calc(70% - 2rem);
         padding: 1rem;
+        padding-bottom: 8rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         background-color: var(--app-bgcolor);
-        color: aqua;
+        color: white;
         overflow-y: scroll;
+        border-left: 0.5rem solid var(--app-border-color);
+
+        .response-content {
+            margin-bottom: 3rem;
+        }
 
         .chat-bar {
-            bottom: 1rem;
+            position: sticky;
+            bottom: 2rem;
+            height: 5rem;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -65,6 +73,7 @@
                 width: 90%;
                 padding: 1rem;
                 font-size: 2rem;
+                @include util.box-border(0.4rem, 0.8rem);
 
                 &:disabled {
                     background-color: gray;
