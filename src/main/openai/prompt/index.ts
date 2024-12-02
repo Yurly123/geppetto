@@ -1,12 +1,13 @@
-import { Message } from "@common/openai";
+import { createMessage, Message } from "@common/openai";
 import { firstSystemMessage, secondSystemMessage, thirdSystemMessage } from "./system";
+import { insertProfile } from "./profile";
 
 export function buildPrompt(prevMessages: Message[], inputMessage: Message) {
     return [
-        firstSystemMessage(),
+        createMessage('system', insertProfile(firstSystemMessage)),
         ...prevMessages,
-        secondSystemMessage(),
+        createMessage('system', secondSystemMessage),
         inputMessage,
-        thirdSystemMessage(),
+        createMessage('system', thirdSystemMessage)
     ]
 }
