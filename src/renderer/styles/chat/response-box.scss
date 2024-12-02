@@ -47,17 +47,16 @@
         height: 100%;
         width: calc(70% - 2rem);
         padding: 1rem;
-        padding-bottom: 8rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-between;
         background-color: var(--app-bgcolor);
         color: white;
         overflow-y: scroll;
         border-left: 0.5rem solid var(--app-border-color);
 
         .response-content {
+            margin-top: 6rem;
             margin-bottom: 3rem;
         }
 
