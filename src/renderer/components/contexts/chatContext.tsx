@@ -23,7 +23,7 @@ function chatReducer(
         case 'changeAll':
             return action.chat || state;
         case 'changeIndex':
-            if (!action.index ||
+            if (action.index === undefined ||
                 action.index < 0 ||
                 action.index >= state.response.paragraphs.length
             ) return state;

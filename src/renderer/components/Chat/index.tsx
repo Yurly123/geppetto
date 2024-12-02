@@ -14,8 +14,14 @@ const Chat: React.FC<Props> = () => {
 
     return (
         <div className='chat side-view'>
-            <Portrait dialogue={paragraph.dialogue} emotion={paragraph.emotion} />
-            <ResponseBox userInput={chat?.userInput} response={chat?.response}/>
+            <Portrait
+                character={paragraph.dialogue.speaker}
+                emotion={paragraph.emotion}
+            />
+            <ResponseBox
+                userInput={chat?.userInput}
+                response={chat?.response}
+            />
             <MessageManager />
         </div>
     );
