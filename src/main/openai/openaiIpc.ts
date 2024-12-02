@@ -29,15 +29,6 @@ export function registerOpenaiIpc() {
             sender.send(rendererChannel.COMPLETION_CHUNK, data);
         }
         function handleUsage(chunk: ChatCompletionChunk) {
-            console.log(chunk)
-            console.log(content)
-            const response = textToResponse(content);
-            console.log(response.location, response.time)
-            response.paragraphs.forEach(paragraph => {
-                console.log(paragraph.narrative)
-                console.log(`${paragraph.dialogue.speaker}(${paragraph.emotion}): "${paragraph.dialogue.content}"`)
-            })
-            return
             sender.send(rendererChannel.COMPLETION_END, 
                 content, chunk.usage.completion_tokens
             );

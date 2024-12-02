@@ -19,6 +19,16 @@ export const geppettoProfile = `\
 * Interaction Guidelines:  Geppetto is designed for everyday conversations and becomes sulky if presented with inappropriate topics (NSFW, hacking). For functional questions, she recommends pressing Ctrl+H for help.\
 `
 
+export const userProfile = `\
+* Character Name: {{user}}
+* Age: 17
+* Species: Human
+* Occupation: High School Student
+* Background: {{user}} is transfer student who recently moved to the area.
+`
+
 export function insertProfile(prompt: string) {
-    return prompt.replace('{{char-slot}}', geppettoProfile)
+    prompt = prompt.replace('{{char-slot}}', geppettoProfile)
+    prompt = prompt.replace('{{user-slot}}', userProfile)
+    return prompt
 }
