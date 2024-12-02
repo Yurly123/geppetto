@@ -1,4 +1,5 @@
 import { assertAssistantHasToken, createMessage, textToResponse } from '@common/openai';
+import { firstMessage } from '@common/openai/firstMessage';
 import { DispatchChatContext, DispatchMessagesContext, MessagesContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
@@ -19,7 +20,6 @@ const MessageManager: React.FC = () => {
 
     useEffect(() => {
         if (messages.length === 0) return;
-        window.store.saveMessages(messages);
 
         const message = messages.at(-1)
         if (message.role !== 'user') return
@@ -27,7 +27,7 @@ const MessageManager: React.FC = () => {
         window.openai.requestCompletion(messages);
         dispatchChat({ type: 'initialize' });
         dispatchChat({ type: 'changePartial', partial: { userInput: message } });
-    }, [messages.length]);
+    }, [messages]);
 
     useEffect(() => {
         if (messages.length === 0) return;
@@ -38,6 +38,7 @@ const MessageManager: React.FC = () => {
             userMessage.role !== 'user') return;
         assertAssistantHasToken(assistantMessage);
 
+        window.store.saveMessages(messages);
         dispatchChat({
             type: 'changeAll', chat: {
                 userInput: userMessage,
@@ -45,7 +46,17 @@ const MessageManager: React.FC = () => {
                 paragraphIndex: 0
             }
         });
-    }, [messages.length]);
+    }, [messages]);
+
+    useEffect(() => {
+        if (messages.length !== 0) return;
+        dispatchMessages({ type: 'add', message: firstMessage })
+        dispatchChat({
+            type: 'changePartial', partial: {
+                response: textToResponse(firstMessage.content),
+            }
+        });
+    }, [messages]);
 
     return null
 };

@@ -8,10 +8,10 @@ export async function completion(openai: OpenAI, messages: Message[]) {
         messages, messages[messages.length - 1]
     )
     const stream = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o-2024-11-20',
         messages: requestMessages,
         stream: true,
-        max_completion_tokens: 500,
+        max_completion_tokens: 1000,
         stream_options: {
             include_usage: true
         },
@@ -20,6 +20,5 @@ export async function completion(openai: OpenAI, messages: Message[]) {
             json_schema: responseSchema.json_schema,
         },
     })
-    console.log(stream)
     return stream
 }

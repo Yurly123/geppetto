@@ -14,6 +14,9 @@ const StreamHandler: React.FC = () => {
     }, [response]);
 
     useEffect(() => {
+        window.openai.onCompletionStart(() => {
+            dispatchResponse({ type: 'clear' })
+        })
         window.openai.onCompletionChunk((chunk) => {
             dispatchResponse({ type: 'data', data: chunk })
         });
@@ -29,11 +32,15 @@ export default StreamHandler;
 
 function reponseReducer(
     state: string,
-    action: { type: 'data', data: string }
+    action: {
+        type: 'data' | 'clear', data?: string
+    }
 ): string {
     switch (action.type) {
         case 'data':
-            return state + action.data;
+            return state + action.data || '';
+        case 'clear':
+            return '';
         default:
             return state;
     }

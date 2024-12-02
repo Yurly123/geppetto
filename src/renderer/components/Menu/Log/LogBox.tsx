@@ -7,13 +7,15 @@ const LogBox = forwardRef<HTMLDivElement>((_, scrollRef) => {
 
     return (
         <div className='log-box' ref={scrollRef}>
-            {messages.map((message, index) =>
-                <LogElement
-                    key={index}
-                    message={message}
-                    index={index}
-                />
-            )}
+            <div>
+                {messages.map((message, index) =>
+                    <LogElement
+                        key={index}
+                        message={message}
+                        index={index}
+                    />
+                )}
+            </div>
         </div>
     )
 })

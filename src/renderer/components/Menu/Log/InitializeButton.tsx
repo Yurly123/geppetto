@@ -1,3 +1,4 @@
+import { firstMessage } from '@common/openai/firstMessage';
 import { DispatchChatContext, DispatchMessagesContext } from '@components/contexts';
 import { Modal, ModalRef } from '@components/util';
 import React, { useContext, useRef } from 'react';

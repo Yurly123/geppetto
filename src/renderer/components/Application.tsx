@@ -9,12 +9,12 @@ import InitialLoader from './InitialLoader';
 const Application: React.FC = () => {
     return (
         <ContextsProvider>
-            <InitialLoader />
             <div className='app'>
                 <Chat />
                 <Menu />
                 <HelpMessageBox />
             </div>
+            <InitialLoader />
         </ContextsProvider>
     );
 };
