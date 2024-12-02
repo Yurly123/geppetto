@@ -11,7 +11,7 @@ const ResponseContent: React.FC<Props> = ({ userInput, response }) => {
     return <div className='response-content'>
         <UserInput userInput={userInput} />
         {response?.paragraphs.map((paragraph, index) => (
-            <Paragraph key={index} paragraph={paragraph} />
+            <Paragraph key={index} paragraph={paragraph} index={index} />
         ))}
     </div>
 }

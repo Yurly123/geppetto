@@ -1,7 +1,12 @@
 import React from 'react';
 import portrait from '@assets/images/gepptto/neutral.png'
+import { Dialogue, Emotion } from '@common/openai';
 
-const Portrait: React.FC = () => {
+type Props = {
+    dialogue: Dialogue;
+    emotion: Emotion;
+}
+const Portrait: React.FC<Props> = ({ dialogue, emotion }) => {
     return (
         <div className='portrait'>
             <img src={portrait} alt='portrait' />

@@ -36,9 +36,11 @@ const MessageManager: React.FC = () => {
         assertAssistantHasToken(assistantMessage);
 
         dispatchChat({
-            userInput: userMessage,
-            response: textToResponse(assistantMessage.content),
-            paragraphIndex: 0
+            type: 'changeAll', chat: {
+                userInput: userMessage,
+                response: textToResponse(assistantMessage.content),
+                paragraphIndex: 0
+            }
         });
     }, [messages.length]);
 

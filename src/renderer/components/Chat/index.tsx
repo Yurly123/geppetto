@@ -10,11 +10,11 @@ type Props = {
 }
 const Chat: React.FC<Props> = () => {
     const chat = useContext(ChatContext)
-    console.log(chat)
+    const paragraph = chat?.response?.paragraphs[chat?.paragraphIndex];
 
     return (
         <div className='chat side-view'>
-            <Portrait />
+            <Portrait dialogue={paragraph.dialogue} emotion={paragraph.emotion} />
             <ResponseBox userInput={chat?.userInput} response={chat?.response}/>
             <MessageManager />
         </div>

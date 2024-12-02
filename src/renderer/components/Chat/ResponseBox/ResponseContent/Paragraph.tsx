@@ -1,10 +1,14 @@
 import { Character, Paragraph } from '@common/openai';
-import React, { createElement, ReactElement } from 'react';
+import { DispatchChatContext } from '@components/contexts';
+import React, { createElement, ReactElement, useContext } from 'react';
 
 type Props = {
     paragraph: Paragraph;
+    index: number;
 }
-const Paragraph: React.FC<Props> = ({ paragraph }) => {
+const Paragraph: React.FC<Props> = ({ paragraph, index }) => {
+    const dispatchChat = useContext(DispatchChatContext);
+
     let speaker: ReactElement;
     switch (paragraph.dialogue.speaker) {
         case Character.Geppetto:
@@ -14,7 +18,12 @@ const Paragraph: React.FC<Props> = ({ paragraph }) => {
             break;
     }
 
-    return <div className='response-element'>
+    return <div
+        className='response-element'
+        onMouseEnter={() => {
+            dispatchChat({ type: 'changeIndex', index });
+        }}
+    >
         <p>
             {paragraph.narrative}
             <br />
