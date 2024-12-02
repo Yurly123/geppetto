@@ -9,6 +9,7 @@ const LogElement: React.FC<Props> = ({ message, index }) => {
     if (message.role === 'system') return null
 
     let role: string, content: string
+    let token: number | undefined
     switch (message.role) {
         case 'user':
             role = '사용자'
@@ -17,6 +18,7 @@ const LogElement: React.FC<Props> = ({ message, index }) => {
         case 'assistant':
             role = '제페토'
             content = extractResponse(message.content)
+            token = message.token
             break
     }
     
@@ -24,7 +26,10 @@ const LogElement: React.FC<Props> = ({ message, index }) => {
         <div className='log-element'>
             <header>
                 <h1>{role}</h1>
-                <span>{index}</span>
+                <span>
+                    {token ? `${token}토큰 ` : ''}
+                    [{index}]
+                </span>
             </header>
             <p>{content}</p>
         </div>
