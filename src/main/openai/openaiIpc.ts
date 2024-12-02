@@ -2,7 +2,7 @@ import { ipcMain } from "electron";
 import OpenAI from 'openai';
 import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
-import { Message, Response } from "@common/openai";
+import { Message, textToResponse } from "@common/openai";
 import { ChatCompletionChunk } from "openai/resources";
 
 export function registerOpenaiIpc() {
@@ -31,7 +31,7 @@ export function registerOpenaiIpc() {
         function handleUsage(chunk: ChatCompletionChunk) {
             console.log(chunk)
             console.log(content)
-            const response: Response = JSON.parse(content);
+            const response = textToResponse(content);
             console.log(response.location, response.time)
             response.paragraphs.forEach(paragraph => {
                 console.log(paragraph.narrative)
