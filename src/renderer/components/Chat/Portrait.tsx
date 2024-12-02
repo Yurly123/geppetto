@@ -9,6 +9,10 @@ const Portrait: React.FC<Props> = ({ character, emotion }) => {
     const [portrait, setPortrait] = useState<string>('');
 
     useEffect(() => {
+        if (!character || !emotion ||
+            !Object.values(Character).includes(character) ||
+            !Object.values(Emotion).includes(emotion)
+        ) return;
         import(`@assets/images/${character}/${emotion}.png`)
             .then((module) => {
                 setPortrait(module.default);

@@ -14,9 +14,10 @@ type action = Parameters<typeof chatReducer>[1]
 function chatReducer(
     state: Chat,
     action: {
-        type: 'changeAll' | 'changeIndex' | 'initialize',
-        chat?: Chat
-        index?: number
+        type: 'changeAll' | 'changeIndex' | 'initialize' | 'changePartial',
+        chat?: Chat,
+        partial?: Partial<Chat>,
+        index?: number,
     },
 ): Chat {
     switch (action.type) {
@@ -29,6 +30,8 @@ function chatReducer(
             ) return state;
             return { ...state, paragraphIndex: action.index }
         case 'initialize': return initialState;
+        case 'changePartial':
+            return { ...state, ...action.partial }
         default:
             return state;
     }

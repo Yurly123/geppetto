@@ -22,8 +22,11 @@ const MessageManager: React.FC = () => {
         window.store.saveMessages(messages);
 
         const message = messages.at(-1)
-        if (message.role === 'user')
-            window.openai.requestCompletion(messages);
+        if (message.role !== 'user') return
+
+        window.openai.requestCompletion(messages);
+        dispatchChat({ type: 'initialize' });
+        dispatchChat({ type: 'changePartial', partial: { userInput: message } });
     }, [messages.length]);
 
     useEffect(() => {

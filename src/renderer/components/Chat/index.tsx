@@ -4,6 +4,7 @@ import MessageManager from './MessageManager';
 import ResponseBox from './ResponseBox';
 import Portrait from './Portrait';
 import { ChatContext } from '@components/contexts';
+import StreamHandler from './StreamHandler';
 
 type Props = {
     enable?: boolean;
@@ -15,7 +16,7 @@ const Chat: React.FC<Props> = () => {
     return (
         <div className='chat side-view'>
             <Portrait
-                character={paragraph.dialogue.speaker}
+                character={paragraph.dialogue?.speaker}
                 emotion={paragraph.emotion}
             />
             <ResponseBox
@@ -23,6 +24,7 @@ const Chat: React.FC<Props> = () => {
                 response={chat?.response}
             />
             <MessageManager />
+            <StreamHandler />
         </div>
     );
 };

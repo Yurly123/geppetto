@@ -24,8 +24,6 @@ export function registerOpenaiIpc() {
         function handleChunk(chunk: ChatCompletionChunk) {
             const data = chunk.choices[0].delta.content || '';
             content += data;
-            console.log(data)
-            return
             sender.send(rendererChannel.COMPLETION_CHUNK, data);
         }
         function handleUsage(chunk: ChatCompletionChunk) {
