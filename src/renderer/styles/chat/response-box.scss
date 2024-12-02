@@ -56,8 +56,23 @@
         border-left: 0.5rem solid var(--app-border-color);
 
         .response-content {
-            margin-top: 6rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+
+            .response-element {
+                border: 0.1rem solid var(--app-border-color);
+                padding: 1rem;
+                margin-bottom: 1rem;
+
+                p {
+                    margin: 0;
+
+                    span.dialogue {
+                        color: var(--quote-font-color);
+                    }
+                }
+            }
         }
 
         .chat-bar {

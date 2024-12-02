@@ -1,12 +1,12 @@
-interface SystemMessage {
+export interface SystemMessage {
     role: 'system';
     content: string;
 }
-interface UserMessage {
+export interface UserMessage {
     role: 'user';
     content: string;
 }
-interface AssistantMessage {
+export interface AssistantMessage {
     role: 'assistant';
     content: string;
     token: number;
