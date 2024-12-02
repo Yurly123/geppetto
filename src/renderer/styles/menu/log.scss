@@ -33,6 +33,10 @@ $bar-height: util.$titlebar-height;
             max-height: 9.5rem;
             overflow: hidden;
 
+            &.assistant {
+                @include util.button-background;
+            }
+
             header {
                 width: calc(100% - 2rem);
                 display: flex;

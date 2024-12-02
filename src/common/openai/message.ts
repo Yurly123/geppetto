@@ -37,9 +37,3 @@ export function assertAssistantHasToken(message: Message): asserts message is As
     if (message.role === 'assistant' && message.token === undefined)
         throw new Error('Assistant message must have a token');
 }
-
-export const RESPONSE_START = '### Response';
-
-export function extractResponse(content: string) {
-    return content.split(RESPONSE_START).at(-1)?.trim();
-}
