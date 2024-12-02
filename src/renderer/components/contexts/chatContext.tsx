@@ -14,7 +14,7 @@ type action = Parameters<typeof chatReducer>[1]
 function chatReducer(
     state: Chat,
     action: {
-        type: 'changeAll' | 'changeIndex',
+        type: 'changeAll' | 'changeIndex' | 'initialize',
         chat?: Chat
         index?: number
     },
@@ -28,8 +28,23 @@ function chatReducer(
                 action.index >= state.response.paragraphs.length
             ) return state;
             return { ...state, paragraphIndex: action.index }
+        case 'initialize': return initialState;
         default:
             return state;
+    }
+}
+
+const initialState: Chat = {
+    userInput: { role: 'user', content: '' },
+    paragraphIndex: 0,
+    response: {
+        paragraphs: [{
+            narrative: '',
+            dialogue: { speaker: Character.Geppetto, content: '' },
+            emotion: Emotion.Neutral,
+        }],
+        time: '',
+        location: ''
     }
 }
 
@@ -37,19 +52,7 @@ type Props = { children: ReactNode; }
 export const ChatProvider: React.FC<Props> = ({
     children
 }) => {
-    const [chat, dispatchChat] = useReducer(chatReducer, {
-        userInput: { role: 'user', content: '' },
-        paragraphIndex: 0,
-        response: {
-            paragraphs: [{
-                narrative: '',
-                dialogue: { speaker: Character.Geppetto, content: '' },
-                emotion: Emotion.Neutral,
-            }],
-            time: '',
-            location: ''
-        }
-    })
+    const [chat, dispatchChat] = useReducer(chatReducer, initialState)
 
     return (
         <ChatContext.Provider value={chat}>

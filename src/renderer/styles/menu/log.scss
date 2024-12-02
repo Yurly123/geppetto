@@ -30,6 +30,8 @@ $bar-height: util.$titlebar-height;
             @include util.box-border(0.3rem, 0.75rem);
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
+            max-height: 9.5rem;
+            overflow: hidden;
 
             header {
                 width: calc(100% - 2rem);

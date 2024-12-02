@@ -1,16 +1,18 @@
-import { DispatchMessagesContext } from '@components/contexts';
+import { DispatchChatContext, DispatchMessagesContext } from '@components/contexts';
 import { Modal, ModalRef } from '@components/util';
 import React, { useContext, useRef } from 'react';
 
 const InitializeButton: React.FC = () => {
     const modalRef = useRef<ModalRef>(null);
     const dispatchMessages = useContext(DispatchMessagesContext);
+    const dispatchChat = useContext(DispatchChatContext);
 
     function initializeLog() {
         window.store.saveMessages([]);
         window.store.loadMessages().then((messages) => {
             dispatchMessages({ type: 'changeAll', messages });
         });
+        dispatchChat({ type: 'initialize' });
     }
 
     return <>
