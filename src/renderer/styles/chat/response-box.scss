@@ -1,0 +1,76 @@
+@use '../util';
+
+.chat.pop-up {
+    .response-box {
+        position: absolute;
+        top: 8rem;
+        width: 90%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--app-bgcolor);
+        color: aqua;
+        opacity: 50%;
+        max-height: calc(100% - 12rem);
+        overflow-y: scroll;
+        @include util.box-border;
+
+        .chat-bar {
+            bottom: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            input {
+                width: 90%;
+                padding: 1rem;
+                font-size: 2rem;
+
+                &:disabled {
+                    background-color: gray;
+                }
+            }
+
+        }
+    }
+
+
+}
+
+.chat.side-view {
+    .response-box {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 50%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--app-bgcolor);
+        color: aqua;
+        overflow-y: scroll;
+
+        .chat-bar {
+            bottom: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            input {
+                width: 90%;
+                padding: 1rem;
+                font-size: 2rem;
+
+                &:disabled {
+                    background-color: gray;
+                }
+            }
+
+        }
+    }
+}

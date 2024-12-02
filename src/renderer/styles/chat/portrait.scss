@@ -1,0 +1,25 @@
+
+.chat.pop-up {
+    .portrait {
+        position: absolute;
+        top: 0;
+        height: calc(100% - 2rem);
+
+        img {
+            height: 300%;
+        }
+    }
+}
+
+.chat.side-view {
+    .portrait {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+
+        img {
+            width: 100%;
+        }
+    }
+}

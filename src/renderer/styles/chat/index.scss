@@ -1,4 +1,7 @@
-@use './util';
+@forward './response-box.scss';
+@forward './portrait.scss';
+
+@use '../util';
 
 .chat {
     position: fixed;
@@ -7,24 +10,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-
-    &-bar {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-
-        input {
-            width: 90%;
-            padding: 1rem;
-            @include util.box-border;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-
-            &:disabled {
-                background-color: gray;
-            }
-        }
-    }
+    height: calc(100% - util.$titlebar-height);
 
     .subtitle {
         position: fixed;
@@ -41,7 +27,7 @@
             background-color: gray;
             width: 80%;
             padding: 1rem;
-        
+
             span {
                 text-align: center;
                 overflow: hidden;
@@ -52,18 +38,14 @@
         }
     }
 
-    .portrait {
 
-        img {
-            width: 50%;
-        }
-    }
 }
 
 @keyframes disappear {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -73,6 +55,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
