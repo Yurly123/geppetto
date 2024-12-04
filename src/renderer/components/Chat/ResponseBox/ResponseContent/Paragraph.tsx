@@ -30,7 +30,6 @@ const Paragraph: React.FC<Props> = ({ paragraph, index }) => {
             speaker = null
             break;
     }
-    console.log(speaker);
 
     return <div
         className='response-element'

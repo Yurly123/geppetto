@@ -1,3 +1,5 @@
+import { ChatModel } from "openai/resources";
+
 export type settingValue = number | boolean | string;
 
 export interface ISettingElement<T extends settingValue> {
@@ -15,9 +17,13 @@ export interface NumberSettingElement
     readonly max?: number;
 };
 
-export interface EnumSettingElement
-    extends ISettingElement<string> {
-    readonly values: string[];
+export interface EnumSettingElement<T extends string = string>
+    extends ISettingElement<T> {
+    readonly enum: {
+        discription: string;
+        value: T;
+        display: string;
+    }[];
 };
 
 export type SettingElement = BooleanSettingElement | NumberSettingElement | EnumSettingElement;
@@ -29,7 +35,7 @@ export interface ISetting {
 export interface Setting extends ISetting {
     'TTS음량': NumberSettingElement;
     'TTS토글': BooleanSettingElement;
-    'GPT모델': EnumSettingElement;
+    'GPT모델': EnumSettingElement<ChatModel>;
 }
 
 export const initialSetting: Setting = {
@@ -44,7 +50,13 @@ export const initialSetting: Setting = {
     'GPT모델': {
         description: '채팅을 구동할 GPT 모델을 선택합니다. 이전 대화 기록에 어떤 모델을 썼느냐에 상관없이 현재 대화에 적용됩니다.',
         value: 'gpt-4o-mini', default: 'gpt-4o-mini',
-        values: ['gpt-4o-mini', 'gpt-4o-2024-11-20']
+        enum: [ {
+            discription: 'gpt-4o-mini 모델로 대화합니다. 토큰당 가격이 매우 낮지만 성능은 떨어집니다. 테스트 목적으로 적합합니다.',
+            value: 'gpt-4o-mini', display: '미니 사오'
+        }, {
+            discription: 'gpt-4o-2024-11-20 모델로 대화합니다. 미니 사오에 비해 성능이 우수합니다.',
+            value: 'gpt-4o-2024-11-20', display: '1120 사오'
+        }]
     }
 }
 

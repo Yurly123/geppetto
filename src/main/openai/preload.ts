@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { mainChannel, rendererChannel } from "./channels";
 import { Message } from "@common/openai";
+import { ChatModel } from "openai/resources";
 
 declare global {
     interface Window {
@@ -9,8 +10,8 @@ declare global {
 }
 
 const preload = {
-    requestCompletion(messages: Message[]) {
-        ipcRenderer.invoke(mainChannel.COMPLETION, messages)
+    requestCompletion(messages: Message[], model: ChatModel) {
+        ipcRenderer.invoke(mainChannel.COMPLETION, messages, model)
     },
 
     onCompletionChunk(callback: (chunk: string) => void) {

@@ -1,4 +1,5 @@
 import { EnumSettingElement } from '@common/setting';
+import { HelpTrigger } from '@components/util';
 import React from 'react';
 
 type Props = {
@@ -6,14 +7,24 @@ type Props = {
     onChange: (value: string) => void
 }
 const EnumSettingInput: React.FC<Props> = ({ element, onChange }) => {
-    return <select
-        value={element.value}
-        onChange={(e) => onChange(e.target.value)}
-    >
-        {element.values.map((option) => {
-            return <option key={option} value={option}>{option}</option>
-        })}
-    </select>
+    const currentOption = element.enum.find((option) =>
+        option.value === element.value);
+
+    return <HelpTrigger message={currentOption?.discription}>
+        <select
+            value={element.value}
+            onChange={(e) => onChange(e.target.value)}
+        >
+            {element.enum.map((option) => (
+                <option
+                    key={option.value}
+                    value={option.value}
+                >
+                    {option.display}
+                </option>
+            ))}
+        </select>
+    </HelpTrigger>
 };
 
 export default EnumSettingInput;

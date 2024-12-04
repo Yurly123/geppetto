@@ -2,16 +2,16 @@ import { ipcMain } from "electron";
 import OpenAI from 'openai';
 import { completion } from "./completion";
 import { mainChannel, rendererChannel } from "./channels";
-import { Message, textToResponse } from "@common/openai";
-import { ChatCompletionChunk } from "openai/resources";
+import { Message } from "@common/openai";
+import { ChatCompletionChunk, ChatModel } from "openai/resources";
 
 export function registerOpenaiIpc() {
     const openai = new OpenAI()
 
-    ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, messages: Message[]) => {
+    ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, messages: Message[], model: ChatModel) => {
         sender.send(rendererChannel.COMPLETION_START)
 
-        const stream = await completion(openai, messages);
+        const stream = await completion(openai, messages, model);
 
         let content = ''
         for await (const chunk of stream) {
