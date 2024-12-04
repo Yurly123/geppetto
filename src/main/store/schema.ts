@@ -5,6 +5,7 @@ import { Schema } from 'electron-store';
 const settingSchema: Schema<SettingStoreData> = {
     'TTS음량': { type: 'number' },
     'TTS토글': { type: 'boolean' },
+    'GPT모델': { type: 'string' },
 }
 
 export { settingSchema }

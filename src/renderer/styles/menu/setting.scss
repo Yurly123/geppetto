@@ -42,6 +42,12 @@
             width: 4rem;
             @include util.box-border(0.2rem, 0.5rem);
         }
+
+        >select {
+            height: 2rem;
+            font: inherit;
+            @include util.box-border(0.2rem, 0.5rem);
+        }
     }
 
     &-saveload {

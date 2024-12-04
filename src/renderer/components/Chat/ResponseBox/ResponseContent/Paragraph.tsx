@@ -10,7 +10,6 @@ const Paragraph: React.FC<Props> = ({ paragraph, index }) => {
     const dispatchChat = useContext(DispatchChatContext);
 
     let speaker: ReactElement;
-    console.log(paragraph.dialogue?.speaker);
     switch (paragraph.dialogue?.speaker) {
         case Character.Geppetto:
             speaker = createElement('span',

@@ -1,7 +1,8 @@
 import React from 'react';
-import { NumberSettingElement, settingValue, BooleanSettingElement, SettingElement } from '@common/setting';
+import { NumberSettingElement, settingValue, BooleanSettingElement, SettingElement, EnumSettingElement } from '@common/setting';
 import NumberSettingInput from './NumberSettingInput';
 import BooleanSettingInput from './BooleanSettingInput';
+import EnumSettingInput from './EnumSettingInput';
 
 type Props = {
     element: SettingElement
@@ -17,6 +18,11 @@ const SettingInput: React.FC<Props> = ({ element, onChange }) => {
         case 'boolean':
             return <BooleanSettingInput
                 element={element as BooleanSettingElement}
+                onChange={onChange}
+            />
+        case 'string':
+            return <EnumSettingInput
+                element={element as EnumSettingElement}
                 onChange={onChange}
             />
     }
