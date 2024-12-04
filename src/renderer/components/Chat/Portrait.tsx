@@ -17,6 +17,7 @@ const Portrait: React.FC<Props> = ({ character, emotion }) => {
             .then((module) => {
                 setPortrait(module.default);
             })
+            .catch(() => {})
     }, [character, emotion])
 
     return (

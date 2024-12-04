@@ -6,7 +6,9 @@ import { insertLorebook } from "./lorebook";
 export function buildPrompt(prevMessages: Message[], inputMessage: Message) {
     let firstSystem = firstSystemMessage
     firstSystem = insertProfile(firstSystem)
-    firstSystem = insertLorebook(firstSystem)
+    firstSystem = insertLorebook(firstSystem,
+        [inputMessage, ...prevMessages.slice(-3*2).reverse()]
+    )
     return [
         createMessage('system', firstSystem),
         ...prevMessages,

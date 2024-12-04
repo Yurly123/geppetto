@@ -1,5 +1,7 @@
 export enum Character {
     Geppetto = 'geppetto', 
+    Gemini = 'gemini',
+    Claude = 'claude',
 }
 
 export enum Emotion {

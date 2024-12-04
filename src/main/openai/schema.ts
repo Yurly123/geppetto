@@ -12,14 +12,14 @@ const dialogue = z.object({
 
 const paragraph = z.object({
     narrative: z.string(),
-    dialogue: dialogue,
     emotion: emotion,
+    dialogue: dialogue,
 });
 
 const response = z.object({
-    paragraphs: z.array(paragraph),
     location: z.string(),
     time: z.string(),
+    paragraphs: z.array(paragraph),
 });
 
 export const responseSchema = zodResponseFormat(response, 'response');
