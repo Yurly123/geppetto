@@ -1,15 +1,16 @@
-import { Message } from '@common/openai';
+import { CompletionRequest } from '@common/openai';
 import OpenAI from 'openai';
 import { buildPrompt } from './prompt';
 import { responseSchema } from './schema';
-import { ChatModel } from 'openai/resources';
 
-export async function completion(openai: OpenAI, messages: Message[], model: ChatModel) {
+export async function completion(openai: OpenAI, request: CompletionRequest) {
     const requestMessages = buildPrompt(
-        messages, messages[messages.length - 1]
+        request.messages, request.messages.at(-1)
     )
+    openai.apiKey = request.apiKey
+
     const stream = await openai.chat.completions.create({
-        model: model,
+        model: request.model,
         messages: requestMessages,
         stream: true,
         max_completion_tokens: 1000,

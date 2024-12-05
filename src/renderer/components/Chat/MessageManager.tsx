@@ -1,5 +1,5 @@
 import { assertAssistantHasToken, createMessage, textToResponse } from '@common/openai';
-import { firstMessage } from '@common/openai/firstMessage';
+import { firstMessage } from '@common/openai';
 import { DispatchChatContext, DispatchMessagesContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
@@ -25,8 +25,11 @@ const MessageManager: React.FC = () => {
         const message = messages.at(-1)
         if (message.role !== 'user') return
 
-        const model = setting['GPT모델'].value;
-        window.openai.requestCompletion(messages, model);
+        window.openai.requestCompletion({
+            messages: messages,
+            model: setting['GPT모델'].value,
+            apiKey: setting['OpenAI API키'].value,
+        });
         dispatchChat({ type: 'initialize' });
         dispatchChat({ type: 'changePartial', partial: { userInput: message } });
     }, [messages]);
