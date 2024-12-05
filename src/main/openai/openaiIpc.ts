@@ -9,6 +9,16 @@ export function registerOpenaiIpc() {
     const openai = new OpenAI()
 
     ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, request: CompletionRequest) => {
+        openai.apiKey = request.apiKey
+        try {
+            console.log(await openai.models.list())
+        } catch (error) {
+            sender.send(rendererChannel.COMPLETION_ERROR,
+                'OpenAI 연결 실패: ' + error)
+            return
+        }
+        console.log('OpenAI 연결 성공')
+
         sender.send(rendererChannel.COMPLETION_START)
 
         const stream = await completion(openai, request);

@@ -7,7 +7,6 @@ export async function completion(openai: OpenAI, request: CompletionRequest) {
     const requestMessages = buildPrompt(
         request.messages, request.messages.at(-1)
     )
-    openai.apiKey = request.apiKey
 
     const stream = await openai.chat.completions.create({
         model: request.model,

@@ -22,6 +22,7 @@ const StreamHandler: React.FC = () => {
         });
         return () => {
             window.openai.removeCompletionChunkListeners();
+            window.openai.removeCompletionStartListeners();
         }
     }, []);
 

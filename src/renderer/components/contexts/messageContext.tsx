@@ -8,7 +8,7 @@ type action = Parameters<typeof messagesReducer>[1]
 function messagesReducer(
     state: Message[], 
     action: { 
-        type: 'add' | 'changeAll', 
+        type: 'add' | 'changeAll' | 'pop', 
         message?: Message,
         messages?: Message[],
     },
@@ -20,6 +20,7 @@ function messagesReducer(
         case 'changeAll': if (!action.messages) return state;
             action.messages.forEach(assertAssistantHasToken);
             return action.messages
+        case 'pop': return state.slice(0, -1)
         default: return state
     }
 }

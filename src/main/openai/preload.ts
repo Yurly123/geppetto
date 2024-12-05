@@ -32,6 +32,13 @@ const preload = {
         ipcRenderer.on(channel, callback)
     },
 
+    onCompletionError(callback: (error: string) => void) {
+        const channel = rendererChannel.COMPLETION_ERROR
+        ipcRenderer.on(channel, (_, error: string) => {
+            callback(error)
+        });
+    },
+
     removeCompletionChunkListeners() {
         ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_CHUNK)
     },
@@ -40,6 +47,9 @@ const preload = {
     },
     removeCompletionStartListeners() {
         ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_START)
+    },
+    removeCompletionErrorListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.COMPLETION_ERROR)
     },
 }
 

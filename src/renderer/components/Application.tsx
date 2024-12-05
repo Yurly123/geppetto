@@ -5,6 +5,7 @@ import Chat from './Chat';
 import Menu from './Menu';
 import HelpMessageBox from './HelpMessageBox';
 import InitialLoader from './InitialLoader';
+import ErrorHandler from './ErrorHandler';
 
 const Application: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const Application: React.FC = () => {
                 <HelpMessageBox />
             </div>
             <InitialLoader />
+            <ErrorHandler />
         </ContextsProvider>
     );
 };
