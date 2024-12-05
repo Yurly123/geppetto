@@ -6,6 +6,7 @@ const settingSchema: Schema<SettingStoreData> = {
     'TTS음량': { type: 'number' },
     'TTS토글': { type: 'boolean' },
     'GPT모델': { type: 'string' },
+    '보기 테마': { type: 'string' },
 }
 
 export { settingSchema }
