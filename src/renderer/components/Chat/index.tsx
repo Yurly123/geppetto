@@ -14,7 +14,7 @@ const Chat: React.FC<Props> = () => {
     const paragraph = chat?.response?.paragraphs[chat?.paragraphIndex];
 
     return (
-        <div className='chat side-view'>
+        <div className='chat pop-up'>
             <Portrait
                 character={paragraph.dialogue?.speaker}
                 emotion={paragraph.emotion}

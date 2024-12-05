@@ -1,99 +1,70 @@
 @use '../util';
 
-.chat.pop-up {
-    .response-box {
-        position: absolute;
-        top: 8rem;
-        width: 90%;
-        padding: 1rem;
+.response-box {
+    padding: 1rem;
+    background-color: var(--app-bgcolor);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    color: white;
+
+    .response-content {
+        margin-bottom: 2rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--app-bgcolor);
-        color: aqua;
-        opacity: 50%;
-        max-height: calc(100% - 12rem);
-        overflow-y: scroll;
-        @include util.box-border;
 
-        .chat-bar {
-            bottom: 1rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .response-element {
+            border: 0.1rem solid var(--app-border-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
 
-            input {
-                width: 90%;
-                padding: 1rem;
-                font-size: 2rem;
+            p {
+                margin: 0;
 
-                &:disabled {
-                    background-color: gray;
+                span.dialogue {
+                    color: var(--quote-font-color);
                 }
             }
-
         }
     }
 
+    .chat-bar {
+        position: sticky;
+        bottom: 0;
+        height: 5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
 
+        input {
+            width: 90%;
+            padding: 1rem;
+            font-size: 2rem;
+            @include util.box-border(0.4rem, 0.8rem);
+
+            &:disabled {
+                background-color: gray;
+            }
+        }
+
+    }
 }
 
-.chat.side-view {
-    .response-box {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: calc(70% - 2rem);
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: var(--app-bgcolor);
-        color: white;
-        overflow-y: scroll;
-        border-left: 0.5rem solid var(--app-border-color);
+.chat.pop-up .response-box {
+    position: absolute;
+    top: 8rem;
+    width: calc(90% - 2rem);
+    opacity: 75%;
+    max-height: calc(100% - 12rem);
+    @include util.box-border;
+}
 
-        .response-content {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-
-            .response-element {
-                border: 0.1rem solid var(--app-border-color);
-                padding: 1rem;
-                margin-bottom: 1rem;
-
-                p {
-                    margin: 0;
-
-                    span.dialogue {
-                        color: var(--quote-font-color);
-                    }
-                }
-            }
-        }
-
-        .chat-bar {
-            position: sticky;
-            bottom: 2rem;
-            height: 5rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-
-            input {
-                width: 90%;
-                padding: 1rem;
-                font-size: 2rem;
-                @include util.box-border(0.4rem, 0.8rem);
-
-                &:disabled {
-                    background-color: gray;
-                }
-            }
-
-        }
-    }
+.chat.side-view .response-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 2rem);
+    width: calc(70% - 2rem);
+    border-left: 0.5rem solid var(--app-border-color);
 }

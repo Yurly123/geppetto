@@ -1,32 +1,47 @@
-.chat.pop-up {
-    .portrait {
-        position: absolute;
-        top: 0;
-        height: calc(100% - 2rem);
+.chat.pop-up .portrait {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: calc(100% - 2rem);
+    display: flex;
+    justify-content: center;
+    align-items: start;
 
+    @media (orientation: portrait) {
         img {
-            height: 300%;
+            min-height: 200%;
+            max-width: 200%;
+            width: 200%;
+            object-fit: cover;
+            object-position: top;
+        }
+    }
+
+    @media (orientation: landscape) {
+        img {
+            max-width: 75%;
+            width: 200%;
+            object-fit: cover;
+            object-position: top;
         }
     }
 }
 
-.chat.side-view {
-    .portrait {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 30%;
-        height: calc(100% - 5rem);
-        display: flex;
-        justify-content: center;
-        align-items: start;
+.chat.side-view .portrait {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    height: calc(100% - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: start;
 
-        img {
-            min-height: 100%;
-            max-width: 150%;
-            width: 300%;
-            object-fit: cover;
-            object-position: bottom;
-        }
+    img {
+        min-height: 100%;
+        max-width: 150%;
+        width: 300%;
+        object-fit: cover;
+        object-position: bottom;
     }
 }
