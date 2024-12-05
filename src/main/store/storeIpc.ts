@@ -1,10 +1,11 @@
-import { app, ipcMain, shell } from "electron"
+import { app, ipcMain, safeStorage, shell } from "electron"
 import { mainChannel } from "./channels"
 import { initialSetting, Setting, SettingStoreData } from "@common/setting"
 import { messageSchema, settingSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
 import { existsSync } from 'fs';
+import { safeLoad, safeSave } from "./safeStore";
 
 export function registerStoreIpc() {
     const settingStore = new Store<SettingStoreData>({
@@ -18,13 +19,17 @@ export function registerStoreIpc() {
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
         Object.entries(setting).forEach(([name, element]) => {
-            settingStore.set(name, element.value)
+            if (name === 'OpenAI API키')
+                safeSave('openai.key', element.value as string)
+            else settingStore.set(name, element.value)
         })
     })
     ipcMain.handle(mainChannel.LOAD_SETTING, (_) => {
         const setting: Setting = { ...initialSetting }
         Object.entries(setting).forEach(([name, element]) => {
-            element.value = settingStore.get(name) ?? element.default
+            if (name === 'OpenAI API키')
+                element.value = safeLoad('openai.key') ?? element.default
+            else element.value = settingStore.get(name) ?? element.default
         })
         return setting
     })

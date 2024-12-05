@@ -21,10 +21,11 @@ const SettingInput: React.FC<Props> = ({ element, onChange }) => {
                 onChange={onChange}
             />
         case 'string':
-            return <EnumSettingInput
-                element={element as EnumSettingElement}
-                onChange={onChange}
-            />
+            if ('enum' in element)
+                return <EnumSettingInput
+                    element={element as EnumSettingElement}
+                    onChange={onChange}
+                />
     }
 }
 

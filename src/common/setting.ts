@@ -26,7 +26,14 @@ export interface EnumSettingElement<T extends string = string>
     }[];
 };
 
-export type SettingElement = BooleanSettingElement | NumberSettingElement | EnumSettingElement;
+export interface StringSettingElement
+    extends ISettingElement<string> { };
+
+export type SettingElement =
+    BooleanSettingElement |
+    NumberSettingElement |
+    EnumSettingElement |
+    StringSettingElement;
 
 export interface ISetting {
     [name: string]: SettingElement
@@ -37,6 +44,7 @@ export interface Setting extends ISetting {
     'TTS토글': BooleanSettingElement;
     'GPT모델': EnumSettingElement<ChatModel>;
     '보기 테마': EnumSettingElement<'side-view' | 'pop-up'>;
+    'OpenAI API키': StringSettingElement;
 }
 
 export const initialSetting: Setting = {
@@ -69,6 +77,10 @@ export const initialSetting: Setting = {
             discription: '초상화를 배경으로 채팅창을 팝업 형태로 띄웁니다.',
             value: 'pop-up', display: '팝업'
         }]
+    },
+    'OpenAI API키': {
+        description: 'OpenAI API를 사용하기 위한 API키를 입력해 주세요. API키는 OpenAI 웹사이트에서 발급받을 수 있습니다. 본 프로그램은 API키를 저장 폴더 이외의 곳에 저장하거나 제3자에게 전송하지 않습니다.',
+        value: 'sk-...', default: 'sk-...',
     }
 }
 
