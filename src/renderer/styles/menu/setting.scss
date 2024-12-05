@@ -48,6 +48,12 @@
             font: inherit;
             @include util.box-border(0.2rem, 0.5rem);
         }
+
+        >input[type="text"] {
+            height: 2rem;
+            max-width: 5rem;
+            @include util.box-border(0.2rem, 0.5rem);
+        }
     }
 
     &-saveload {
