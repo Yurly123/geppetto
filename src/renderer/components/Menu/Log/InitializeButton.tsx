@@ -23,6 +23,7 @@ const InitializeButton: React.FC = () => {
             초기화
         </h3>
         <Modal
+            type='confirm'
             ref={modalRef}
             onClose={(result) => {
                 result && initializeLog();

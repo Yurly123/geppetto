@@ -20,7 +20,7 @@ const ErrorHandler: React.FC = () => {
         }
     }, [messages])
 
-    return <Modal ref={modalRef}>
+    return <Modal type='alert' ref={modalRef}>
         <span color='red'>{error}</span>
     </Modal>
 }
