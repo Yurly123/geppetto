@@ -47,8 +47,6 @@ $bar-height: util.$titlebar-height;
                 h1 {
                     font-size: 1.5rem;
                 }
-
-                span {}
             }
 
             p {
@@ -58,7 +56,6 @@ $bar-height: util.$titlebar-height;
                 padding-right: 1rem;
                 padding-top: 0.2rem;
                 padding-bottom: 0.2rem;
-                margin: 0;
                 border: 0.2rem solid var(--app-border-color);
                 border-left: 0;
                 border-right: 0;

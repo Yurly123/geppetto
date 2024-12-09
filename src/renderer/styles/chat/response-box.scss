@@ -21,12 +21,8 @@
             border: 0.1rem solid var(--app-border-color);
             padding: 1rem;
 
-            p {
-                margin: 0;
-
-                span.dialogue {
-                    color: var(--quote-font-color);
-                }
+            span.dialogue {
+                color: var(--quote-font-color);
             }
         }
     }
