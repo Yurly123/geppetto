@@ -125,7 +125,7 @@ const responses: Response[] = [
                 }
             },
             {
-                narrative: '{{user}}은/는 그런 제페토를 조를 부담스럽게 느끼면서도 미소를 지어보였다. 그녀는 {{user}}에게 태피스트리를 다시 건네받는다.',
+                narrative: '{{user}}은/는 그런 제페토를 조금 부담스럽게 느끼면서도 미소를 지어보였다. 그녀는 {{user}}에게 태피스트리를 다시 건네받는다.',
                 emotion: Emotion.Flustered,
                 dialogue: {
                     speaker: Character.Geppetto,

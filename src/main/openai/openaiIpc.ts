@@ -6,10 +6,10 @@ import { CompletionRequest } from "@common/openai";
 import { ChatCompletionChunk } from "openai/resources";
 
 export function registerOpenaiIpc() {
-    const openai = new OpenAI()
-
     ipcMain.handle(mainChannel.COMPLETION, async ({ sender }, request: CompletionRequest) => {
-        openai.apiKey = request.apiKey
+        const openai = new OpenAI({
+            apiKey: request.apiKey
+        })
         try {
             await openai.models.list()
         } catch (error) {

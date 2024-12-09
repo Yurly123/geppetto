@@ -2,7 +2,6 @@ import { app, BrowserWindow, Menu, MenuItem } from 'electron';
 import path from 'path';
 import { registerTitlebarIpc } from '@main/window/titlebarIpc';
 import { registerOpenaiIpc } from './openai/openaiIpc';
-import { registerAzureIpc } from './azure/azureIpc';
 import { registerStoreIpc } from './store/storeIpc';
 
 // Electron Forge automatically creates these entry points
@@ -66,7 +65,6 @@ function registerMainIPC() {
    */
   registerTitlebarIpc(appWindow);
   registerOpenaiIpc();
-  registerAzureIpc();
   registerStoreIpc();
 }
 
