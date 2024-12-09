@@ -3,6 +3,7 @@ import ChatBar from './ChatBar';
 import ResponseContent from './ResponseContent';
 import { Response, responseToText, UserMessage } from '@common/openai';
 import { MessagesContext } from '@components/contexts';
+import RerollButton from './RerollButton';
 
 type Props = {
     userInput: UserMessage;
@@ -10,16 +11,17 @@ type Props = {
 }
 const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
     const messages = useContext(MessagesContext)
-    let enable = false
+    let isCurrentChat = false
     try {
-        enable = messages.at(-1)?.content
+        isCurrentChat = messages.at(-1)?.content
             === responseToText(response)
     } catch { }
 
     return (
         <div className='response-box'>
             <ResponseContent userInput={userInput} response={response} />
-            <ChatBar enable={enable}/>
+            <ChatBar enable={isCurrentChat}/>
+            <RerollButton enable={isCurrentChat} />
         </div>
     );
 }

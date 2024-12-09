@@ -9,8 +9,11 @@
     overflow-y: scroll;
     color: white;
 
+    >* {
+        margin-bottom: 1rem;
+    }
+
     .response-content {
-        margin-bottom: 2rem;
         display: flex;
         flex-direction: column;
 
@@ -46,7 +49,15 @@
                 background-color: gray;
             }
         }
+    }
 
+    .reroll {
+        height: 5rem;
+        width: fit-content;
+        color: aqua;
+        padding: 1rem;
+        cursor: pointer;
+        border: 0.1rem solid var(--app-border-color);
     }
 }
 
