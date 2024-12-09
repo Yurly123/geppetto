@@ -2,7 +2,7 @@ import { DispatchMessagesContext } from "@components/contexts";
 import { HelpTrigger } from "@components/util";
 import React, { useContext } from "react";
 
-const RerollButton: React.FC = () => {
+const Reroll: React.FC = () => {
     const dispatchMessages = useContext(DispatchMessagesContext)
 
     function handleClick() {
@@ -20,4 +20,4 @@ const RerollButton: React.FC = () => {
     );
 }
 
-export default RerollButton;
+export default Reroll;

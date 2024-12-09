@@ -1,15 +1,18 @@
 import React from 'react';
-import RerollButton from './RerollButton';
+import Reroll from './Reroll';
+import InputChange from './InputChange';
+import DeleteMessage from './DeleteMessage';
 
 type Props = {
     isCurrentChat?: boolean;
 }
-const Controllers: React.FC<Props> = ({isCurrentChat}) => {
+const Controllers: React.FC<Props> = ({ isCurrentChat }) => {
     return (
         <div className='controllers'>
-            {isCurrentChat &&
-                <RerollButton />}
-            <div>asdf</div>
+            {isCurrentChat ?
+                <Reroll /> :
+                <DeleteMessage />}
+            <InputChange />
         </div>
     );
 }

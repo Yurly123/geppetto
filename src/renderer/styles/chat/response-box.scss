@@ -61,11 +61,21 @@
             width: fit-content;
             padding: 1rem;
             cursor: pointer;
-            border: 0.1rem solid var(--app-border-color);
+            border: 0.25rem solid var(--app-border-color);
+
+            &:hover {
+                background-color: var(--app-accent-color);
+            }
         }
 
         .reroll {
             color: aqua;
+        }
+        .input-change {
+            color: lime;
+        }
+        .delete-message {
+            color: red;
         }
     }
 }
