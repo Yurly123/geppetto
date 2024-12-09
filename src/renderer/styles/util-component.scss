@@ -14,6 +14,8 @@
         @include util.box-border;
         background-color: white;
         padding: 0.5rem;
+        width: max-content;
+        max-width: 90%;
 
         .modal-content {
             padding: 0.5rem;
@@ -21,17 +23,19 @@
 
         .modal-footer {
             display: flex;
+            flex-direction: row;
             justify-content: space-around;
 
             .modal-button {
                 @include util.box-border(0.4rem, 0.8rem);
                 @include util.button-background;
-                padding: 0.2rem;
+                padding: 0.3rem;
             }
 
             .modal-input {
                 @include util.box-border(0.4rem, 0.8rem);
-                padding: 0.2rem;
+                padding: 0.3rem;
+                font-size: 2rem;
             }
         }
     }
