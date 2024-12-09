@@ -60,6 +60,7 @@ const MessageManager: React.FC = () => {
         dispatchChat({
             type: 'changePartial', partial: {
                 response: textToResponse(firstMessage.content),
+                paragraphIndex: 0
             }
         });
     }, [messages]);

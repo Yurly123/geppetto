@@ -28,13 +28,13 @@ export function responseToText(response: Response): string {
 }
 
 export function assertResponse(response: Response): asserts response is Response {
-    if (!response.paragraphs || !response.location || !response.time ||
+    if (response.paragraphs === undefined || response.location === undefined || response.time === undefined ||
         !Array.isArray(response.paragraphs) || typeof response.location !== 'string' || typeof response.time !== 'string')
         throw new Error('Invalid response format');
     for (const paragraph of response.paragraphs) {
-        if (!paragraph.narrative || !paragraph.dialogue || !paragraph.emotion ||
+        if (paragraph.narrative === undefined || paragraph.dialogue === undefined || paragraph.emotion === undefined ||
             typeof paragraph.narrative !== 'string' || typeof paragraph.emotion !== 'string' ||
-            !paragraph.dialogue.speaker || !paragraph.dialogue.content ||
+            paragraph.dialogue.speaker === undefined || paragraph.dialogue.content === undefined ||
             typeof paragraph.dialogue.speaker !== 'string' || typeof paragraph.dialogue.content !== 'string')
             throw new Error('Invalid response format');
     }

@@ -55,10 +55,23 @@ const responses: Response[] = [
                 }
             }
         ]
+    },
+    {
+        location: '', time: '',
+        paragraphs: [
+            {
+                emotion: Emotion.Neutral,
+                narrative: '',
+                dialogue: {
+                    speaker: Character.Geppetto,
+                    content: ''
+                }
+            }
+        ]
     }
 ]
 
-export const firstMessages: AssistantMessage[] = 
+export const firstMessages: AssistantMessage[] =
     responses.map(response => ({
         role: 'assistant',
         content: responseToText(response),

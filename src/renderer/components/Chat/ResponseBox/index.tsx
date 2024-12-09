@@ -21,7 +21,10 @@ const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
         <div className='response-box'>
             <ResponseContent userInput={userInput} response={response} />
             <ChatBar enable={isCurrentChat}/>
-            <Controllers isCurrentChat={isCurrentChat} />
+            <Controllers
+                isCurrentChat={isCurrentChat}
+                isFirstMessage={messages.length === 1}
+            />
         </div>
     );
 }
