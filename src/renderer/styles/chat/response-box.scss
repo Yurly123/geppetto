@@ -51,13 +51,22 @@
         }
     }
 
-    .reroll {
+    .controllers {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
         height: 5rem;
-        width: fit-content;
-        color: aqua;
-        padding: 1rem;
-        cursor: pointer;
-        border: 0.1rem solid var(--app-border-color);
+
+        >* {
+            width: fit-content;
+            padding: 1rem;
+            cursor: pointer;
+            border: 0.1rem solid var(--app-border-color);
+        }
+
+        .reroll {
+            color: aqua;
+        }
     }
 }
 

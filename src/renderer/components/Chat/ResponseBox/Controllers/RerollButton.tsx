@@ -2,16 +2,13 @@ import { DispatchMessagesContext } from "@components/contexts";
 import { HelpTrigger } from "@components/util";
 import React, { useContext } from "react";
 
-type Props = {
-    enable?: boolean;
-}
-const RerollButton: React.FC<Props> = ({ enable }) => {
+const RerollButton: React.FC = () => {
     const dispatchMessages = useContext(DispatchMessagesContext)
 
     function handleClick() {
-        dispatchMessages({ type: 'pop'});
+        dispatchMessages({ type: 'pop' });
     }
-    return (enable &&
+    return (
         <div
             className='reroll'
             onClick={handleClick}
