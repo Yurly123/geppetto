@@ -1,11 +1,11 @@
-import { assertAssistantHasToken, createMessage, textToResponse } from '@common/openai';
-import { firstMessage } from '@common/openai';
-import { DispatchChatContext, DispatchMessagesContext, MessagesContext, SettingContext } from '@components/contexts';
+import { assertAssistantHasToken, createMessage, firstMessages, textToResponse } from '@common/openai';
+import { DispatchChatContext, DispatchMessagesContext, FirstMessageIndexContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
 const MessageManager: React.FC = () => {
     const setting = useContext(SettingContext);
     const messages = useContext(MessagesContext)
+    const firstMessageIndex = useContext(FirstMessageIndexContext);
     const dispatchMessages = useContext(DispatchMessagesContext);
     const dispatchChat = useContext(DispatchChatContext);
 
@@ -55,6 +55,7 @@ const MessageManager: React.FC = () => {
 
     useEffect(() => {
         if (messages.length !== 0) return;
+        const firstMessage = firstMessages[firstMessageIndex];
         dispatchMessages({ type: 'add', message: firstMessage })
         dispatchChat({
             type: 'changePartial', partial: {
