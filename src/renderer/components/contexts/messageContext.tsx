@@ -8,9 +8,10 @@ type action = Parameters<typeof messagesReducer>[1]
 function messagesReducer(
     state: Message[], 
     action: { 
-        type: 'add' | 'changeAll' | 'pop', 
+        type: 'add' | 'changeAll' | 'pop' | 'changeIndex', 
         message?: Message,
         messages?: Message[],
+        index?: number,
     },
 ): Message[] {
     switch (action.type) {
@@ -21,6 +22,14 @@ function messagesReducer(
             action.messages.forEach(assertAssistantHasToken);
             return action.messages
         case 'pop': return state.slice(0, -1)
+        case 'changeIndex': if (action.index === undefined || !action.message) return state;
+            if (action.message.role !== state.at(action.index).role)
+                 return state;
+            return [
+                ...state.slice(0, action.index),
+                action.message,
+                ...state.slice(action.index + 1),
+            ]
         default: return state
     }
 }
