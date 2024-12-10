@@ -22,21 +22,6 @@ export const initialSetting: Setting = {
         description: 'OpenAI API를 사용하기 위한 API키를 입력해 주세요. API키는 OpenAI 웹사이트에서 발급받을 수 있습니다. 본 프로그램은 API키를 저장 폴더 이외의 곳에 저장하거나 제3자에게 전송하지 않습니다.',
         value: 'sk-...', default: 'sk-...',
     },
-    '보기 테마': {
-        description: '채팅창의 보기 테마를 선택합니다. 현재 디스플레이에 적합하게 조절해주세요.',
-        value: 'side-view', default: 'side-view',
-        enum: [ {
-            discription: '채팅창과 초상화를 옆쪽으로 배치합니다. 세로 화면에 적합하지 않습니다.',
-            value: 'side-view', display: '사이드 뷰'
-        }, {
-            discription: '초상화를 배경으로 채팅창을 팝업 형태로 띄웁니다.',
-            value: 'pop-up', display: '팝업'
-        }]
-    },
-    '제미니 모드': {
-        description: '제미니 모드를 활성화합니다. 제미니 모드는 GPT 모델 대신에 Gemini 모델을 사용합니다. Gemini 모델은 Google에서 무료 할당량을 받을 수 있습니다. 제미니 모드는 Google AI Studio의 API Key가 필요합니다.',
-        value: false, default: false,
-    },
     'Gemini모델': {
         description: '제미니 모드에서 사용할 Gemini 모델을 선택합니다. 제미니 모드가 활성화되어 있을 때만 적용됩니다.',
         value: 'gemini-exp-1206', default: 'gemini-exp-1206',
@@ -60,5 +45,20 @@ export const initialSetting: Setting = {
     'Gemini API키': {
         description: 'Google AI Studio의 API를 사용하기 위한 API키를 입력해 주세요. API키는 Google AI Studio 웹사이트에서 발급받을 수 있습니다. 본 프로그램은 API키를 저장 폴더 이외의 곳에 저장하거나 제3자에게 전송하지 않습니다.',
         value: 'AIza...', default: 'AIza...',
+    },
+    '보기 테마': {
+        description: '채팅창의 보기 테마를 선택합니다. 현재 디스플레이에 적합하게 조절해주세요.',
+        value: 'side-view', default: 'side-view',
+        enum: [ {
+            discription: '채팅창과 초상화를 옆쪽으로 배치합니다. 세로 화면에 적합하지 않습니다.',
+            value: 'side-view', display: '사이드 뷰'
+        }, {
+            discription: '초상화를 배경으로 채팅창을 팝업 형태로 띄웁니다.',
+            value: 'pop-up', display: '팝업'
+        }]
+    },
+    '제미니 모드': {
+        description: '제미니 모드를 활성화합니다. 제미니 모드는 GPT 모델 대신에 Gemini 모델을 사용합니다. Gemini 모델은 Google에서 무료 할당량을 받을 수 있습니다. 제미니 모드는 Google AI Studio의 API Key가 필요합니다.',
+        value: false, default: false,
     },
 }
