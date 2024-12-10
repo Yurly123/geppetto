@@ -19,17 +19,32 @@ export function registerStoreIpc() {
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
         Object.entries(setting).forEach(([name, element]) => {
-            if (name === 'OpenAI API키')
-                safeSave('openai.key', element.value as string)
-            else settingStore.set(name, element.value)
+            switch (name) {
+                case 'OpenAI API키':
+                    safeSave('openai.key', element.value as string)
+                    break
+                case 'Gemini API키':
+                    safeSave('gemini.key', element.value as string)
+                    break
+                default:
+                    settingStore.set(name, element.value)
+            }
         })
     })
     ipcMain.handle(mainChannel.LOAD_SETTING, (_) => {
         const setting: Setting = { ...initialSetting }
         Object.entries(setting).forEach(([name, element]) => {
-            if (name === 'OpenAI API키')
-                element.value = safeLoad('openai.key') ?? element.default
-            else element.value = settingStore.get(name) ?? element.default
+            switch (name) {
+                case 'OpenAI API키':
+                    element.value = safeLoad('openai.key')
+                    break
+                case 'Gemini API키':
+                    element.value = safeLoad('gemini.key')
+                    break
+                default:
+                    element.value = settingStore.get(name)
+            }
+            element.value ??= element.default
         })
         return setting
     })

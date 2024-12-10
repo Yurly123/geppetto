@@ -3,10 +3,10 @@ import { SettingStoreData } from '@common/setting';
 import { Schema } from 'electron-store';
 
 const settingSchema: Schema<SettingStoreData> = {
-    'TTS음량': { type: 'number' },
-    'TTS토글': { type: 'boolean' },
     'GPT모델': { type: 'string' },
     '보기 테마': { type: 'string' },
+    '제미니 모드': { type: 'boolean' },
+    'Gemini모델': { type: 'string' },
 }
 
 export { settingSchema }
