@@ -10,6 +10,7 @@ const ErrorHandler: React.FC = () => {
 
     useEffect(() => {
         window.openai.onCompletionError((error) => {
+            console.error(error);
             setError(error);
             modalRef.current?.open();
             if (messages.at(-1)?.role === 'user')
