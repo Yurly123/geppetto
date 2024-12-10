@@ -1,53 +1,4 @@
-import { ChatModel } from "openai/resources";
-import { GeminiModel } from "./google";
-
-export type settingValue = number | boolean | string;
-
-export interface ISettingElement<T extends settingValue> {
-    value: T;
-    readonly default: T;
-    readonly description: string;
-}
-
-export interface BooleanSettingElement
-    extends ISettingElement<boolean> { };
-
-export interface NumberSettingElement
-    extends ISettingElement<number> {
-    readonly min?: number;
-    readonly max?: number;
-};
-
-export interface EnumSettingElement<T extends string = string>
-    extends ISettingElement<T> {
-    readonly enum: {
-        discription: string;
-        value: T;
-        display: string;
-    }[];
-};
-
-export interface StringSettingElement
-    extends ISettingElement<string> { };
-
-export type SettingElement =
-    BooleanSettingElement |
-    NumberSettingElement |
-    EnumSettingElement |
-    StringSettingElement;
-
-export interface ISetting {
-    [name: string]: SettingElement
-}
-
-export interface Setting extends ISetting {
-    'GPT모델': EnumSettingElement<ChatModel>;
-    'OpenAI API키': StringSettingElement;
-    '보기 테마': EnumSettingElement<'side-view' | 'pop-up'>;
-    '제미니 모드': BooleanSettingElement;
-    'Gemini모델': EnumSettingElement<GeminiModel>;
-    'Gemini API키': StringSettingElement;
-}
+import { Setting } from "./setting";
 
 export const initialSetting: Setting = {
     'GPT모델': {
@@ -110,15 +61,4 @@ export const initialSetting: Setting = {
         description: 'Google AI Studio의 API를 사용하기 위한 API키를 입력해 주세요. API키는 Google AI Studio 웹사이트에서 발급받을 수 있습니다. 본 프로그램은 API키를 저장 폴더 이외의 곳에 저장하거나 제3자에게 전송하지 않습니다.',
         value: 'AIza...', default: 'AIza...',
     },
-}
-
-export interface ISettingStoreData {
-    [name: keyof Setting]: settingValue;
-}
-
-export interface SettingStoreData extends ISettingStoreData {
-    'GPT모델': string;
-    '보기 테마': string;
-    '제미니 모드': boolean;
-    'Gemini모델': string;
 }

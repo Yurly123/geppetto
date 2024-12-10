@@ -1,7 +1,7 @@
-import { app, ipcMain, safeStorage, shell } from "electron"
+import { app, ipcMain, shell } from "electron"
 import { mainChannel } from "./channels"
-import { initialSetting, Setting, SettingStoreData } from "@common/setting"
-import { messageSchema, settingSchema } from './schema';
+import { initialSetting, Setting, settingSchema, SettingStoreData } from "@common/setting"
+import { messageSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
 import { existsSync } from 'fs';
