@@ -73,6 +73,7 @@
     "zod": "^3.23.8"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.38.0",

@@ -25,10 +25,11 @@ const MessageManager: React.FC = () => {
         const message = messages.at(-1)
         if (message.role !== 'user') return
 
+        const geminiMode = setting['제미니 모드'].value;
+        const model = geminiMode ? setting['Gemini모델'].value : setting['GPT모델'].value;
+        const apiKey = geminiMode ? setting['Gemini API키'].value : setting['OpenAI API키'].value;
         window.openai.requestCompletion({
-            messages: messages,
-            model: setting['GPT모델'].value,
-            apiKey: setting['OpenAI API키'].value,
+            messages, model, apiKey, geminiMode
         });
         dispatchChat({ type: 'initialize' });
         dispatchChat({ type: 'changePartial', partial: { userInput: message } });
