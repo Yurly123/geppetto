@@ -45,12 +45,16 @@ export async function handleCompletion(sender: WebContents, request: CompletionR
 
     let content = ''
     for await (const chunk of result.stream) {
-        const text = chunk.text()
-        console.log(text)
-        content += text
         if (chunk.candidates[0].finishReason) {
-            console.log(chunk.usageMetadata)
-            console.log(JSON.parse(content))
+            content += chunk.text()
+            sender.send(rendererChannel.COMPLETION_END,
+                content, chunk.usageMetadata.candidatesTokenCount
+            );
+        }
+        else {
+            const data = chunk.text()
+            content += data
+            sender.send(rendererChannel.COMPLETION_CHUNK, data);
         }
     }
 }
