@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import '@styles/chat/index.scss';
-import MessageManager from './MessageManager';
 import ResponseBox from './ResponseBox';
 import Portrait from './Portrait';
 import { ChatContext, SettingContext } from '@components/contexts';
@@ -24,7 +23,6 @@ const Chat: React.FC<Props> = () => {
                 userInput={chat?.userInput}
                 response={chat?.response}
             />
-            <MessageManager />
             <StreamHandler />
         </div>
     );

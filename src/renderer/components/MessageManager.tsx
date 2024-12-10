@@ -1,4 +1,4 @@
-import { assertAssistantHasToken, createMessage, firstMessages, textToResponse } from '@common/openai';
+import { assertAssistantHasToken, AssistantMessage, createMessage, firstMessages, textToResponse } from '@common/openai';
 import { DispatchChatContext, DispatchMessagesContext, FirstMessageIndexContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
@@ -18,6 +18,17 @@ const MessageManager: React.FC = () => {
         });
         return () => window.openai.removeCompletionEndListeners();
     }, []);
+
+    useEffect(() => {
+        if (messages.length !== 1) return;
+        const firstMessage = messages.at(0) as AssistantMessage;
+        dispatchChat({
+            type: 'changePartial', partial: {
+                response: textToResponse(firstMessage.content),
+                paragraphIndex: 0
+            }
+        });
+    }, [messages]);
 
     useEffect(() => {
         if (messages.length === 0) return;

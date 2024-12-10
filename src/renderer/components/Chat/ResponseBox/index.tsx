@@ -12,18 +12,22 @@ type Props = {
 const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
     const messages = useContext(MessagesContext)
     let isCurrentChat = false
+    let viewingFirstMessage = false
     try {
         const latestResponse = textToResponse(messages.at(-1)?.content)
         isCurrentChat = responseToText(response) === responseToText(latestResponse)
+        const firstMessageResponse = textToResponse(messages[0]?.content)
+        viewingFirstMessage = responseToText(response) === responseToText(firstMessageResponse)
     } catch { }
 
     return (
         <div className='response-box'>
             <ResponseContent userInput={userInput} response={response} />
-            <ChatBar enable={isCurrentChat}/>
+            <ChatBar enable={isCurrentChat} />
             <Controllers
                 isCurrentChat={isCurrentChat}
                 isFirstMessage={messages.length === 1}
+                viewingFirstMessage={viewingFirstMessage}
             />
         </div>
     );
