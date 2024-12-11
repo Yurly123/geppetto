@@ -24,6 +24,13 @@ const preload = {
         return ipcRenderer.invoke(mainChannel.LOAD_MESSAGES)
     },
 
+    saveSession(name: string, messages: Message[]) {
+        ipcRenderer.invoke(mainChannel.SAVE_SESSION, name, messages)
+    },
+    loadSession(name: string) {
+        return ipcRenderer.invoke(mainChannel.LOAD_SESSION, name)
+    },
+
     openStorageFolder() {
         ipcRenderer.invoke(mainChannel.OPEN_STORAGE_FOLDER)
     },
@@ -33,6 +40,9 @@ const preload = {
     },
     checkMessagesFile() {
         return ipcRenderer.invoke(mainChannel.CHECK_MESSAGES_FILE)
+    },
+    getAllSessions() {
+        return ipcRenderer.invoke(mainChannel.GET_ALL_SESSIONS)
     }
 }
 

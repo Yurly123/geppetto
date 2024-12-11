@@ -4,8 +4,9 @@ import { initialSetting, Setting, settingSchema, SettingStoreData } from "@commo
 import { messageSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync } from 'fs';
 import { safeLoad, safeSave } from "./safeStore";
+import { join } from "path";
 
 export function registerStoreIpc() {
     const settingStore = new Store<SettingStoreData>({
@@ -16,6 +17,15 @@ export function registerStoreIpc() {
         name: 'messages',
         schema: messageSchema,
     })
+    const sessionStore = (name: string) => {
+        const sessionPath = join(app.getPath('userData'), 'sessions')
+        if (!existsSync(sessionPath)) 
+            mkdirSync(sessionPath)
+        return new Store({
+            name: join('sessions', name),
+            schema: messageSchema,
+        })
+    }
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
         Object.entries(setting).forEach(([name, element]) => {
@@ -53,7 +63,14 @@ export function registerStoreIpc() {
         messageStore.set({ messages })
     })
     ipcMain.handle(mainChannel.LOAD_MESSAGES, (_) => {
-        return messageStore.store.messages 
+        return messageStore.store.messages
+    })
+
+    ipcMain.handle(mainChannel.SAVE_SESSION, (_, name: string, messages: Message[]) => {
+        sessionStore(name).set({ messages })
+    })
+    ipcMain.handle(mainChannel.LOAD_SESSION, (_, name: string) => {
+        return sessionStore(name).store.messages
     })
 
     ipcMain.handle(mainChannel.OPEN_STORAGE_FOLDER, () => {
@@ -65,5 +82,11 @@ export function registerStoreIpc() {
     })
     ipcMain.handle(mainChannel.CHECK_MESSAGES_FILE, () => {
         return existsSync(messageStore.path)
+    })
+    ipcMain.handle(mainChannel.GET_ALL_SESSIONS, () => {
+        const sessionPath = join(app.getPath('userData'), 'sessions')
+        if (!existsSync(sessionPath)) 
+            mkdirSync(sessionPath)
+        return readdirSync(sessionPath)
     })
 }
