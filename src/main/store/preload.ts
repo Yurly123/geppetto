@@ -30,6 +30,16 @@ const preload = {
     loadSession(name: string): Promise<Message[]> {
         return ipcRenderer.invoke(mainChannel.LOAD_SESSION, name)
     },
+    deleteSession(name: string) {
+        ipcRenderer.invoke(mainChannel.DELETE_SESSION, name)
+    },
+
+    setCurrentSession(name: string) {
+        ipcRenderer.invoke(mainChannel.SET_CURRENT_SESSION, name)
+    },
+    getCurrentSession(): Promise<string> {
+        return ipcRenderer.invoke(mainChannel.GET_CURRENT_SESSION)
+    },
 
     openStorageFolder() {
         ipcRenderer.invoke(mainChannel.OPEN_STORAGE_FOLDER)

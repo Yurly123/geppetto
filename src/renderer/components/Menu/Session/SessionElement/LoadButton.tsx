@@ -10,6 +10,7 @@ const LoadButton: React.FC<Props> = ({ name }) => {
     async function handleClick() {
         const messages = await window.store.loadSession(name)
         dispatchMessages({ type: 'changeAll', messages: messages })
+        window.store.setCurrentSession(name)
     }
 
     return (

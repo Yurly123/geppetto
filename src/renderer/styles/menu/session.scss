@@ -39,6 +39,13 @@
                 justify-content: space-between;
                 flex-direction: row;
 
+                .session-name {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
                 .controllers {
                     display: flex;
                     align-items: center;

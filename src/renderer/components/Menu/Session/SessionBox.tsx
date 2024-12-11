@@ -4,22 +4,30 @@ import SessionElement from './SessionElement';
 interface Session {
     name: string;
     displayContent: string;
+    isCurrent: boolean;
 }
 
 const SessionBox: React.FC = () => {
     const [sessions, dispatchSession] = useReducer(sessionReducer, [])
 
-    useEffect(() => {
-        window.store.getAllSessions()
-            .then(fileNames => fileNames.forEach(loadSession))
-
-        async function loadSession(fileName: string) {
-            const sessionName = fileName.split('.')[0]
+    useEffect(() => { (async () => {
+        const fileNames = await window.store.getAllSessions()
+        const sessionNames = fileNames.map(fileName => fileName.split('.json')[0])
+        let currentSession = await window.store.getCurrentSession()
+        if (!currentSession || !sessionNames.includes(currentSession)) {
+            currentSession = ''
+            window.store.setCurrentSession(currentSession)
+        }
+        sessionNames.forEach(async sessionName => {
             const messages = await window.store.loadSession(sessionName)
             const displayContent = messages?.at(-1).content
-            dispatchSession({ name: sessionName, displayContent })
-        }
-    }, [])
+            dispatchSession({
+                name: sessionName,
+                displayContent,
+                isCurrent: sessionName === currentSession
+            })
+        })
+    })() }, [])
 
     return (
         <div className='session-box'>
@@ -28,6 +36,7 @@ const SessionBox: React.FC = () => {
                     key={session.name}
                     name={session.name}
                     displayContent={session.displayContent}
+                    isCurrent={session.isCurrent}
                 />
             ))}
         </div>

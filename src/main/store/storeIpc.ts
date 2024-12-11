@@ -4,7 +4,7 @@ import { initialSetting, Setting, settingSchema, SettingStoreData } from "@commo
 import { messageSchema } from './schema';
 import Store from 'electron-store';
 import { Message, Messages } from "@common/openai";
-import { existsSync, mkdirSync, readdirSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync, rmSync } from 'fs';
 import { safeLoad, safeSave } from "./safeStore";
 import { join } from "path";
 
@@ -26,6 +26,9 @@ export function registerStoreIpc() {
             schema: messageSchema,
         })
     }
+    const currentSessionStore = new Store<{ name: string }>({
+        name: 'current-session',
+    })
 
     ipcMain.handle(mainChannel.SAVE_SETTING, (_, setting: Setting) => {
         Object.entries(setting).forEach(([name, element]) => {
@@ -71,6 +74,17 @@ export function registerStoreIpc() {
     })
     ipcMain.handle(mainChannel.LOAD_SESSION, (_, name: string) => {
         return sessionStore(name).store.messages
+    })
+    ipcMain.handle(mainChannel.DELETE_SESSION, (_, name: string) => {
+        sessionStore(name).clear()
+        rmSync(join(app.getPath('userData'), 'sessions', `${name}.json`))
+    })
+
+    ipcMain.handle(mainChannel.SET_CURRENT_SESSION, (_, name: string) => {
+        currentSessionStore.set({ name })
+    })
+    ipcMain.handle(mainChannel.GET_CURRENT_SESSION, () => {
+        return currentSessionStore.store.name
     })
 
     ipcMain.handle(mainChannel.OPEN_STORAGE_FOLDER, () => {

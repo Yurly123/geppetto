@@ -5,7 +5,7 @@ type Props = {
 }
 const DeleteButton: React.FC<Props> = ({ name }) => {
     async function handleClick() {
-        console.log(name, ' 구현 안?됨')
+        window.store.deleteSession(name)
     }
 
     return (
