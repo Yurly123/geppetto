@@ -31,10 +31,27 @@
             margin-bottom: 0.5rem;
             max-height: 15rem;
             overflow: hidden;
-            @include util.button-background;
 
             header {
                 width: calc(100% - 2rem);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+
+                .controllers {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    gap: 0.5rem;
+
+                    >* {
+                        border: 0.2rem solid var(--app-border-color);
+                        padding: 0.2rem;
+                        @include util.button-background;
+                    }
+                }
             }
 
             p {
