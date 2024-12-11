@@ -17,7 +17,7 @@ const SessionBox: React.FC = () => {
             const sessionName = fileName.split('.')[0]
             const messages = await window.store.loadSession(sessionName)
             const displayContent = messages?.at(-1).content
-            dispatchSession({ name: fileName, displayContent })
+            dispatchSession({ name: sessionName, displayContent })
         }
     }, [])
 
