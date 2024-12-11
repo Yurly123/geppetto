@@ -1,0 +1,10 @@
+@use '../util';
+@use './menu-util.scss';
+
+.session-button {
+    @include menu-util.menu-button(2);
+}
+
+.session {
+    @include util.background(var(--semi-transparent-black));
+}
