@@ -81,6 +81,10 @@ export function registerStoreIpc() {
         rmSync(join(app.getPath('userData'), 'sessions', `${name}.json`))
         sender.send(rendererChannel.SESSONS_CHANGED)
     })
+    ipcMain.handle(mainChannel.CREATE_SESSION, ({ sender }, name: string) => {
+        sessionStore(name).set({ messages: [] })
+        sender.send(rendererChannel.SESSONS_CHANGED)
+    })
 
     ipcMain.handle(mainChannel.SET_CURRENT_SESSION, ({ sender }, name: string) => {
         currentSessionStore.set({ name })

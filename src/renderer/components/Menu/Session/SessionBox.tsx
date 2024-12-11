@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import SessionElement from './SessionElement';
+import NewSession from './NewSession';
 
 interface Session {
     name: string;
@@ -19,11 +20,13 @@ const SessionBox: React.FC = () => {
             if (currentSession !== '') {
                 currentSession = ''
                 window.store.setCurrentSession(currentSession)
+                return
             }
         }
         sessionNames.forEach(async sessionName => {
             const messages = await window.store.loadSession(sessionName)
-            const displayContent = messages?.at(-1).content
+            const displayContent = messages?.at(-1)?.content || ''
+            console.log(displayContent)
             dispatchSession({
                 type: 'add', session: {
                     name: sessionName,
@@ -41,7 +44,7 @@ const SessionBox: React.FC = () => {
     }, [])
 
     return (
-        <div className='session-box'>
+        <div className='session-box'><div>
             {sessions.map(session => (
                 <SessionElement
                     key={session.name}
@@ -50,7 +53,8 @@ const SessionBox: React.FC = () => {
                     isCurrent={session.isCurrent}
                 />
             ))}
-        </div>
+            <NewSession />
+        </div></div>
     )
 }
 

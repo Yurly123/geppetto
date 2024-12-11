@@ -73,5 +73,13 @@
                 border-right: 0;
             }
         }
+
+        .new-session {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            @include util.box-border(0.3rem, 0.75rem);
+            @include util.button-background;
+        }
     }
 }

@@ -6,6 +6,7 @@ export const mainChannel = {
     SAVE_SESSION: 'save-session',
     LOAD_SESSION: 'load-session',
     DELETE_SESSION: 'delete-session',
+    CREATE_SESSION: 'create-session',
     SET_CURRENT_SESSION: 'set-current-session',
     GET_CURRENT_SESSION: 'get-current-session',
     OPEN_STORAGE_FOLDER: 'open-storage-folder',

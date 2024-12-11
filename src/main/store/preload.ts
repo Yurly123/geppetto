@@ -40,6 +40,9 @@ const preload = {
     getCurrentSession(): Promise<string> {
         return ipcRenderer.invoke(mainChannel.GET_CURRENT_SESSION)
     },
+    createSession(name: string) {
+        ipcRenderer.invoke(mainChannel.CREATE_SESSION, name)
+    },
 
     openStorageFolder() {
         ipcRenderer.invoke(mainChannel.OPEN_STORAGE_FOLDER)
