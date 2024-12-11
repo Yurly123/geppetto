@@ -1,20 +1,10 @@
-import React, { useState } from 'react';
-import SessionButton from './SessionButton';
+import React from 'react';
 
-type Props = {
-    sessionButtonEnable?: boolean;
-}
-const Session: React.FC<Props> = ({ sessionButtonEnable }) => {
-    const [enable, setEnable] = useState(false);
-
-    return <>
-        {enable &&
-            <div className='session'>저장 파일들</div>
-        }
-        {sessionButtonEnable &&
-            <SessionButton onClick={() => setEnable(!enable)} />
-        }
-    </>
+const Session: React.FC = () => {
+    return <div className='session'>
+        저장 파일들
+    </div>
 }
 
 export default Session;
+export { default as SessionButton } from './SessionButton';

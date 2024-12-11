@@ -2,23 +2,35 @@ import React, { useState } from 'react';
 import '@styles/menu/index.scss';
 import MenuButton from './MenuButton';
 import Setting from './Setting';
-import Log from './Log';
+import Log, { LogButton } from './Log';
+import Session, { SessionButton } from './Session';
 import StorageFolderButton from './StorageFolderButton';
 import TokenCounter from './TokenCounter';
-import Session from './Session';
 
 const Menu: React.FC = () => {
     const [menuEnable, setMenuEnable] = useState(false);
+    const [logEnable, setLogEnable] = useState(false);
+    const [sessionEnable, setSessionEnable] = useState(false);
     return <>
         {menuEnable &&
             <div className='menu'>
                 <Setting />
                 <StorageFolderButton />
-            </div>}
+                <LogButton onClick={() => setLogEnable(!logEnable)} />
+                <SessionButton onClick={() => setSessionEnable(!sessionEnable)} />
+            </div>
+        }
         <TokenCounter />
         <MenuButton onClick={() => setMenuEnable(!menuEnable)} />
-        <Log logButtonEnable={menuEnable} />
-        <Session sessionButtonEnable={menuEnable} />
+
+        {logEnable && <>
+            <Log />
+            <LogButton onClick={() => setLogEnable(!logEnable)} />
+        </>}
+        {sessionEnable && <>
+            <Session />
+            <SessionButton onClick={() => setSessionEnable(!sessionEnable)} />
+        </>}
     </>
 }
 

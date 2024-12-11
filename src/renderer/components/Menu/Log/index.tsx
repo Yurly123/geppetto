@@ -1,39 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import LogButton from './LogButton';
+import React, { useEffect, useRef } from 'react';
 import LogBox from './LogBox';
 import InitializeButton from './InitializeButton';
 
-type Props = {
-    logButtonEnable?: boolean;
-}
-const Log: React.FC<Props> = (props) => {
-    const [enable, setEnable] = useState(false);
+const Log: React.FC = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const scrollHeight = useRef(-1);
 
     useEffect(() => {
-        if (!enable || !scrollRef.current) return
-        if (scrollHeight.current === -1)
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-        else
-            scrollRef.current.scrollTop = scrollHeight.current
-    }, [enable])
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }, [])
 
-    function handleLogButtonClick() {
-        if (enable) 
-            scrollHeight.current = scrollRef.current.scrollTop
-        setEnable(!enable)
-    }
-    return <>
-        {enable &&
-            <div className='log'>
-                <LogBox ref={scrollRef}/>
-                <InitializeButton />
-            </div>}
-        {props.logButtonEnable &&
-            <LogButton onClick={handleLogButtonClick} />
-        }
-    </>
+    return <div className='log'>
+        <LogBox ref={scrollRef} />
+        <InitializeButton />
+    </div>
 }
 
 export default Log;
+export { default as LogButton } from './LogButton';
