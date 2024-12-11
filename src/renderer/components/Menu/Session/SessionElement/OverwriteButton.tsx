@@ -23,7 +23,7 @@ const OverwriteButton: React.FC<Props> = ({ name }) => {
             onClose={() => saveSession()}
         >
             <h3>이미 존재하는 세션을 덮어쓰시겠습니까?</h3>
-            <span>원래 세션의 대화기록은 <span className='warning-color'>되돌릴 수 없습니다</span></span>
+            <span>원래 세션의 대화기록은 현재 대화기록으로 <span className='warning-color'>대체됩니다</span></span>
         </Modal>
     </>
 }
