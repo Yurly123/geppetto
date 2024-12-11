@@ -1,21 +1,31 @@
 import { MessagesContext } from '@components/contexts'
-import React, { useContext } from 'react'
+import { Modal, ModalRef } from '@components/util'
+import React, { useContext, useRef } from 'react'
 
 type Props = {
     name: string,
 }
 const OverwriteButton: React.FC<Props> = ({ name }) => {
     const messages = useContext(MessagesContext)
+    const modalRef = useRef<ModalRef>(null)
 
-    async function handleClick() {
-        await window.store.saveSession(name, messages)
+    function saveSession() {
+        window.store.saveSession(name, messages)
     }
 
-    return (
-        <div onClick={handleClick}>
+    return <>
+        <div onClick={() => modalRef?.current?.open()}>
             덮어쓰기
         </div>
-    )
+        <Modal
+            ref={modalRef}
+            type='confirm'
+            onClose={() => saveSession()}
+        >
+            <h3>이미 존재하는 세션을 덮어쓰시겠습니까?</h3>
+            <span>원래 세션의 대화기록은 <span className='warning-color'>되돌릴 수 없습니다</span></span>
+        </Modal>
+    </>
 }
 
 export default OverwriteButton;
