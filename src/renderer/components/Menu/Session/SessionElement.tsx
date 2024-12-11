@@ -7,7 +7,9 @@ type Props = {
 const SessionElement: React.FC<Props> = ({ name, displayContent }) => {
     return (
         <div className='session-element'>
-            <h3>{name}</h3>
+            <header>
+                <h2>{name}</h2>
+            </header>
             <p>{displayContent}</p>
         </div>
     )

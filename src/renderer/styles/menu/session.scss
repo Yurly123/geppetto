@@ -20,5 +20,34 @@
         flex-direction: column;
         overflow-y: scroll;
         max-height: calc(100% - util.$titlebar-height - 5rem);
+
+        .session-element {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.5rem;
+            @include util.box-border(0.3rem, 0.75rem);
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            max-height: 15rem;
+            overflow: hidden;
+            @include util.button-background;
+
+            header {
+                width: calc(100% - 2rem);
+            }
+
+            p {
+                width: 100%;
+                box-sizing: border-box;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
+                border: 0.2rem solid var(--app-border-color);
+                border-left: 0;
+                border-right: 0;
+            }
+        }
     }
 }

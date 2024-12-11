@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import SessionElement from './SessionElement';
 
 interface Session {
@@ -7,7 +7,7 @@ interface Session {
 }
 
 const SessionBox: React.FC = () => {
-    const [sessions, setSessions] = useState<Session[]>([]);
+    const [sessions, dispatchSession] = useReducer(sessionReducer, [])
 
     useEffect(() => {
         window.store.getAllSessions()
@@ -17,10 +17,7 @@ const SessionBox: React.FC = () => {
             const sessionName = fileName.split('.')[0]
             const messages = await window.store.loadSession(sessionName)
             const displayContent = messages?.at(-1).content
-            setSessions([
-                ...sessions,
-                { name: fileName, displayContent }
-            ])
+            dispatchSession({ name: fileName, displayContent })
         }
     }, [])
 
@@ -38,3 +35,10 @@ const SessionBox: React.FC = () => {
 }
 
 export default SessionBox;
+
+function sessionReducer(
+    state: Session[],
+    action: Session
+): Session[] {
+    return [...state, action]
+}
