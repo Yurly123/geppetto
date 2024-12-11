@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import SessionBox from './SessionBox';
 
 const Session: React.FC = () => {
-    useEffect(() => {
-        window.store.getAllSessions().then(console.log);
-    }, []);
-
     return <div className='session'>
-        저장 파일들
+        <SessionBox />
     </div>
 }
 

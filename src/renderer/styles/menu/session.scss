@@ -7,4 +7,18 @@
 
 .session {
     @include util.background(var(--semi-transparent-black));
+
+    &-box {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        padding: 1rem;
+        width: calc(100% - 12rem);
+        background-color: white;
+        @include util.box-border;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        max-height: calc(100% - util.$titlebar-height - 5rem);
+    }
 }

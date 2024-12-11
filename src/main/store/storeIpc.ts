@@ -21,7 +21,7 @@ export function registerStoreIpc() {
         const sessionPath = join(app.getPath('userData'), 'sessions')
         if (!existsSync(sessionPath)) 
             mkdirSync(sessionPath)
-        return new Store({
+        return new Store<Messages>({
             name: join('sessions', name),
             schema: messageSchema,
         })

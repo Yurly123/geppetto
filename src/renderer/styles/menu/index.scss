@@ -5,7 +5,6 @@
 
 @use '../util';
 @use './menu-util.scss';
-$bar-height: util.$titlebar-height;
 
 .menu-button {
     @include menu-util.menu-button(0);

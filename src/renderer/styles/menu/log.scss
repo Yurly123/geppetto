@@ -1,6 +1,5 @@
 @use '../util';
 @use './menu-util.scss';
-$bar-height: util.$titlebar-height;
 
 .log-button {
     @include menu-util.menu-button(1);
@@ -20,7 +19,7 @@ $bar-height: util.$titlebar-height;
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
-        max-height: calc(100% - $bar-height - 5rem);
+        max-height: calc(100% - util.$titlebar-height - 5rem);
 
         .log-element {
             display: flex;
