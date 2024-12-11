@@ -10,24 +10,35 @@ interface Session {
 const SessionBox: React.FC = () => {
     const [sessions, dispatchSession] = useReducer(sessionReducer, [])
 
-    useEffect(() => { (async () => {
+    async function loadSessions() {
+        dispatchSession({ type: 'clear' })
         const fileNames = await window.store.getAllSessions()
         const sessionNames = fileNames.map(fileName => fileName.split('.json')[0])
         let currentSession = await window.store.getCurrentSession()
         if (!currentSession || !sessionNames.includes(currentSession)) {
-            currentSession = ''
-            window.store.setCurrentSession(currentSession)
+            if (currentSession !== '') {
+                currentSession = ''
+                window.store.setCurrentSession(currentSession)
+            }
         }
         sessionNames.forEach(async sessionName => {
             const messages = await window.store.loadSession(sessionName)
             const displayContent = messages?.at(-1).content
             dispatchSession({
-                name: sessionName,
-                displayContent,
-                isCurrent: sessionName === currentSession
+                type: 'add', session: {
+                    name: sessionName,
+                    displayContent,
+                    isCurrent: sessionName === currentSession
+                }
             })
         })
-    })() }, [])
+    }
+
+    useEffect(() => {
+        loadSessions()
+        window.store.onSessionsChanged(loadSessions)
+        return () => window.store.removeSessionsChangedListeners()
+    }, [])
 
     return (
         <div className='session-box'>
@@ -47,7 +58,17 @@ export default SessionBox;
 
 function sessionReducer(
     state: Session[],
-    action: Session
+    action: {
+        type: 'add' | 'clear'
+        session?: Session
+    }
 ): Session[] {
-    return [...state, action]
+    switch (action.type) {
+        case 'add':
+            return [...state, action.session]
+        case 'clear':
+            return []
+        default:
+            return state
+    }
 }

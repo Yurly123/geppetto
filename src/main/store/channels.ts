@@ -15,4 +15,5 @@ export const mainChannel = {
 }
 
 export const rendererChannel = {
+    SESSONS_CHANGED: 'sessions-changed',
 }

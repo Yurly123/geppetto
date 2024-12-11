@@ -1,5 +1,5 @@
 import { app, ipcMain, shell } from "electron"
-import { mainChannel } from "./channels"
+import { mainChannel, rendererChannel } from "./channels"
 import { initialSetting, Setting, settingSchema, SettingStoreData } from "@common/setting"
 import { messageSchema } from './schema';
 import Store from 'electron-store';
@@ -69,19 +69,22 @@ export function registerStoreIpc() {
         return messageStore.store.messages
     })
 
-    ipcMain.handle(mainChannel.SAVE_SESSION, (_, name: string, messages: Message[]) => {
+    ipcMain.handle(mainChannel.SAVE_SESSION, ({ sender }, name: string, messages: Message[]) => {
         sessionStore(name).set({ messages })
+        sender.send(rendererChannel.SESSONS_CHANGED)
     })
     ipcMain.handle(mainChannel.LOAD_SESSION, (_, name: string) => {
         return sessionStore(name).store.messages
     })
-    ipcMain.handle(mainChannel.DELETE_SESSION, (_, name: string) => {
+    ipcMain.handle(mainChannel.DELETE_SESSION, ({ sender }, name: string) => {
         sessionStore(name).clear()
         rmSync(join(app.getPath('userData'), 'sessions', `${name}.json`))
+        sender.send(rendererChannel.SESSONS_CHANGED)
     })
 
-    ipcMain.handle(mainChannel.SET_CURRENT_SESSION, (_, name: string) => {
+    ipcMain.handle(mainChannel.SET_CURRENT_SESSION, ({ sender }, name: string) => {
         currentSessionStore.set({ name })
+        sender.send(rendererChannel.SESSONS_CHANGED)
     })
     ipcMain.handle(mainChannel.GET_CURRENT_SESSION, () => {
         return currentSessionStore.store.name

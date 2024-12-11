@@ -1,6 +1,6 @@
 import { Setting } from "@common/setting"
 import { contextBridge, ipcRenderer } from "electron"
-import { mainChannel } from "./channels"
+import { mainChannel, rendererChannel } from "./channels"
 import { Message } from "@common/openai"
 
 declare global {
@@ -53,6 +53,13 @@ const preload = {
     },
     getAllSessions(): Promise<string[]> {
         return ipcRenderer.invoke(mainChannel.GET_ALL_SESSIONS)
+    },
+
+    onSessionsChanged(callback: () => void) {
+        ipcRenderer.on(rendererChannel.SESSONS_CHANGED, callback)
+    },
+    removeSessionsChangedListeners() {
+        ipcRenderer.removeAllListeners(rendererChannel.SESSONS_CHANGED)
     }
 }
 
