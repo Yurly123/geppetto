@@ -18,7 +18,7 @@ export interface NumberSettingElement
 export interface EnumSettingElement<T extends string = string>
     extends ISettingElement<T> {
     readonly enum: {
-        readonly discription: string;
+        readonly description: string;
         readonly value: T;
         readonly display: string;
     }[];

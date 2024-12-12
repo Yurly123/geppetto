@@ -10,7 +10,7 @@ const EnumSettingInput: React.FC<Props> = ({ element, onChange }) => {
     const currentOption = element.enum.find((option) =>
         option.value === element.value);
 
-    return <HelpTrigger message={currentOption?.discription}>
+    return <HelpTrigger message={currentOption?.description}>
         <select
             value={element.value}
             onChange={(e) => onChange(e.target.value)}
