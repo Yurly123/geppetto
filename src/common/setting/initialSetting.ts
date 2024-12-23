@@ -3,7 +3,7 @@ import { Setting } from "./setting";
 export const initialSetting: Setting = {
     'GPT모델': {
         description: '채팅을 구동할 GPT 모델을 선택합니다. 이전 대화 기록에 어떤 모델을 썼느냐에 상관없이 현재 대화에 적용됩니다.',
-        value: 'gpt-4o-mini', default: 'gpt-4o-mini',
+        value: 'chatgpt-4o-latest', default: 'chatgpt-4o-latest',
         enum: [ {
             description: 'gpt-4o-mini 모델로 대화합니다. 성능은 떨어지지만 토큰 당 가격이 매우 저렴합니다. 테스트 목적으로 적합합니다.',
             value: 'gpt-4o-mini', display: '미니 사오'
@@ -26,23 +26,11 @@ export const initialSetting: Setting = {
         description: '제미니 모드에서 사용할 Gemini 모델을 선택합니다. 제미니 모드가 활성화되어 있을 때만 적용됩니다.',
         value: 'gemini-2.0-flash-exp', default: 'gemini-2.0-flash-exp',
         enum: [{
-            description: 'gemini-2.0-flash-exp 모델로 대화합니다. 가장 최근에 발표된 제미니 2.0 모델입니다. 실험적 모델이므로 응답이 불안정할 수 있습니다. 또한 언제든지 모델이 삭제되거나 변경될 수 있습니다.',
+            description: 'gemini-2.0-flash-exp 모델로 대화합니다. 최근에 발표된 제미니 2.0 플래시 모델입니다. 실험적 모델이므로 응답이 불안정할 수 있습니다. 또한 언제든지 모델이 삭제되거나 변경될 수 있습니다.',
             value: 'gemini-2.0-flash-exp', display: '잼플 2.0',
         }, {
-            description: 'gemini-exp-1206 모델로 대화합니다. 제미니 플래시를 이어받는 모델입니다. 실험적 모델이므로 응답이 불안정할 수 있습니다. 또한 언제든지 모델이 삭제되거나 변경될 수 있습니다.',
+            description: 'gemini-exp-1206 모델로 대화합니다. 실험적 모델이므로 응답이 불안정할 수 있습니다. 또한 언제든지 모델이 삭제되거나 변경될 수 있습니다.',
             value: 'gemini-exp-1206', display: '1206 잼민',
-        }, {
-            description: 'gemini-exp-1121 모델로 대화합니다. exp모델이지만 성능이 매우 우수합니다. 실험적 모델이므로 응답이 불안정할 수 있습니다. 또한 언제든지 모델이 삭제되거나 변경될 수 있습니다.',
-            value: 'gemini-exp-1121', display: '1121 잼민',
-        }, {
-            description: 'gemini-1.5-pro 모델로 대화합니다. 1.5 모델 중에서 가장 성능이 우수한 모델입니다. 그러나 무료 할당량이 다른 모델들보다 적습니다.',
-            value: 'gemini-1.5-pro', display: '잼프로',
-        }, {
-            description: 'gemini-1.5-flash 모델로 대화합니다. 제미니 프로보다 빠른 응답과 더 많은 무료 할당량을 제공합니다.',
-            value: 'gemini-1.5-flash', display: '잼플',
-        }, {
-            description: 'gemini-1.5-flash-8b 모델로 대화합니다. 제미니 플래시보다도 더 빠른, 가장 빠른 응답을 제공합니다.',
-            value: 'gemini-1.5-flash-8b', display: '잼플-8B',
         }]
     },
     'Gemini API키': {

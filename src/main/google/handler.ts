@@ -30,13 +30,12 @@ export async function handleCompletion(sender: WebContents, request: CompletionR
             category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
             threshold: HarmBlockThreshold.BLOCK_NONE,
         }],
-        systemInstruction: buildPrompt(prevMessages, userInput),
     })
     sender.send(rendererChannel.COMPLETION_START)
 
     const chat = model.startChat({
         history: [
-            createContent('user', ''),
+            createContent('user', buildPrompt(prevMessages, userInput)),
             ...prevMessages.map(message => messageToContent(message)),
         ],
     })
