@@ -3,6 +3,7 @@ import Reroll from './Reroll';
 import InputChange from './InputChange';
 import DeleteMessage from './DeleteMessage';
 import SelectFirstMessage from './SelectFirstMessage';
+import UserNameInput from './UserNameInput';
 
 type Props = {
     isCurrentChat?: boolean;
@@ -13,6 +14,7 @@ const Controllers: React.FC<Props> = ({ isCurrentChat, isFirstMessage, viewingFi
     if (isFirstMessage)
         return <div className='controllers'>
             <SelectFirstMessage />
+            <UserNameInput />
         </div>
     if (viewingFirstMessage)
         return null
