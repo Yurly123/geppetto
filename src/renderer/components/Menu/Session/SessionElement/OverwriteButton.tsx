@@ -11,6 +11,7 @@ const OverwriteButton: React.FC<Props> = ({ name }) => {
 
     function saveSession() {
         window.store.saveSession(name, messages)
+        window.store.setCurrentSession(name)
     }
 
     return <>

@@ -55,6 +55,9 @@ const MessageManager: React.FC = () => {
             userMessage.role !== 'user') return;
         assertAssistantHasToken(assistantMessage);
 
+        window.store.getCurrentSession().then(currentSession => {
+            window.store.saveSession(currentSession, messages);
+        })
         window.store.saveMessages(messages);
         dispatchChat({
             type: 'changeAll', chat: {
