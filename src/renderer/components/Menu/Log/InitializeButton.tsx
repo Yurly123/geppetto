@@ -8,8 +8,8 @@ const InitializeButton: React.FC = () => {
     const dispatchChat = useContext(DispatchChatContext);
 
     function initializeLog() {
-        window.store.saveMessages([]);
-        window.store.loadMessages().then((messages) => {
+        window.store.saveMessages({ messages: [] });
+        window.store.loadMessages().then(({ messages }) => {
             dispatchMessages({ type: 'changeAll', messages });
         });
         dispatchChat({ type: 'initialize' });

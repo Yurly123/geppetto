@@ -6,7 +6,7 @@ import { HelpTrigger } from '@components/util';
 const TokenCounter: React.FC = () => {
     const messages = useContext(MessagesContext)
     const [count, setCount] = useState(0)
-    const max = 5000
+    const max = 20000
 
     useEffect(() => {
         const count = messages.reduce((acc, message) => {

@@ -1,4 +1,4 @@
-import { Message, Messages } from "@common/openai";
+import { Messages } from "@common/openai";
 import { mainChannel, rendererChannel } from "@main/store/channels";
 import { messageSchema } from "@main/store/schema";
 import { app, ipcMain } from "electron"
@@ -22,12 +22,12 @@ export function registerSessionStoreIpc() {
         name: 'current-session',
     })
 
-    ipcMain.handle(mainChannel.SAVE_SESSION, ({ sender }, name: string, messages: Message[]) => {
-        sessionStore(name).set({ messages })
+    ipcMain.handle(mainChannel.SAVE_SESSION, ({ sender }, name: string, messages: Messages) => {
+        sessionStore(name).set(messages)
         sender.send(rendererChannel.SESSONS_CHANGED)
     })
     ipcMain.handle(mainChannel.LOAD_SESSION, (_, name: string) => {
-        return sessionStore(name).store.messages
+        return sessionStore(name).store
     })
     ipcMain.handle(mainChannel.DELETE_SESSION, ({ sender }, name: string) => {
         sessionStore(name).clear()

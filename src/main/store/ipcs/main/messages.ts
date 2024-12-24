@@ -1,4 +1,4 @@
-import { Message, Messages } from "@common/openai";
+import { Messages } from "@common/openai";
 import { mainChannel } from "@main/store/channels";
 import { messageSchema } from "@main/store/schema"
 import { ipcMain } from "electron"
@@ -11,12 +11,12 @@ export function registerMessagesStoreIpc() {
         schema: messageSchema,
     })
 
-    ipcMain.handle(mainChannel.SAVE_MESSAGES, (_, messages: Message[]) => {
-        messageStore.set({ messages })
+    ipcMain.handle(mainChannel.SAVE_MESSAGES, (_, messages: Messages) => {
+        messageStore.set(messages)
     })
 
     ipcMain.handle(mainChannel.LOAD_MESSAGES, (_) => {
-        return messageStore.store.messages
+        return messageStore.store
     })
 
     ipcMain.handle(mainChannel.CHECK_MESSAGES_FILE, () => {

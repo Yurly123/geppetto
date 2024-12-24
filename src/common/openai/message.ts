@@ -18,6 +18,7 @@ export type Message = SystemMessage | UserMessage | AssistantMessage;
 // In other cases, just use Message[]
 export interface Messages {
     messages: Message[];
+    userName?: string;
 }
 
 export function createMessage(role: 'system', content: string): SystemMessage;

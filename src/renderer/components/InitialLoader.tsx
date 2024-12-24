@@ -14,7 +14,7 @@ const InitialLoader: React.FC = () => {
 
         const messagesFileExist = await window.store.checkMessagesFile()
         if (messagesFileExist) {
-            const messages = await window.store.loadMessages()
+            const { messages } = await window.store.loadMessages()
             dispatchMessages({ type: 'changeAll', messages })
         }
     })() }, [])

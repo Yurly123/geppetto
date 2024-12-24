@@ -5,6 +5,7 @@ export interface Chat {
     userInput: UserMessage;
     response: Response;
     paragraphIndex: number;
+    userName?: string;
 }
 
 export const ChatContext = createContext<Chat>(null);

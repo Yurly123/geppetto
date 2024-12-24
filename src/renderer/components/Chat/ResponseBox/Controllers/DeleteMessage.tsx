@@ -15,7 +15,7 @@ const DeleteMessage: React.FC = () => {
             type: 'changeAll',
             messages: messages.slice(0, index),
         })
-        window.store.saveMessages([])
+        window.store.saveMessages({ messages: [] })
     }
     return <>
         <div

@@ -25,9 +25,11 @@ const MessageManager: React.FC = () => {
         dispatchChat({
             type: 'changePartial', partial: {
                 response: textToResponse(firstMessage.content),
+                userInput: createMessage('user', ''),
                 paragraphIndex: 0
             }
         });
+        window.store.saveMessages({ messages });
     }, [messages]);
 
     useEffect(() => {
@@ -56,9 +58,9 @@ const MessageManager: React.FC = () => {
         assertAssistantHasToken(assistantMessage);
 
         window.store.getCurrentSession().then(currentSession => {
-            window.store.saveSession(currentSession, messages);
+            window.store.saveSession(currentSession, { messages });
         })
-        window.store.saveMessages(messages);
+        window.store.saveMessages({ messages });
         dispatchChat({
             type: 'changeAll', chat: {
                 userInput: userMessage,

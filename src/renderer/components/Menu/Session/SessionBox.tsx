@@ -24,7 +24,7 @@ const SessionBox: React.FC = () => {
             }
         }
         sessionNames.forEach(async sessionName => {
-            const messages = await window.store.loadSession(sessionName)
+            const { messages } = await window.store.loadSession(sessionName)
             const displayContent = messages?.at(-1)?.content || ''
             console.log(displayContent)
             dispatchSession({

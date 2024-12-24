@@ -14,6 +14,9 @@ const messageSchema: Schema<Messages> = {
             required: ['role', 'content'],
         },
     },
+    'userName': {
+        type: 'string',
+    },
 }
 
 export { messageSchema }

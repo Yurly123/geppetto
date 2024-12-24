@@ -10,8 +10,8 @@ const LoadButton: React.FC<Props> = ({ name }) => {
     const modalRef = useRef<ModalRef>(null)
 
     async function loadSession() {
-        const messages = await window.store.loadSession(name)
-        dispatchMessages({ type: 'changeAll', messages: messages })
+        const { messages } = await window.store.loadSession(name)
+        dispatchMessages({ type: 'changeAll', messages })
         window.store.setCurrentSession(name)
     }
 

@@ -10,7 +10,7 @@ const OverwriteButton: React.FC<Props> = ({ name }) => {
     const modalRef = useRef<ModalRef>(null)
 
     function saveSession() {
-        window.store.saveSession(name, messages)
+        window.store.saveSession(name, { messages })
         window.store.setCurrentSession(name)
     }
 
