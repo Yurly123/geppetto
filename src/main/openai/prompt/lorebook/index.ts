@@ -1,5 +1,6 @@
 import { CompletionRequest, Message } from "@common/openai";
 import { claudeProfile, geminiProfile } from "./profile";
+import { impersonateLorebook } from "./impersonate";
 
 export interface LoreBook {
     activationKeys: string[]; // [] for global
@@ -30,6 +31,7 @@ export const lorebooks: LoreBook[] = [{
 export function insertLorebook(prompt: string, request: CompletionRequest) {
     const searchingMessages = request.messages.slice(-3 * 2)
     let activatedLorebooks: LoreBook[] = []
+    activatedLorebooks.push(impersonateLorebook(request.impersonate))
     for (const lorebook of lorebooks) {
         if (lorebook.activationKeys.length === 0) {
             activatedLorebooks.push(lorebook)
@@ -44,3 +46,6 @@ export function insertLorebook(prompt: string, request: CompletionRequest) {
     prompt = prompt.replace('{{lore-slot}}', fullLore)
     return prompt
 }
+
+export * from './profile'
+export * from './impersonate'

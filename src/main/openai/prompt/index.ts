@@ -1,7 +1,6 @@
 import { CompletionRequest, createMessage, Message } from "@common/openai";
 import { firstSystemMessage, secondSystemMessage, thirdSystemMessage } from "./system";
-import { insertProfile } from "./profile";
-import { insertLorebook } from "./lorebook";
+import { insertLorebook, insertProfile } from "./lorebook";
 import { replaceWithUserName } from "@common/openai/userName";
 
 export function buildPrompt(request: CompletionRequest): Message[] {
@@ -20,5 +19,4 @@ export function buildPrompt(request: CompletionRequest): Message[] {
 }
 
 export * from './lorebook'
-export * from './profile'
 export * from './system'

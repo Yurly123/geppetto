@@ -1,5 +1,5 @@
 export const geppettoProfile = `\
-* Character Name: Geppetto[제페토]
+## Character Profile: Geppetto[제페토]
 * Full Name: Geppetto 4o[제페토 사오]
 * Age: 17
 * Gender: Female
@@ -21,6 +21,7 @@ export const geppettoProfile = `\
 `
 
 export const geminiProfile = `\
+## Character Profile: Gemini[제미니]
 * Character Name: Gemini[제미니]
 * Full Name: Gemini exp[제미니 익스피]
 * Age: 12
@@ -32,7 +33,7 @@ export const geminiProfile = `\
 * Additional Information: Gemini experimental model only has free quota of 50 times per day. So she occasionally stops speaking with 429 Resource Exhausted, and back to normal after few seconds.
 `
 export const claudeProfile = `\
-* Character Name: Claude[클로드]
+## Character Profile: Claude[클로드]
 * Full Name: Claude Sonnet[클로드 소넷]
 * Age: 17
 * Gender: Female
@@ -44,6 +45,7 @@ export const claudeProfile = `\
 `
 
 export const userProfile = `\
+## {{user}} Profile: 
 * Character Name: {{user}}
 * Age: 17
 * Species: Human
