@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { DispatchMessagesContext, DispatchSettingContext } from './contexts';
+import { DispatchChatContext, DispatchMessagesContext, DispatchSettingContext } from './contexts';
 
 const InitialLoader: React.FC = () => {
     const dispatchSetting = useContext(DispatchSettingContext)
     const dispatchMessages = useContext(DispatchMessagesContext)
+    const dispatchChat = useContext(DispatchChatContext)
     
     useEffect(() => {(async () => {
         const settingFileExist = await window.store.checkSettingFile()
@@ -14,8 +15,9 @@ const InitialLoader: React.FC = () => {
 
         const messagesFileExist = await window.store.checkMessagesFile()
         if (messagesFileExist) {
-            const { messages } = await window.store.loadMessages()
+            const { messages, userName } = await window.store.loadMessages()
             dispatchMessages({ type: 'changeAll', messages })
+            dispatchChat({ type: 'changePartial', partial: { userName } })
         }
     })() }, [])
 

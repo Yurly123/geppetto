@@ -18,28 +18,28 @@ export function replaceWithUserName(
 }
 
 function replaceWithUserNameMessage(message: Message, userName: string): Message {
-    message.content = message.content
-        .replace(/{{user}}/g, userName)
-    return message
+    return {
+        ...message,
+        content: message.content.replace(/{{user}}/g, userName)
+    }
 }
 function replaceWithUserNameMessages(messages: Message[], userName: string): Message[] {
-    return messages.map(message => {
-        message.content = message.content
-            .replace(/{{user}}/g, userName)
-        return message
-    })
+    return messages.map(message => replaceWithUserNameMessage(message, userName))
 }
 function replaceWithUserNameResponse(response: Response, userName: string): Response {
-    response.paragraphs.forEach(paragraph => {
-        const regex = /{{user}}/g
-        paragraph.dialogue.content = paragraph.dialogue.content
-            .replace(regex, userName)
-        paragraph.narrative = paragraph.narrative
-            .replace(regex, userName)
-    })
-    response.location = response.location.replace(/{{user}}/g, userName)
-    response.time = response.time.replace(/{{user}}/g, userName)
-    return response
+    return {
+        ...response,
+        paragraphs: response.paragraphs.map(paragraph => ({
+            ...paragraph,
+            dialogue: {
+                ...paragraph.dialogue,
+                content: paragraph.dialogue.content.replace(/{{user}}/g, userName)
+            },
+            narrative: paragraph.narrative.replace(/{{user}}/g, userName)
+        })),
+        location: response.location.replace(/{{user}}/g, userName),
+        time: response.time.replace(/{{user}}/g, userName),
+    }
 }
 
 export function replaceWithUserPlaceholder(message: Message, userName: string): Message;
@@ -60,27 +60,27 @@ export function replaceWithUserPlaceholder(
 
 function replaceWithUserPlaceholderMessage(message: Message, userName: string): Message {
     const regex = new RegExp(userName, 'g')
-    message.content = message.content
-        .replace(regex, '{{user}}')
-    return message
+    return {
+        ...message,
+        content: message.content.replace(regex, '{{user}}')
+    }
 }
 function replaceWithUserPlaceholderMessages(messages: Message[], userName: string): Message[] {
-    const regex = new RegExp(userName, 'g')
-    return messages.map(message => {
-        message.content = message.content
-            .replace(regex, '{{user}}')
-        return message
-    })
+    return messages.map(message => replaceWithUserPlaceholderMessage(message, userName))
 }
 function replaceWithUserPlaceholderResponse(response: Response, userName: string): Response {
     const regex = new RegExp(userName, 'g')
-    response.paragraphs.forEach(paragraph => {
-        paragraph.dialogue.content = paragraph.dialogue.content
-            .replace(regex, '{{user}}')
-        paragraph.narrative = paragraph.narrative
-            .replace(regex, '{{user}}')
-    })
-    response.location = response.location.replace(regex, '{{user}}')
-    response.time = response.time.replace(regex, '{{user}}')
-    return response
+    return {
+        ...response,
+        paragraphs: response.paragraphs.map(paragraph => ({
+            ...paragraph,
+            dialogue: {
+                ...paragraph.dialogue,
+                content: paragraph.dialogue.content.replace(regex, '{{user}}')
+            },
+            narrative: paragraph.narrative.replace(regex, '{{user}}')
+        })),
+        location: response.location.replace(regex, '{{user}}'),
+        time: response.time.replace(regex, '{{user}}'),
+    }
 }

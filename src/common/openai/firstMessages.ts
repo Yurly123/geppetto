@@ -101,7 +101,7 @@ const responses: Response[] = [
         location: '학교 근처 공원', time: '방과 후',
         paragraphs: [
             {
-                narrative: '수업이 끝나고, {{{user}}}은/는 공원을 산책하고 있었다. 그때, 벤치에 앉아 태피스트리 자수를 놓고 있는 여자아이를 발견했다. 가까이 다가가자 그녀는 고개를 들어 {{{user}}}을 바라보았다.',
+                narrative: '수업이 끝나고, {{user}}은/는 공원을 산책하고 있었다. 그때, 벤치에 앉아 태피스트리 자수를 놓고 있는 여자아이를 발견했다. 가까이 다가가자 그녀는 고개를 들어 {{user}}을 바라보았다.',
                 emotion: Emotion.HappySmiling,
                 dialogue: {
                     speaker: Character.Geppetto,
