@@ -1,21 +1,34 @@
+import { Content } from "@common/google/content";
 import { Message } from "./message";
 import { Response } from "./response";
 
 export function replaceWithUserName(message: Message, userName?: string): Message;
 export function replaceWithUserName(messages: Message[], userName?: string): Message[];
 export function replaceWithUserName(response: Response, userName?: string): Response;
+export function replaceWithUserName(content: Content, userName?: string): Content;
+export function replaceWithUserName(contents: Content[], userName?: string): Content[];
 
 export function replaceWithUserName(
-    input: Message | Message[] | Response,
+    input: Message | Message[] | Response | Content | Content[],
     userName?: string,
 ) {
     userName = userName || '{{user}}'
-    if (Array.isArray(input))
-        return replaceWithUserNameMessages(input, userName)
-    else if ('role' in input)
+    if (Array.isArray(input)) {
+        if (input.length === 0) return input
+        if ('content' in input[0]) 
+            return (input as Message[]).map(message =>
+                replaceWithUserNameMessage(message, userName))
+        if ('parts' in input[0])
+            return (input as Content[]).map(content =>
+                replaceWithUserNameContent(content, userName))
+    }
+
+    if ('content' in input) 
         return replaceWithUserNameMessage(input, userName)
-    else
+    if ('paragraphs' in input) 
         return replaceWithUserNameResponse(input, userName)
+    if ('parts' in input)
+        return replaceWithUserNameContent(input, userName)
 }
 
 function replaceWithUserNameMessage(message: Message, userName: string): Message {
@@ -23,9 +36,6 @@ function replaceWithUserNameMessage(message: Message, userName: string): Message
         ...message,
         content: message.content?.replace(/{{user}}/g, userName)
     }
-}
-function replaceWithUserNameMessages(messages: Message[], userName: string): Message[] {
-    return messages.map(message => replaceWithUserNameMessage(message, userName))
 }
 function replaceWithUserNameResponse(response: Response, userName: string): Response {
     return {
@@ -42,47 +52,9 @@ function replaceWithUserNameResponse(response: Response, userName: string): Resp
         time: response.time?.replace(/{{user}}/g, userName),
     }
 }
-
-export function replaceWithUserPlaceholder(message: Message, userName?: string): Message;
-export function replaceWithUserPlaceholder(messages: Message[], userName?: string): Message[];
-export function replaceWithUserPlaceholder(response: Response, userName?: string): Response;
-
-export function replaceWithUserPlaceholder(
-    input: Message | Message[] | Response,
-    userName?: string,
-) {
-    if (!userName) return input
-    if (Array.isArray(input))
-        return replaceWithUserPlaceholderMessages(input, userName)
-    else if ('role' in input)
-        return replaceWithUserPlaceholderMessage(input, userName)
-    else
-        return replaceWithUserPlaceholderResponse(input, userName)
-}
-
-function replaceWithUserPlaceholderMessage(message: Message, userName: string): Message {
-    const regex = new RegExp(userName, 'g')
+function replaceWithUserNameContent(content: Content, userName: string): Content {
     return {
-        ...message,
-        content: message.content?.replace(regex, '{{user}}')
-    }
-}
-function replaceWithUserPlaceholderMessages(messages: Message[], userName: string): Message[] {
-    return messages.map(message => replaceWithUserPlaceholderMessage(message, userName))
-}
-function replaceWithUserPlaceholderResponse(response: Response, userName: string): Response {
-    const regex = new RegExp(userName, 'g')
-    return {
-        ...response,
-        paragraphs: response.paragraphs?.map(paragraph => ({
-            ...paragraph,
-            dialogue: {
-                ...paragraph?.dialogue,
-                content: paragraph?.dialogue?.content?.replace(regex, '{{user}}')
-            },
-            narrative: paragraph?.narrative?.replace(regex, '{{user}}')
-        })),
-        location: response.location?.replace(regex, '{{user}}'),
-        time: response.time?.replace(regex, '{{user}}'),
+        ...content,
+        parts: [{ text: content.parts[0].text.replace(/{{user}}/g, userName) }]
     }
 }

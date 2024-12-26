@@ -1,16 +1,19 @@
-import { Message } from "@common/openai";
-import { insertLorebook } from "@main/openai/prompt/lorebook";
-import { insertProfile } from "@main/openai/prompt/profile";
-import { firstSystemMessage, secondSystemMessage, thirdSystemMessage } from "@main/openai/prompt/system";
+import { createContent, messageToContent } from "@common/google/content";
+import { CompletionRequest } from "@common/openai";
+import { replaceWithUserName } from "@common/openai/userName";
+import { firstSystemMessage, insertLorebook, insertProfile, secondSystemMessage, thirdSystemMessage } from "@main/openai/prompt";
 
-export function buildPrompt(prevMessages: Message[], inputMessage: Message) {
+export function buildPrompt(request: CompletionRequest) {
     let firstSystem = firstSystemMessage
     firstSystem = insertProfile(firstSystem)
-    firstSystem = insertLorebook(firstSystem,
-        [inputMessage, ...prevMessages.slice(-3 * 2).reverse()]
-    )
+    firstSystem = insertLorebook(firstSystem, request)
 
-    return firstSystem + '\n\n'
-        + secondSystemMessage + '\n\n'
-        + thirdSystemMessage + '\n\n'
+    const contents = [
+        createContent('user', firstSystem),
+        createContent('user', secondSystemMessage),
+        createContent('user', thirdSystemMessage),
+        ...request.messages.slice(0, -1).map(messageToContent),
+        messageToContent(request.messages.at(-1)),
+    ]
+    return replaceWithUserName(contents, request.userName)
 }

@@ -1,4 +1,4 @@
-import { Message } from "@common/openai";
+import { CompletionRequest, Message } from "@common/openai";
 import { claudeProfile, geminiProfile } from "./profile";
 
 export interface LoreBook {
@@ -19,18 +19,16 @@ function isKeyIncluded(lorebook: LoreBook, messages: Message[]) {
     return false
 }
 
-export const lorebooks: LoreBook[] = [
-    {
-        activationKeys: ['gemini', '제미니'],
-        content: '### Gemini Profile\n' + geminiProfile,
-    },
-    {
-        activationKeys: ['claude', '클로드'],
-        content: '### Claude Profile\n' + claudeProfile,
-    }
-]
+export const lorebooks: LoreBook[] = [{
+    activationKeys: ['gemini', '제미니'],
+    content: '### Gemini Profile\n' + geminiProfile,
+}, {
+    activationKeys: ['claude', '클로드'],
+    content: '### Claude Profile\n' + claudeProfile,
+}]
 
-export function insertLorebook(prompt: string, searchingMessages: Message[]) {
+export function insertLorebook(prompt: string, request: CompletionRequest) {
+    const searchingMessages = request.messages.slice(-3 * 2)
     let activatedLorebooks: LoreBook[] = []
     for (const lorebook of lorebooks) {
         if (lorebook.activationKeys.length === 0) {

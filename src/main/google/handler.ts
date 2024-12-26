@@ -35,13 +35,7 @@ export async function handleCompletion(sender: WebContents, request: CompletionR
     sender.send(rendererChannel.COMPLETION_START)
 
     const chat = model.startChat({
-        history: [
-            createContent('user', buildPrompt(
-                replaceWithUserName(prevMessages, request.userName),
-                replaceWithUserName(userInput, request.userName),
-            )),
-            ...prevMessages.map(message => messageToContent(message)),
-        ],
+        history: buildPrompt(request),
     })
 
     const result = await chat.sendMessageStream(userInput.content)
