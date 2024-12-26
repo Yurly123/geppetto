@@ -1,7 +1,7 @@
-import { Character, Emotion } from "./enum";
+import { Character, CharacterWithUser, Emotion } from "./enum";
 
 export interface Dialogue {
-    speaker: Character;
+    speaker: Character | CharacterWithUser;
     content: string;
 }
 

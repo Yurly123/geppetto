@@ -13,4 +13,5 @@ export interface Setting extends ISetting {
     '제미니 모드': BooleanSettingElement;
     'Gemini모델': EnumSettingElement<GeminiModel>;
     'Gemini API키': StringSettingElement;
+    '사칭 허용': BooleanSettingElement;
 }

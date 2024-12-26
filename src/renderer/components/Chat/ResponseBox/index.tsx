@@ -27,6 +27,7 @@ const ResponseBox: React.FC<Props> = ({ userInput, response, userName }) => {
             <ResponseContent
                 userInput={replaceWithUserName(userInput, userName) as UserMessage}
                 response={replaceWithUserName(response, userName)}
+                userName={userName}
             />
             <ChatBar enable={isCurrentChat} />
             <Controllers

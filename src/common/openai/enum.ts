@@ -4,6 +4,13 @@ export enum Character {
     Claude = 'claude',
 }
 
+export enum CharacterWithUser {
+    User = 'user',
+    Geppetto = 'geppetto',
+    Gemini = 'gemini',
+    Claude = 'claude',
+}
+
 export enum Emotion {
     Admiring = 'admiring', Angry = 'angry', 
     Annoyed = 'annoyed', Aroused = 'aroused',

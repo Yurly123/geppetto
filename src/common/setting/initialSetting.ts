@@ -52,4 +52,8 @@ export const initialSetting: Setting = {
         description: '제미니 모드를 활성화합니다. 제미니 모드는 GPT 모델 대신에 Gemini 모델을 사용합니다. Gemini 모델은 Google에서 무료 할당량을 받을 수 있습니다. 제미니 모드는 Google AI Studio의 API Key가 필요합니다.',
         value: false, default: false,
     },
+    '사칭 허용': {
+        description: '사칭을 허용합니다. 사칭을 허용하면 AI 모델이 사용자의 말과 행동을 응답에 포함해 상황을 묘사할 수 있습니다. 사칭을 허용하지 않으면 AI는 사용자의 말을 묘사할 수 없습니다.',
+        value: false, default: false,
+    }
 }

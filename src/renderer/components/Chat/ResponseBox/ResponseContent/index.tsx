@@ -7,8 +7,9 @@ import Environment from './Environment';
 type Props = {
     userInput: UserMessage;
     response: Response;
+    userName: string;
 }
-const ResponseContent: React.FC<Props> = ({ userInput, response }) => {
+const ResponseContent: React.FC<Props> = ({ userInput, response, userName }) => {
     return <div className='response-content'>
         {userInput && userInput.content &&
             <UserInput userInput={userInput} />
@@ -20,7 +21,12 @@ const ResponseContent: React.FC<Props> = ({ userInput, response }) => {
         }
         {response?.paragraphs.map((paragraph, index) => (
             paragraph && paragraph.narrative &&
-            <Paragraph key={index} paragraph={paragraph} index={index} />
+            <Paragraph
+                key={index}
+                paragraph={paragraph}
+                index={index}
+                userName={userName}
+            />
         ))}
     </div>
 }
