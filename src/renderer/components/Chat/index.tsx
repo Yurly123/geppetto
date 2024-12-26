@@ -22,6 +22,7 @@ const Chat: React.FC<Props> = () => {
             <ResponseBox
                 userInput={chat?.userInput}
                 response={chat?.response}
+                userName={chat?.userName || '{{user}}'}
             />
             <StreamHandler />
         </div>

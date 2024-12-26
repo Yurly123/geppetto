@@ -4,12 +4,14 @@ import ResponseContent from './ResponseContent';
 import { Response, responseToText, textToResponse, UserMessage } from '@common/openai';
 import { MessagesContext } from '@components/contexts';
 import Controllers from './Controllers';
+import { replaceWithUserName } from '@common/openai/userName';
 
 type Props = {
     userInput: UserMessage;
     response: Response;
+    userName: string;
 }
-const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
+const ResponseBox: React.FC<Props> = ({ userInput, response, userName }) => {
     const messages = useContext(MessagesContext)
     let isCurrentChat = false
     let viewingFirstMessage = false
@@ -22,7 +24,10 @@ const ResponseBox: React.FC<Props> = ({ userInput, response }) => {
 
     return (
         <div className='response-box'>
-            <ResponseContent userInput={userInput} response={response} />
+            <ResponseContent
+                userInput={replaceWithUserName(userInput, userName) as UserMessage}
+                response={replaceWithUserName(response, userName)}
+            />
             <ChatBar enable={isCurrentChat} />
             <Controllers
                 isCurrentChat={isCurrentChat}
