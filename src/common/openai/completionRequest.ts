@@ -7,4 +7,5 @@ export interface CompletionRequest {
     model: ChatModel | GeminiModel;
     apiKey: string;
     geminiMode: boolean;
+    impersonate: boolean;
 }

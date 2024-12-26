@@ -1,14 +1,14 @@
-import { Character, Emotion } from "@common/openai";
+import { Character, CharacterWithoutUser, Emotion } from "@common/openai";
 import { Schema, SchemaType } from "@google/generative-ai";
 
-const dialogue: Schema = {
+const dialogue = (impersonate: boolean) => ({
     description: 'Speech of a character',
     type: SchemaType.OBJECT,
     properties: {
         speaker: {
             description: 'Character speaking',
             type: SchemaType.STRING,
-            enum: Object.values(Character),
+            enum: Object.values(impersonate ? Character : CharacterWithoutUser),
             nullable: false,
         },
         content: {
@@ -19,9 +19,9 @@ const dialogue: Schema = {
     },
     required: ['speaker', 'content'],
     nullable: false,
-}
+}) as Schema
 
-const paragraph: Schema = {
+const paragraph = (impersonate: boolean) => ({
     description: 'Single act of character interaction',
     type: SchemaType.OBJECT,
     properties: {
@@ -36,13 +36,13 @@ const paragraph: Schema = {
             enum: Object.values(Emotion),
             nullable: false,
         },
-        dialogue: dialogue,
+        dialogue: dialogue(impersonate),
     },
     required: ['narrative', 'emotion', 'dialogue'],
     nullable: false,
-}
+}) as Schema
 
-export const responseSchema: Schema = {
+export const responseSchema = (impersonate: boolean) => ({
     description: 'Your generated situation',
     type: SchemaType.OBJECT,
     properties: {
@@ -59,10 +59,10 @@ export const responseSchema: Schema = {
         paragraphs: {
             description: 'List of paragraphs',
             type: SchemaType.ARRAY,
-            items: paragraph,
+            items: paragraph(impersonate),
             nullable: false,
         },
     },
     required: ['location', 'time', 'paragraphs'],
     nullable: false,
-}
+}) as Schema

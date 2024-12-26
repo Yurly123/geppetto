@@ -10,6 +10,7 @@ const Portrait: React.FC<Props> = ({ character, emotion }) => {
 
     useEffect(() => {
         if (!character || !emotion ||
+            character === Character.User ||
             !Object.values(Character).includes(character) ||
             !Object.values(Emotion).includes(emotion)
         ) return;

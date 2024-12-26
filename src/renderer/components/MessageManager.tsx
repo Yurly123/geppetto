@@ -1,4 +1,4 @@
-import { assertAssistantHasToken, AssistantMessage, createMessage, firstMessages, textToResponse } from '@common/openai';
+import { assertAssistantHasToken, AssistantMessage, CompletionRequest, createMessage, firstMessages, textToResponse } from '@common/openai';
 import { DispatchChatContext, DispatchMessagesContext, FirstMessageIndexContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
@@ -39,11 +39,14 @@ const MessageManager: React.FC = () => {
         if (message.role !== 'user') return
 
         const geminiMode = setting['제미니 모드'].value;
-        const model = geminiMode ? setting['Gemini모델'].value : setting['GPT모델'].value;
-        const apiKey = geminiMode ? setting['Gemini API키'].value : setting['OpenAI API키'].value;
-        window.openai.requestCompletion({
-            messages, model, apiKey, geminiMode
-        });
+        const request: CompletionRequest = {
+            messages,
+            geminiMode,
+            model: geminiMode ? setting['Gemini모델'].value : setting['GPT모델'].value,
+            apiKey: geminiMode ? setting['Gemini API키'].value : setting['OpenAI API키'].value,
+            impersonate: setting['사칭 허용'].value
+        }
+        window.openai.requestCompletion(request);
         dispatchChat({ type: 'initialize' });
         dispatchChat({ type: 'changePartial', partial: { userInput: message } });
     }, [messages]);

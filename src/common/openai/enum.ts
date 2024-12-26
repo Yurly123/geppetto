@@ -1,12 +1,12 @@
 export enum Character {
+    User = 'user',
     Geppetto = 'geppetto', 
     Gemini = 'gemini',
     Claude = 'claude',
 }
 
-export enum CharacterWithUser {
-    User = 'user',
-    Geppetto = 'geppetto',
+export enum CharacterWithoutUser {
+    Geppetto = 'geppetto', 
     Gemini = 'gemini',
     Claude = 'claude',
 }

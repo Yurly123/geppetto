@@ -1,4 +1,4 @@
-import { Character, CharacterWithUser, Paragraph } from '@common/openai';
+import { Character, Paragraph } from '@common/openai';
 import { DispatchChatContext } from '@components/contexts';
 import React, { createElement, ReactElement, useContext } from 'react';
 
@@ -27,7 +27,7 @@ const Paragraph: React.FC<Props> = ({ paragraph, index, userName }) => {
                 { style: { color: 'chocolate' } },
                 '클로드');
             break;
-        case CharacterWithUser.User:
+        case Character.User:
             speaker = createElement('span',
                 { style: { color: 'dodgerblue' } },
                 userName);

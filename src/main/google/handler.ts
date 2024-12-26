@@ -15,7 +15,7 @@ export async function handleCompletion(sender: WebContents, request: CompletionR
         model: request.model,
         generationConfig: {
             responseMimeType: 'application/json',
-            responseSchema: responseSchema,
+            responseSchema: responseSchema(request.impersonate),
         },
         safetySettings: [{
             category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,

@@ -18,7 +18,7 @@ export async function completion(openai: OpenAI, request: CompletionRequest) {
         },
         response_format: {
             type: 'json_schema',
-            json_schema: responseSchema.json_schema,
+            json_schema: responseSchema(request.impersonate).json_schema,
         },
     })
     return stream
