@@ -2,6 +2,7 @@ import { CompletionRequest } from '@common/openai';
 import OpenAI from 'openai';
 import { buildPrompt } from './prompt';
 import { responseSchema } from './schema';
+import { replaceWithUserName } from '@common/openai/userName';
 
 export async function completion(openai: OpenAI, request: CompletionRequest) {
     const requestMessages = buildPrompt(
@@ -10,7 +11,7 @@ export async function completion(openai: OpenAI, request: CompletionRequest) {
 
     const stream = await openai.chat.completions.create({
         model: request.model,
-        messages: requestMessages,
+        messages: replaceWithUserName(requestMessages, request.userName),
         stream: true,
         max_completion_tokens: 1000,
         stream_options: {

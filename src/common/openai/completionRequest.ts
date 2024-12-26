@@ -8,4 +8,5 @@ export interface CompletionRequest {
     apiKey: string;
     geminiMode: boolean;
     impersonate: boolean;
+    userName?: string;
 }

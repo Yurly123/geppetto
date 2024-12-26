@@ -15,7 +15,7 @@ const AssistantLogElement: React.FC<Props> = ({ index, message }) => {
         if (userInput.role !== 'user')
             userInput = createMessage('user', '')
         dispatchChat({
-            type: 'changeAll',
+            type: 'changePartial',
             chat: {
                 userInput: userInput,
                 response: textToResponse(message.content),

@@ -1,10 +1,11 @@
 import { assertAssistantHasToken, AssistantMessage, CompletionRequest, createMessage, firstMessages, textToResponse } from '@common/openai';
-import { DispatchChatContext, DispatchMessagesContext, FirstMessageIndexContext, MessagesContext, SettingContext } from '@components/contexts';
+import { ChatContext, DispatchChatContext, DispatchMessagesContext, FirstMessageIndexContext, MessagesContext, SettingContext } from '@components/contexts';
 import { useContext, useEffect } from 'react';
 
 const MessageManager: React.FC = () => {
     const setting = useContext(SettingContext);
     const messages = useContext(MessagesContext)
+    const chat = useContext(ChatContext);
     const firstMessageIndex = useContext(FirstMessageIndexContext);
     const dispatchMessages = useContext(DispatchMessagesContext);
     const dispatchChat = useContext(DispatchChatContext);
@@ -44,11 +45,17 @@ const MessageManager: React.FC = () => {
             geminiMode,
             model: geminiMode ? setting['Gemini모델'].value : setting['GPT모델'].value,
             apiKey: geminiMode ? setting['Gemini API키'].value : setting['OpenAI API키'].value,
-            impersonate: setting['사칭 허용'].value
+            impersonate: setting['사칭 허용'].value,
+            userName: chat.userName,
         }
         window.openai.requestCompletion(request);
         dispatchChat({ type: 'initialize' });
-        dispatchChat({ type: 'changePartial', partial: { userInput: message } });
+        dispatchChat({
+            type: 'changePartial', partial: {
+                userInput: message,
+                userName: chat.userName,
+            }
+        });
     }, [messages]);
 
     useEffect(() => {
@@ -68,7 +75,8 @@ const MessageManager: React.FC = () => {
             type: 'changeAll', chat: {
                 userInput: userMessage,
                 response: textToResponse(assistantMessage.content),
-                paragraphIndex: 0
+                paragraphIndex: 0,
+                userName: chat.userName,
             }
         });
     }, [messages]);

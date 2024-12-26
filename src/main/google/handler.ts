@@ -5,6 +5,7 @@ import { WebContents } from "electron";
 import { responseSchema } from "./schema";
 import { createContent, messageToContent } from "@common/google/content";
 import { buildPrompt } from "./prompt";
+import { replaceWithUserName } from "@common/openai/userName";
 
 export async function handleCompletion(sender: WebContents, request: CompletionRequest) {
     const prevMessages = request.messages.slice(0, -1)
@@ -35,7 +36,10 @@ export async function handleCompletion(sender: WebContents, request: CompletionR
 
     const chat = model.startChat({
         history: [
-            createContent('user', buildPrompt(prevMessages, userInput)),
+            createContent('user', buildPrompt(
+                replaceWithUserName(prevMessages, request.userName),
+                replaceWithUserName(userInput, request.userName),
+            )),
             ...prevMessages.map(message => messageToContent(message)),
         ],
     })
