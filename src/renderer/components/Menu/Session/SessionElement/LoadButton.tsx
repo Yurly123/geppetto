@@ -1,4 +1,4 @@
-import { DispatchMessagesContext } from '@components/contexts'
+import { DispatchChatContext, DispatchMessagesContext } from '@components/contexts'
 import { Modal, ModalRef } from '@components/util'
 import React, { useContext, useRef } from 'react'
 
@@ -7,12 +7,15 @@ type Props = {
 }
 const LoadButton: React.FC<Props> = ({ name }) => {
     const dispatchMessages = useContext(DispatchMessagesContext)
+    const dispatchChat = useContext(DispatchChatContext)
     const modalRef = useRef<ModalRef>(null)
 
     async function loadSession() {
-        const { messages } = await window.store.loadSession(name)
+        const { messages, userName } = await window.store.loadSession(name)
         dispatchMessages({ type: 'changeAll', messages })
+        dispatchChat({ type: 'changePartial', partial: { userName } })
         window.store.setCurrentSession(name)
+        window.store.saveMessages({ messages })
     }
 
     return <>

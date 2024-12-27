@@ -23,7 +23,11 @@ export function registerSessionStoreIpc() {
     })
 
     ipcMain.handle(mainChannel.SAVE_SESSION, ({ sender }, name: string, messages: Messages) => {
-        sessionStore(name).set(messages)
+        const store = sessionStore(name)
+        if (messages.userName === undefined)
+            store.set('messages', messages.messages)
+        else
+            store.set(messages)
         sender.send(rendererChannel.SESSONS_CHANGED)
     })
     ipcMain.handle(mainChannel.LOAD_SESSION, (_, name: string) => {

@@ -30,7 +30,6 @@ const MessageManager: React.FC = () => {
                 paragraphIndex: 0
             }
         });
-        window.store.saveMessages({ messages });
     }, [messages]);
 
     useEffect(() => {

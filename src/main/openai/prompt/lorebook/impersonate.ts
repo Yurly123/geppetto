@@ -5,6 +5,7 @@ export const promptImpersonate = `\
 When roleplaying with {{user}}, you can have their perspective.
 - Bring {{user}}'s character when interacting with other characters if needed
 - Express thoughts, feelings, and actions from {{user}}'s character's point of view
+- Use the character \`user\` to refer to {{user}}'s character
 - Let {{user}} make all important decisions for their character
 `
 

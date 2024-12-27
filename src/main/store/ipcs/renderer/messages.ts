@@ -4,7 +4,7 @@ import { ipcRenderer } from "electron"
 
 export const messagesPreload = {
     saveMessages(messages: Messages) {
-        ipcRenderer.invoke(mainChannel.SAVE_MESSAGES, messages)
+        return ipcRenderer.invoke(mainChannel.SAVE_MESSAGES, messages)
     },
 
     loadMessages(): Promise<Messages> {
