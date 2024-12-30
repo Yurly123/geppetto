@@ -57,6 +57,7 @@
                         border: 0.2rem solid var(--app-border-color);
                         padding: 0.2rem;
                         @include util.button-background;
+                        white-space: nowrap;
                     }
                 }
             }

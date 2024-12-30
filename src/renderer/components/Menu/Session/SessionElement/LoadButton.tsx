@@ -1,5 +1,5 @@
-import { DispatchChatContext, DispatchMessagesContext } from '@components/contexts'
-import { Modal, ModalRef } from '@components/util'
+import { DispatchChatContext, DispatchMessagesContext, HelpContext } from '@components/contexts'
+import { HelpTrigger, Modal, ModalRef } from '@components/util'
 import React, { useContext, useRef } from 'react'
 
 type Props = {
@@ -19,9 +19,11 @@ const LoadButton: React.FC<Props> = ({ name }) => {
     }
 
     return <>
-        <div onClick={() => modalRef?.current?.open()}>
-            불러오기
-        </div>
+        <HelpTrigger message='저장된 세션을 불러옵니다. 불러온 세션은 현재 대화내용을 대체합니다.'>
+            <div onClick={() => modalRef?.current?.open()}>
+                불러오기
+            </div>
+        </HelpTrigger>
         <Modal
             ref={modalRef}
             type='confirm'

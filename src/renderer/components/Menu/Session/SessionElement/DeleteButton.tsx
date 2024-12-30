@@ -1,4 +1,4 @@
-import { Modal, ModalRef } from '@components/util'
+import { HelpTrigger, Modal, ModalRef } from '@components/util'
 import React, { useRef } from 'react'
 
 type Props = {
@@ -12,12 +12,14 @@ const DeleteButton: React.FC<Props> = ({ name }) => {
     }
 
     return <>
-        <div
-            className='warning-color'
-            onClick={() => modalRef?.current?.open()}
-        >
-            삭제하기
-        </div>
+        <HelpTrigger message='현재 세션을 삭제합니다. 삭제된 세션은 되돌릴 수 없습니다.'>
+            <div
+                className='warning-color'
+                onClick={() => modalRef?.current?.open()}
+            >
+                삭제하기
+            </div>
+        </HelpTrigger>
         <Modal
             ref={modalRef}
             type='confirm'

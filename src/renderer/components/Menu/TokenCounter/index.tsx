@@ -21,7 +21,7 @@ const TokenCounter: React.FC = () => {
         <div className='token-counter'>
             <HelpTrigger message={`
                 현재까지 제페토에게 응답받은 토큰의 총량입니다. 
-                최대치는 ${max}입니다. 
+                최대치는 ${max}입니다. 최대치를 넘겨도 큰 변화는 없지만, 응답의 질이 떨어질 수 있습니다.
                 토큰은 간단히 말하면 AI가 이해하는 단어의 최소단위입니다.
             `}>
                 <span>토큰: {

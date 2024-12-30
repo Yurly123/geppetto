@@ -1,5 +1,5 @@
 import { MessagesContext } from '@components/contexts'
-import { Modal, ModalRef } from '@components/util'
+import { HelpTrigger, Modal, ModalRef } from '@components/util'
 import React, { useContext, useRef } from 'react'
 
 type Props = {
@@ -15,9 +15,11 @@ const OverwriteButton: React.FC<Props> = ({ name }) => {
     }
 
     return <>
-        <div onClick={() => modalRef?.current?.open()}>
-            덮어쓰기
-        </div>
+        <HelpTrigger message='세션의 저장내용을 덮어씁니다. 평소에는 현재 세션에 자동으로 저장이 됩니다.'>
+            <div onClick={() => modalRef?.current?.open()}>
+                덮어쓰기
+            </div>
+        </HelpTrigger>
         <Modal
             ref={modalRef}
             type='confirm'
