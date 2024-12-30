@@ -22,10 +22,10 @@ function isKeyIncluded(lorebook: LoreBook, messages: Message[]) {
 
 export const lorebooks: LoreBook[] = [{
     activationKeys: ['gemini', '제미니'],
-    content: '### Gemini Profile\n' + geminiProfile,
+    content: geminiProfile,
 }, {
     activationKeys: ['claude', '클로드'],
-    content: '### Claude Profile\n' + claudeProfile,
+    content: claudeProfile,
 }]
 
 export function insertLorebook(prompt: string, request: CompletionRequest) {
