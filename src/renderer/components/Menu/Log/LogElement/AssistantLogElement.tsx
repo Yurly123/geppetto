@@ -16,7 +16,7 @@ const AssistantLogElement: React.FC<Props> = ({ index, message }) => {
             userInput = createMessage('user', '')
         dispatchChat({
             type: 'changePartial',
-            chat: {
+            partial: {
                 userInput: userInput,
                 response: textToResponse(message.content),
                 paragraphIndex: 0,
