@@ -1,10 +1,11 @@
-import { Character, CharacterWithoutUser, Emotion } from '@common/openai';
+import { Background, Character, CharacterWithoutUser, Emotion } from '@common/openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
 
 const emotion = z.nativeEnum(Emotion);
 const character = z.nativeEnum(Character);
 const characterWithoutUser = z.nativeEnum(CharacterWithoutUser);
+const background = z.nativeEnum(Background);
 
 const dialogue = (impersonate: boolean) => z.object({
     speaker: (impersonate ? character : characterWithoutUser)
@@ -22,6 +23,7 @@ const response = (impersonate: boolean) => z.object({
     location: z.string().describe('Current location of situation'),
     time: z.string().describe('Current time of situation'),
     paragraphs: z.array(paragraph(impersonate)).describe('List of paragraphs'),
+    background: background.describe('Background image of the situation'),
 }).describe('Your generated situation');
 
 export const responseSchema = (impersonate: boolean) =>

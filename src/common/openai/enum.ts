@@ -44,3 +44,8 @@ export enum Emotion {
     Suspicious = 'suspicious', Thinking = 'thinking',
     Worried = 'worried',
 }
+
+export enum Background {
+    School = 'school',
+    Park = 'park',
+}

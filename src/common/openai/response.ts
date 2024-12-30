@@ -1,4 +1,4 @@
-import { Character, Emotion } from "./enum";
+import { Background, Character, Emotion } from "./enum";
 
 export interface Dialogue {
     speaker: Character;
@@ -15,6 +15,7 @@ export interface Response {
     paragraphs: Paragraph[];
     location: string;
     time: string;
+    background?: Background;
 }
 
 export function textToResponse(text: string): Response {

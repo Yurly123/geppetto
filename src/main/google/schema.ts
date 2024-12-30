@@ -1,4 +1,4 @@
-import { Character, CharacterWithoutUser, Emotion } from "@common/openai";
+import { Background, Character, CharacterWithoutUser, Emotion } from "@common/openai";
 import { Schema, SchemaType } from "@google/generative-ai";
 
 const dialogue = (impersonate: boolean) => ({
@@ -62,7 +62,13 @@ export const responseSchema = (impersonate: boolean) => ({
             items: paragraph(impersonate),
             nullable: false,
         },
+        background: {
+            description: 'Background image of the situation',
+            type: SchemaType.STRING,
+            enum: Object.values(Background),
+            nullable: false,
+        }
     },
-    required: ['location', 'time', 'paragraphs'],
+    required: ['location', 'time', 'paragraphs', 'background'],
     nullable: false,
 }) as Schema

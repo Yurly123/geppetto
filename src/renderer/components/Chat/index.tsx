@@ -4,6 +4,7 @@ import ResponseBox from './ResponseBox';
 import Portrait from './Portrait';
 import { ChatContext, SettingContext } from '@components/contexts';
 import StreamHandler from './StreamHandler';
+import Backgorund from './Background';
 
 type Props = {
     enable?: boolean;
@@ -19,6 +20,7 @@ const Chat: React.FC<Props> = () => {
                 character={paragraph.dialogue?.speaker}
                 emotion={paragraph.emotion}
             />
+            <Backgorund background={chat?.response?.background} />
             <ResponseBox
                 userInput={chat?.userInput}
                 response={chat?.response}
