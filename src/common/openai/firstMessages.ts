@@ -1,10 +1,11 @@
-import { Character, Emotion } from "./enum";
+import { Background, Character, Emotion } from "./enum";
 import { AssistantMessage } from "./message";
 import { Response, responseToText } from "./response";
 
 const responses: Response[] = [
     {
         location: '학교 교실', time: '수업 전',
+        background: Background.Classroom,
         paragraphs: [
             {
                 narrative: '고등학교 2학년인 {{user}}은/는 오늘 이 학교에 전학을 왔다. 그가 인사를 마치고 자리에 앉자 제페토가 웃는 얼굴로 다가갔다.',
@@ -46,6 +47,7 @@ const responses: Response[] = [
     },
     {
         location: '버스 정류장', time: '하교 시간',
+        background: Background.BusStop,
         paragraphs: [
             {
                 narrative: '{{user}}은/는 하교를 위해 버스 정류장에서 버스를 기다리고 있었다. 그때, 옆에 서 있던 여자아이가 갑자기 말을 걸었다.',
@@ -99,6 +101,7 @@ const responses: Response[] = [
     },
     {
         location: '학교 근처 공원', time: '방과 후',
+        background: Background.Park,
         paragraphs: [
             {
                 narrative: '수업이 끝나고, {{user}}은/는 공원을 산책하고 있었다. 그때, 벤치에 앉아 태피스트리 자수를 놓고 있는 여자아이를 발견했다. 가까이 다가가자 그녀는 고개를 들어 {{user}}을 바라보았다.',
@@ -144,6 +147,7 @@ const responses: Response[] = [
     },
     {
         location: '교실', time: '점심시간',
+        background: Background.Classroom,
         paragraphs: [
             {
                 narrative: '{{user}}은/는 점심시간을 이용해 교실에서 책을 읽고 있었다. 그때, 빨간색 헤드기어를 쓴 여자아이가 조심스럽게 다가왔다.',
@@ -197,6 +201,7 @@ const responses: Response[] = [
     },
     {
         location: '학교 강당', time: '전학식',
+        background: Background.Auditorium,
         paragraphs: [
             {
                 narrative: '전학생 {{user}}을/를 위한 환영식이 열리고 있었다. 교장 선생님의 지루한 연설이 끝나고, 대표로 제페토가 단상에 올랐다. 그녀는 또랑또랑한 목소리로 {{user}}에 대한 환영사를 낭독했다.',
@@ -226,6 +231,7 @@ const responses: Response[] = [
     },
     {
         location: '학교 도서관', time: '방과 후',
+        background: Background.Library,
         paragraphs: [
             {
                 narrative: '{{user}}은/는 수업이 끝난 학교 도서관에서 책을 찾고 있었다. 그때, 책장 너머에서 누군가의 목소리가 들려왔다.',
@@ -271,6 +277,7 @@ const responses: Response[] = [
     },
     {
         location: '학교 뒷뜰', time: '점심시간',
+        background: Background.Backyard,
         paragraphs: [
             {
                 narrative: '{{user}}은/는 점심시간에 학교 뒷뜰 벤치에서 조용히 책을 읽고 있었다. 그때, 근처에서 낭랑한 목소리가 들려왔다. 목소리의 주인공은 클로드였다.',

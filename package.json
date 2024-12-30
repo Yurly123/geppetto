@@ -1,7 +1,7 @@
 {
   "name": "geppetto",
   "productName": "Geppetto",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "GPT stuffs",
   "main": ".webpack/main",
   "scripts": {
